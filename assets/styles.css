@@ -1,0 +1,65 @@
+body{
+	color: #555555 !important;
+	letter-spacing: 0.25px !important;
+}
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #ffffff;
+    border-color: #efefef;
+}
+.request-item .panel-title{
+	font-size: 12px !important;
+}
+.panel-title .glyphicon{
+	font-size: 12px;
+	font-weight: bold;
+}
+.collection-intro{
+	padding-bottom: 10px !important;
+}
+ul{
+	list-style: none;
+}
+ul li{
+	margin-left: -30px;
+	line-height: 16pt;
+}
+ul li .endpoint_menu{
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
+}
+ul li .endpoint_menu:hover{
+	margin-left: 5px;
+	font-weight: bolder;
+}
+a{
+	text-decoration: none !important;
+}
+.request-method{
+	padding: 4px;
+}
+.border-success{
+	border: 1px solid #3c763d;
+}
+.border-info{
+	border: 1px solid #337ab7;
+}
+.border-warning{
+	border: 1px solid #f0ad4e;
+}
+.border-danger{
+	border: 1px solid #a94442;
+}
+pre {outline: 1px solid #ffffff; padding: 5px; margin: 5px; }
+.string { color: #16a085; }
+.number { color: #f39c12; }
+.boolean { color: #2980b9; }
+.null { color: magenta; }
+.key { color: #e74c3c; }
+.null { color: #8e44ad; }
+.love-color{
+	color: #c0392b;
+	font-weight: bold;
+}

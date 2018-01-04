@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>
+            @{{ if .Data.Info.Name }}@
+                @{{ .Data.Info.Name }}@
+            @{{ end }}@
+            @{{ if .Data.Info.Description }}@
+                &nbsp;|&nbsp;
+                @{{ .Data.Info.Description }}@
+            @{{ end }}@
+        </title>
+        <!-- Bootstrap -->
+        <style media="screen">
+            @{{ .Assets.BootstrapCSS | css }}@
+            @{{ .Assets.StylesCSS | css }}@
+        </style>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container-fluid">
+        <div class="row">
+            <!-- introduction -->
+            <div class="col-md-12 collection-intro">
+                <h3>@{{ .Data.Info.Name }}@</h3>
+                <p>
+                    @{{ .Data.Info.Description | markdown | html }}@
+                </p>
+            </div>
+            <!-- end introduction -->
+            <div class="col-md-12">
+                <!-- left sidebar index -->
+                <div class="col-md-3">
+                    <ul>
+                        @{{ range $index, $c := .Data.Collections }}@
+                        <li>
+                            <strong><a href="#@{{ $c.Name | snake }}@">@{{ $c.Name }}@</a></strong>
+                            <ul>
+                                @{{ range $i, $item := $c.Items }}@
+                                    <li><a class="endpoint_menu" href="#jump-@{{ $c.Name | snake }}@-@{{ $item.Name | snake }}@">@{{ $item.Name }}@</a></li>
+                                @{{ end }}@
+                            </ul>
+                        </li>
+                        @{{ end }}@
+                    </ul>
+                </div>
+                <!-- end left sidebar index -->
+                <!-- main div to display items -->
+                <div class="col-md-9">
+                    <!-- directory -->
+                    @{{ range $di, $d := .Data.Collections }}@
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" id="@{{ $d.Name | snake }}@">
+                                @{{ $d.Name }}@
+                                <span class="badge">@{{ len $d.Items }}@</span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                @{{ $d.Description | markdown | html }}@
+                            </p>
+                            <div class="request-item">
+                                <div class="panel-group" id="accordion-@{{ $d.Name | snake }}@">
+                                    <!-- single request item -->
+                                    @{{ range $ii, $item := $d.Items }}@
+                                        <div class="panel panel-@{{ $item.Request.Method | color }}@" id="jump-@{{ $d.Name | snake }}@-@{{ $item.Name | snake }}@">
+                                        <div class="panel-heading">
+                                            <small class="pull-right text-muted">
+                                                @{{ $item.Request.Body.Mode }}@
+                                            </small>
+                                            <a class="text-@{{ $item.Request.Method | color }}@" data-toggle="collapse" data-parent="#accordion-@{{ $d.Name | snake }}@" href="#collapse-@{{ $d.Name | snake }}@-@{{ $item.Name | snake }}@">
+                                                <h4 class="panel-title">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                    @{{ if $item.Name }}@
+                                                        <strong>@{{ $item.Name }}@</strong> &nbsp;|&nbsp;
+                                                    @{{ end }}@
+                                                    <strong class="request-method border-@{{ $item.Request.Method | color }}@">
+                                                    @{{ $item.Request.Method }}@
+                                                    </strong>
+                                                    &nbsp;
+                                                    @{{ $item.Request.URL.Raw | trimQueryParams}}@
+                                                </h4>
+                                            </a>
+                                        </div>
+                                        <div id="collapse-@{{ $d.Name | snake }}@-@{{ $item.Name | snake }}@" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                @{{ if $item.Request.Description }}@
+                                                <h5 class="label label-default">Description</h5>
+                                                <br>
+                                                <small>
+                                                    @{{ $item.Request.Description | markdown | html }}@
+                                                </small>
+                                                <br><br>
+                                                @{{ end }}@
+                                                @{{ if $item.Request.Headers }}@
+                                                    <h5 class="label label-warning">Headers</h5>
+                                                    <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Value</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @{{ range $ih, $h := $item.Request.Headers }}@
+                                                            <tr>
+                                                                <td>@{{ $h.Key }}@</td>
+                                                                <td>@{{ $h.Value }}@</td>
+                                                                <td>@{{ $h.Description | markdown | html }}@</td>
+                                                            </tr>
+                                                        @{{ end }}@
+                                                    </tbody>
+                                                </table>
+                                                @{{ end }}@
+                                                @{{ if $item.Request.URL.Query }}@
+                                                    <h5 class="label label-info">Query</h5>
+                                                    <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Value</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @{{ range $iq, $q := $item.Request.URL.Query }}@
+                                                            <tr>
+                                                                <td>@{{ $q.Key }}@</td>
+                                                                <td>@{{ $q.Value }}@</td>
+                                                                <td>@{{ $q.Description | markdown | html }}@</td>
+                                                            </tr>
+                                                        @{{ end }}@
+                                                    </tbody>
+                                                </table>
+                                                @{{ end }}@
+
+                                                @{{ if $item.Request.Body.Mode}}@
+                                                    @{{ if eq $item.Request.Body.Mode "raw"}}@
+                                                        @{{ if $item.Request.Body.Raw }}@
+                                                        <h5 class="label label-primary">Body</h5>
+                                                        <span class="resp-prettyprint">
+                                                        @{{ $item.Request.Body.Raw }}@
+                                                        </span>
+                                                        <div class="clearfix"></div>
+                                                        @{{ end }}@
+                                                    @{{ end }}@
+                                                @{{ end }}@
+
+                                                @{{ if $item.Request.Body.Mode}}@
+                                                    @{{ if eq $item.Request.Body.Mode "formdata"}}@
+                                                        <h5 class="label label-primary">Body</h5>
+                                                        @{{ if $item.Request.Body.FormData }}@
+                                                            <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Key</th>
+                                                                    <th>Value</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @{{ range $if, $f := $item.Request.Body.FormData }}@
+                                                                <tr>
+                                                                    <td>@{{ $f.Key }}@</td>
+                                                                    <td>@{{ $f.Value }}@</td>
+                                                                    <td>@{{ $f.Description | markdown | html }}@</td>
+                                                                </tr>
+                                                                @{{ end }}@
+                                                            </tbody>
+                                                        </table>
+                                                        @{{ end }}@
+                                                    @{{ end }}@
+                                                @{{ end }}@
+
+                                                @{{ if $item.Request.Body.Mode}}@
+                                                    @{{ if eq $item.Request.Body.Mode "urlencoded"}}@
+                                                        <h5 class="label label-primary">Body</h5>
+                                                        @{{ if $item.Request.Body.URLEncoded }}@
+                                                            <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Key</th>
+                                                                    <th>Value</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @{{ range $iu, $u := $item.Request.Body.URLEncoded }}@
+                                                                    <tr>
+                                                                        <td>@{{ $u.Key }}@</td>
+                                                                        <td>@{{ $u.Value }}@</td>
+                                                                        <td>@{{ $u.Description | markdown | html }}@</td>
+                                                                    </tr>
+                                                                @{{ end }}@
+                                                            </tbody>
+                                                        </table>
+                                                        @{{ end }}@
+                                                    @{{ end }}@
+                                                @{{ end }}@
+
+                                                @{{ if $item.Responses }}@
+                                                    <h5 class="label label-success">Response</h5>
+                                                    <div class="clearfix"></div>
+                                                    @{{ range $ir, $resp := $item.Responses }}@
+                                                        @{{ if $resp.Name }}@
+                                                            <h6>@{{ $resp.Name }}@&nbsp;|&nbsp;Code: @{{ $resp.Code }}@</h6>
+                                                        @{{ end }}@
+                                                        @{{ if $resp.Body }}@
+                                                            <span class="resp-prettyprint">
+                                                            @{{ $resp.Body }}@
+                                                            </span>
+                                                            <div class="clearfix"></div>
+                                                            @{{ end }}@
+                                                        @{{ end }}@
+                                                    @{{ end }}@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @{{ end }}@
+                                    <!-- end single request item -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{{ end }}@
+                    <!-- end directory -->
+                </div>
+                <!-- end main div to display items -->
+            </div>
+        </div>
+        <!-- necessary sciprts -->
+        <script type="text/javascript">
+            @{{ .Assets.JqueryJS | js }}@
+            @{{ .Assets.BootstrapJS | js }}@
+            @{{ .Assets.ScriptsJS | js }}@
+        </script>
+    </body>
+    <br>
+    <br>
+    <footer class="navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+          <div class="span12 text-center">
+            <span>Made with <em class="love-color">&#9829;</em> by <a href="https://github.com/thedevsaddam" target="_blank" class="text-muted">thedevsaddam</a></span>
+          </div>
+        </div>
+    </footer>
+</html>
