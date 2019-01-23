@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io"
+	"sort"
 )
 
 type (
@@ -75,8 +76,10 @@ type (
 	// Item describes a request item
 	Item struct {
 		Name      string     `json:"name"`
+		Items     []Item     `json:"item"`
 		Request   Request    `json:"request"`
 		Responses []Response `json:"response"` // TODO: need to build response
+		Subfolder bool       `json:"_postman_isSubFolder"`
 	}
 
 	// Collection describes a request collection/item
@@ -105,13 +108,15 @@ func (r *Root) Open(rdr io.Reader) error {
 		return err
 	}
 	r.build()
+	r.sortCollections()
+
 	return nil
 }
 
 // Build build UnCategorized collection
 func (r *Root) build() {
 	c := Collection{}
-	c.Name = "Default"
+	c.Name = defaultCollection
 	for i := len(r.Collections) - 1; i >= 0; i-- {
 		if len(r.Collections[i].Items) <= 0 {
 			c.Items = append(c.Items, Item{
@@ -120,7 +125,45 @@ func (r *Root) build() {
 				Responses: r.Collections[i].Responses,
 			})
 			r.Collections = append(r.Collections[:i], r.Collections[i+1:]...)
+		} else {
+			clctn := Collection{}
+			for j := len(r.Collections[i].Items) - 1; j >= 0; j-- {
+				built := r.buildSubChildItems(r.Collections[i].Items[j], &clctn, r.Collections[i].Name)
+				if built {
+					r.Collections[i].Items = r.Collections[i].Items[1:] //removing the sub folder from the parent to make it a collection itself
+				}
+			}
 		}
 	}
 	r.Collections = append(r.Collections, c)
+}
+
+// buildSubChildItems builds all the sub folder collections
+func (r *Root) buildSubChildItems(itm Item, c *Collection, pn string) bool {
+	if itm.Subfolder {
+		clctn := Collection{}
+		clctn.Name = pn + "/" + itm.Name
+		for _, i := range itm.Items {
+			r.buildSubChildItems(i, &clctn, clctn.Name)
+		}
+		r.Collections = append(r.Collections, clctn)
+		return true
+	} else {
+		c.Items = append(c.Items, Item{
+			Name:      itm.Name,
+			Request:   itm.Request,
+			Responses: itm.Responses,
+		})
+	}
+	return false
+}
+
+// sortCollections sorts the collections in the alphabetical order(except for the default)
+func (r *Root) sortCollections() {
+	sort.Slice(r.Collections, func(i int, j int) bool {
+		if r.Collections[i].Name == defaultCollection {
+			return false
+		}
+		return r.Collections[i].Name < r.Collections[j].Name
+	})
 }

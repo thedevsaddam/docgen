@@ -1,21 +1,208 @@
 {
 	"info": {
+		"_postman_id": "75a6c412-e114-425d-a2c0-7eb96b465374",
 		"name": "SMS",
-		"_postman_id": "5dc9ecfe-c08a-06c3-26ff-11921363f0e7",
 		"description": "Full `Rest API` collection and documentation of *School management system*",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Teacher",
-			"description": "Teacher contains teacher's api collection",
 			"item": [
+				{
+					"name": "V2",
+					"item": [
+						{
+							"name": "get teachers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/teachers/v2?q=john&page=1&dept=science",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										"v2"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "john",
+											"description": "q can be name, email, phone etc"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "page as interger number"
+										},
+										{
+											"key": "dept",
+											"value": "science",
+											"description": "dept is the name of the department in which the teacher works"
+										}
+									]
+								},
+								"description": "Get list of teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "create teacher",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version",
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "John Doe",
+											"description": "`name` field must be between *3 to 20* chars",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "33",
+											"description": "`age` field must be a valid numeric value",
+											"type": "text"
+										},
+										{
+											"key": "dept",
+											"value": "Science",
+											"description": "`dept` field must be a string refering to the department of the teacher",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/teachers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers"
+									]
+								},
+								"description": "creates a teacher entity"
+							},
+							"response": [
+								{
+									"name": "Validation Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "John Doe",
+													"description": "`name` field must be between *3 to 20* chars",
+													"type": "text"
+												},
+												{
+													"key": "age",
+													"value": "33",
+													"description": "`age` field must be a valid numeric value",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{base_url}}/teachers",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"teachers"
+											]
+										}
+									},
+									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [],
+									"cookie": [],
+									"body": "{\n    \"errors\": [\n        \"Name field is required\",\n        \"age field is required\"\n    ],\n    \"code\": 42201\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "John Doe",
+													"description": "`name` field must be between *3 to 20* chars",
+													"type": "text"
+												},
+												{
+													"key": "age",
+													"value": "33",
+													"description": "`age` field must be a valid numeric value",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{base_url}}/teachers",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"teachers"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [],
+									"cookie": [],
+									"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 20101\n}"
+								}
+							]
+						}
+					],
+					"description": "Teacher/V2 contains two updated endpoints(get , create) of Teacher collection",
+					"_postman_isSubFolder": true
+				},
 				{
 					"name": "get teachers",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/teachers?q=john&page=1",
 							"host": [
@@ -28,13 +215,11 @@
 								{
 									"key": "q",
 									"value": "john",
-									"equals": true,
 									"description": "q can be name, email, phone etc"
 								},
 								{
 									"key": "page",
 									"value": "1",
-									"equals": true,
 									"description": "page as interger number"
 								}
 							]
@@ -79,60 +264,10 @@
 							"path": [
 								"teachers"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": [
 						{
-							"id": "64402722-7c6b-4d7e-852a-9d81cff14f4d",
-							"name": "Success",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "name",
-											"value": "John Doe",
-											"description": "`name` field must be between *3 to 20* chars",
-											"type": "text"
-										},
-										{
-											"key": "age",
-											"value": "33",
-											"description": "`age` field must be a valid numeric value",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{base_url}}/teachers",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"teachers"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "parsed",
-							"header": [],
-							"cookie": [],
-							"responseTime": 0,
-							"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 20101\n}"
-						},
-						{
-							"id": "1a4aaf99-877b-4af6-b631-b2ec76ef1c37",
 							"name": "Validation Error",
 							"originalRequest": {
 								"method": "POST",
@@ -173,11 +308,54 @@
 							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
 							"code": 422,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "parsed",
 							"header": [],
 							"cookie": [],
-							"responseTime": 0,
 							"body": "{\n    \"errors\": [\n        \"Name field is required\",\n        \"age field is required\"\n    ],\n    \"code\": 42201\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "John Doe",
+											"description": "`name` field must be between *3 to 20* chars",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "33",
+											"description": "`age` field must be a valid numeric value",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/teachers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 20101\n}"
 						}
 					]
 				},
@@ -197,14 +375,12 @@
 								{
 									"key": "name",
 									"value": "John Doe",
-									"type": "text",
-									"description": ""
+									"type": "text"
 								},
 								{
 									"key": "age",
 									"value": "33",
-									"type": "text",
-									"description": ""
+									"type": "text"
 								}
 							]
 						},
@@ -241,14 +417,12 @@
 								{
 									"key": "name",
 									"value": "John Doe",
-									"type": "text",
-									"description": ""
+									"type": "text"
 								},
 								{
 									"key": "age",
 									"value": "33",
-									"type": "text",
-									"description": ""
+									"type": "text"
 								}
 							]
 						},
@@ -270,7 +444,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/teachers/{{id}}",
 							"host": [
@@ -285,11 +462,11 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Teacher contains teacher's api collection"
 		},
 		{
 			"name": "Student",
-			"description": "Students `API` collection",
 			"item": [
 				{
 					"name": "get students",
@@ -301,7 +478,10 @@
 								"value": "Bearer {{access_token}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/students?page=1",
 							"host": [
@@ -314,7 +494,6 @@
 								{
 									"key": "page",
 									"value": "1",
-									"equals": true,
 									"description": "int number page"
 								}
 							]
@@ -324,6 +503,7 @@
 					"response": []
 				}
 			],
+			"description": "Students `API` collection",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -349,14 +529,16 @@
 		},
 		{
 			"name": "Github API",
-			"description": "My github api collection",
 			"item": [
 				{
 					"name": "get profile",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://api.github.com/users/thedevsaddam",
 							"protocol": "https",
@@ -374,12 +556,14 @@
 					},
 					"response": [
 						{
-							"id": "38f3c8fa-3e3f-44ef-be2d-99b9d26de43d",
 							"name": "success response",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "https://api.github.com/users/thedevsaddam",
 									"protocol": "https",
@@ -397,7 +581,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Access-Control-Allow-Origin",
@@ -545,7 +728,6 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 1709,
 							"body": "{\"login\":\"thedevsaddam\",\"id\":9676798,\"avatar_url\":\"https://avatars0.githubusercontent.com/u/9676798?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/thedevsaddam\",\"html_url\":\"https://github.com/thedevsaddam\",\"followers_url\":\"https://api.github.com/users/thedevsaddam/followers\",\"following_url\":\"https://api.github.com/users/thedevsaddam/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/thedevsaddam/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/thedevsaddam/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/thedevsaddam/subscriptions\",\"organizations_url\":\"https://api.github.com/users/thedevsaddam/orgs\",\"repos_url\":\"https://api.github.com/users/thedevsaddam/repos\",\"events_url\":\"https://api.github.com/users/thedevsaddam/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/thedevsaddam/received_events\",\"type\":\"User\",\"site_admin\":false,\"name\":\"Saddam H\",\"company\":\"Pathao Inc.\",\"blog\":\"https://thedevsaddam.github.io/\",\"location\":\"Dhaka, Bangladesh\",\"email\":null,\"hireable\":true,\"bio\":\"Software Engineer, Pathao Inc | Open Source Enthusiast | Love to write elegant code | Gopher, thirsty for exploring new tech tools.\",\"public_repos\":45,\"public_gists\":29,\"followers\":68,\"following\":62,\"created_at\":\"2014-11-11T14:07:13Z\",\"updated_at\":\"2017-12-18T05:25:18Z\"}"
 						}
 					]
@@ -585,14 +767,13 @@
 					},
 					"response": [
 						{
-							"id": "fc106081-e869-4b7d-b538-d4014e37dc38",
 							"name": "succes",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"John Doe\",\n\t\"age\": 30,\n\t\"is_bangladeshi\": true\n}"
+									"raw": ""
 								},
 								"url": {
 									"raw": "https://api.github.com/users/thedevsaddam",
@@ -611,7 +792,6 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
 							"header": [
 								{
 									"key": "Access-Control-Allow-Origin",
@@ -759,12 +939,12 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 1709,
 							"body": "{\n    \"login\": \"thedevsaddam\",\n    \"avatar_url\": \"https://avatars0.githubusercontent.com/u/9676798?v=4\",\n    \"url\": \"https://api.github.com/users/thedevsaddam\",\n    \"html_url\": \"https://github.com/thedevsaddam\",\n    \"followers_url\": \"https://api.github.com/users/thedevsaddam/followers\",\n    \"following_url\": \"https://api.github.com/users/thedevsaddam/following{/other_user}\",\n    \"created_at\": \"2014-11-11T14:07:13Z\",\n    \"updated_at\": \"2017-12-18T05:25:18Z\"\n}"
 						}
 					]
 				}
 			],
+			"description": "My github api collection",
 			"event": [
 				{
 					"listen": "prerequest",

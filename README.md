@@ -15,6 +15,7 @@ go get -u github.com/thedevsaddam/docgen
 ### Available features
 * Live postman collection to documentation
 * Build postman collection to html documentation
+* Supports multi-level collection build
 
 ### Usage
 * To see live documentation from postman collection use `docgen server -f input-postman-collection.json -p 8000` This will open the html version of postman collection to the defined port
