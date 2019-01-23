@@ -24,6 +24,7 @@ go get -u github.com/thedevsaddam/docgen
 ### Author
 1. [Sajib Sikder](https://github.com/mhshajib)
 1. [Saddam H](https://github.com/thedevsaddam)
+1. [Anondo](https://github.com/Anondo)
 
 ### Contribution
 Your suggestions will be more than appreciated.
