@@ -19,6 +19,10 @@ var (
 	}
 )
 
+const (
+	defaultCollection = "Default"
+)
+
 func init() {
 	// init assets
 	assets = Assets{
