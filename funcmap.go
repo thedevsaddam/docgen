@@ -3,8 +3,8 @@ package main
 import (
 	"html/template"
 	"log"
-	"regexp"
 	"net/url"
+	"regexp"
 	"strings"
 
 	blackfriday "gopkg.in/russross/blackfriday.v2"
@@ -32,16 +32,15 @@ func js(v string) template.JS {
 
 func snake(v string) string {
 
+	reg, err := regexp.Compile("[^a-zA-Z0-9%]+")
+	resURI := url.QueryEscape(v)
+	if err != nil {
 
-		reg, err := regexp.Compile("[^a-zA-Z0-9%]+")
-		resUri := url.QueryEscape(v)
-		if err != nil {
-			
-			log.Fatal(err)
-		}
-		result := reg.ReplaceAllString(resUri, "")
-		result = strings.Replace(result,"%","_",-1)
-		return result
+		log.Fatal(err)
+	}
+	result := reg.ReplaceAllString(resURI, "")
+	result = strings.Replace(result, "%", "_", -1)
+	return result
 }
 
 func trimQueryParams(v string) string {

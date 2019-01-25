@@ -3,6 +3,7 @@
 // assets/bootstrap.min.css
 // assets/bootstrap.min.js
 // assets/index.html
+// assets/index.md
 // assets/jquery.min.js
 // assets/scripts.js
 // assets/styles.css
@@ -88,7 +89,7 @@ func assetsBootstrapMinCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/bootstrap.min.css", size: 121200, mode: os.FileMode(420), modTime: time.Unix(1469440408, 0)}
+	info := bindataFileInfo{name: "assets/bootstrap.min.css", size: 121200, mode: os.FileMode(420), modTime: time.Unix(1515247000, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -108,7 +109,7 @@ func assetsBootstrapMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/bootstrap.min.js", size: 37045, mode: os.FileMode(420), modTime: time.Unix(1469440410, 0)}
+	info := bindataFileInfo{name: "assets/bootstrap.min.js", size: 37045, mode: os.FileMode(420), modTime: time.Unix(1515247000, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -128,7 +129,27 @@ func assetsIndexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/index.html", size: 16453, mode: os.FileMode(420), modTime: time.Unix(1515074598, 0)}
+	info := bindataFileInfo{name: "assets/index.html", size: 16453, mode: os.FileMode(420), modTime: time.Unix(1515247000, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _assetsIndexMd = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x84\x91\x4d\x6a\x80\x30\x10\x85\xf7\x39\xc5\x40\xb2\x68\x8b\xc9\x01\x0a\x05\xa1\x6e\xdc\xf4\x02\xa5\x8b\x90\x8c\x25\x54\x63\x31\x59\x14\x52\xef\x5e\x46\x63\xd0\xf4\x6f\x56\x32\x6f\xe6\x7b\x6f\x4c\x9b\x92\x04\x37\x80\xea\x74\xd4\xaa\xf7\xc3\xac\x9e\xf4\x84\x20\xd7\xb5\x65\x1c\xda\x94\xbe\x49\xa4\x50\x1f\xbd\x2d\xdf\x57\x42\x87\xc1\x2c\xee\x3d\xba\xd9\x1f\x13\xf2\x37\x5d\xd6\x38\xc6\x39\xf4\xde\x3a\x83\x61\x5f\x5c\xb4\x7f\x45\x10\xce\x5b\xfc\x68\x40\x18\xb8\x7f\xc8\xb0\xc7\x79\x1c\xd1\x10\x26\x6c\xab\x9c\x0a\x9e\x89\x26\x4c\x09\xfb\x72\x73\x6e\x7c\x42\xf0\xfa\x6d\x13\x6e\x19\x00\x6c\x27\x1e\x16\x0d\x08\x17\x71\x22\x07\x61\x54\x1f\x71\xda\xc1\x77\x19\x4a\xe2\xff\x5c\x59\xcd\x5e\x2c\x8b\xe7\xf9\xf7\x95\xdb\x65\x2e\xc6\x4e\xb1\x2c\xe5\xb2\x7f\x9e\x9d\xf3\xd9\x3a\x9c\xfd\x21\x41\x16\xea\x47\xba\x04\xf9\x0a\x00\x00\xff\xff\xd1\x55\x5a\xd9\x17\x02\x00\x00")
+
+func assetsIndexMdBytes() ([]byte, error) {
+	return bindataRead(
+		_assetsIndexMd,
+		"assets/index.md",
+	)
+}
+
+func assetsIndexMd() (*asset, error) {
+	bytes, err := assetsIndexMdBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "assets/index.md", size: 535, mode: os.FileMode(420), modTime: time.Unix(1548433496, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -148,7 +169,7 @@ func assetsJqueryMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/jquery.min.js", size: 97163, mode: os.FileMode(420), modTime: time.Unix(1514300279, 0)}
+	info := bindataFileInfo{name: "assets/jquery.min.js", size: 97163, mode: os.FileMode(420), modTime: time.Unix(1515247000, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -168,7 +189,7 @@ func assetsScriptsJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/scripts.js", size: 2192, mode: os.FileMode(420), modTime: time.Unix(1514303517, 0)}
+	info := bindataFileInfo{name: "assets/scripts.js", size: 2192, mode: os.FileMode(420), modTime: time.Unix(1515247000, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -188,7 +209,7 @@ func assetsStylesCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/styles.css", size: 1208, mode: os.FileMode(420), modTime: time.Unix(1514478642, 0)}
+	info := bindataFileInfo{name: "assets/styles.css", size: 1208, mode: os.FileMode(420), modTime: time.Unix(1515247000, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -248,6 +269,7 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/bootstrap.min.css": assetsBootstrapMinCss,
 	"assets/bootstrap.min.js": assetsBootstrapMinJs,
 	"assets/index.html": assetsIndexHtml,
+	"assets/index.md": assetsIndexMd,
 	"assets/jquery.min.js": assetsJqueryMinJs,
 	"assets/scripts.js": assetsScriptsJs,
 	"assets/styles.css": assetsStylesCss,
@@ -297,6 +319,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"bootstrap.min.css": &bintree{assetsBootstrapMinCss, map[string]*bintree{}},
 		"bootstrap.min.js": &bintree{assetsBootstrapMinJs, map[string]*bintree{}},
 		"index.html": &bintree{assetsIndexHtml, map[string]*bintree{}},
+		"index.md": &bintree{assetsIndexMd, map[string]*bintree{}},
 		"jquery.min.js": &bintree{assetsJqueryMinJs, map[string]*bintree{}},
 		"scripts.js": &bintree{assetsScriptsJs, map[string]*bintree{}},
 		"styles.css": &bintree{assetsStylesCss, map[string]*bintree{}},
