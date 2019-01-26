@@ -76,6 +76,16 @@ func githubLink(v string) string {
 	return v
 }
 
+func githubLinkIncrementer(v string) string {
+	k, ok := githubLinkInc[v]
+	if ok {
+		githubLinkInc[v]++
+		return v + "-" + strconv.Itoa((k + 1))
+	}
+	githubLinkInc[v] = 0
+	return v
+}
+
 func merge(v1 int, v2 string) string {
 	return strconv.Itoa(v1+1) + ". " + v2
 }

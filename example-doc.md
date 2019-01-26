@@ -42,7 +42,7 @@ Full `Rest API` collection and documentation of *School management system*
 
 * [Teacher/v2](#teacherv2)
 
-    * [Fetch teachers](#1-fetch-teachers)
+    * [Fetch teachers](#1-fetch-teachers-1)
 
 
 

@@ -12,6 +12,8 @@ import (
 var (
 	assets Assets
 
+	githubLinkInc = make(map[string]int)
+
 	cmd = &cobra.Command{
 		Use:   "docgen",
 		Short: "Generate documentation from Postman JSON collection",
@@ -101,6 +103,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		"lower":           lower,
 		"upper":           upper,
 		"glink":           githubLink,
+		"glinkInc":        githubLinkIncrementer,
 		"merge":           merge,
 		"trimQueryParams": trimQueryParams,
 	})

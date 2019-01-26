@@ -14,7 +14,7 @@
 @{{- range $index, $c := .Data.Collections }}@
 * [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
 @{{ range $i, $item := $c.Items }}@
-    * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink }}@)
+    * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
 
 @{{ end }}@
 @{{ end }}@
