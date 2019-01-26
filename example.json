@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "75a6c412-e114-425d-a2c0-7eb96b465374",
+		"_postman_id": "5dc9ecfe-c08a-06c3-26ff-11921363f0e7",
 		"name": "SMS",
 		"description": "Full `Rest API` collection and documentation of *School management system*",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -10,10 +10,10 @@
 			"name": "Teacher",
 			"item": [
 				{
-					"name": "V2",
+					"name": "v2",
 					"item": [
 						{
-							"name": "get teachers",
+							"name": "Fetch teachers",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -22,13 +22,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{base_url}}/teachers/v2?q=john&page=1&dept=science",
+									"raw": "{{base_url}}/v2/teachers?q=john&page=1",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
-										"teachers",
-										"v2"
+										"v2",
+										"teachers"
 									],
 									"query": [
 										{
@@ -40,162 +40,19 @@
 											"key": "page",
 											"value": "1",
 											"description": "page as interger number"
-										},
-										{
-											"key": "dept",
-											"value": "science",
-											"description": "dept is the name of the department in which the teacher works"
 										}
 									]
 								},
 								"description": "Get list of teachers"
 							},
 							"response": []
-						},
-						{
-							"name": "create teacher",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version",
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "name",
-											"value": "John Doe",
-											"description": "`name` field must be between *3 to 20* chars",
-											"type": "text"
-										},
-										{
-											"key": "age",
-											"value": "33",
-											"description": "`age` field must be a valid numeric value",
-											"type": "text"
-										},
-										{
-											"key": "dept",
-											"value": "Science",
-											"description": "`dept` field must be a string refering to the department of the teacher",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{base_url}}/teachers",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"teachers"
-									]
-								},
-								"description": "creates a teacher entity"
-							},
-							"response": [
-								{
-									"name": "Validation Error",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Bearer {{access_token}}",
-												"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "name",
-													"value": "John Doe",
-													"description": "`name` field must be between *3 to 20* chars",
-													"type": "text"
-												},
-												{
-													"key": "age",
-													"value": "33",
-													"description": "`age` field must be a valid numeric value",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{base_url}}/teachers",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"teachers"
-											]
-										}
-									},
-									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-									"code": 422,
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\n    \"errors\": [\n        \"Name field is required\",\n        \"age field is required\"\n    ],\n    \"code\": 42201\n}"
-								},
-								{
-									"name": "Success",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Bearer {{access_token}}",
-												"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "name",
-													"value": "John Doe",
-													"description": "`name` field must be between *3 to 20* chars",
-													"type": "text"
-												},
-												{
-													"key": "age",
-													"value": "33",
-													"description": "`age` field must be a valid numeric value",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{base_url}}/teachers",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"teachers"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [],
-									"cookie": [],
-									"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 20101\n}"
-								}
-							]
 						}
 					],
-					"description": "Teacher/V2 contains two updated endpoints(get , create) of Teacher collection",
+					"description": "***V2*** contains the version 2 API collections",
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "get teachers",
+					"name": "Fetch teachers",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -229,7 +86,7 @@
 					"response": []
 				},
 				{
-					"name": "create teacher",
+					"name": "Create teacher",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -355,12 +212,12 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 20101\n}"
+							"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 1002\n}"
 						}
 					]
 				},
 				{
-					"name": "update teacher",
+					"name": "Update teacher",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -398,7 +255,7 @@
 					"response": []
 				},
 				{
-					"name": "update teacher partial",
+					"name": "Update teacher partially",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -440,14 +297,11 @@
 					"response": []
 				},
 				{
-					"name": "delete teacher",
+					"name": "Remove teacher",
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "{{base_url}}/teachers/{{id}}",
 							"host": [
@@ -469,11 +323,12 @@
 			"name": "Student",
 			"item": [
 				{
-					"name": "get students",
+					"name": "Fetch students",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
+								"description": "Must provide valid `access_token`",
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
 							}
@@ -483,7 +338,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/students?page=1",
+							"raw": "{{base_url}}/students?page=1&limit=20",
 							"host": [
 								"{{base_url}}"
 							],
@@ -494,16 +349,21 @@
 								{
 									"key": "page",
 									"value": "1",
-									"description": "int number page"
+									"description": "page number must be number (`int`)"
+								},
+								{
+									"key": "limit",
+									"value": "20",
+									"description": "list limit must be a number (`int`)"
 								}
 							]
 						},
-						"description": "list of all students"
+						"description": "Fetch list of all students"
 					},
 					"response": []
 				}
 			],
-			"description": "Students `API` collection",
+			"description": "Contains Students `API` collection",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -531,10 +391,17 @@
 			"name": "Github API",
 			"item": [
 				{
-					"name": "get profile",
+					"name": "Fetch profile",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"description": "Valid `access_token`",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -552,11 +419,11 @@
 								"thedevsaddam"
 							]
 						},
-						"description": "get profile response"
+						"description": "Get ***github*** profile information"
 					},
 					"response": [
 						{
-							"name": "success response",
+							"name": "Success Response",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
@@ -583,152 +450,104 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Access-Control-Expose-Headers",
-									"value": "ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
-									"name": "Access-Control-Expose-Headers",
-									"description": "Lets a server whitelist headers that browsers are allowed to access."
-								},
-								{
-									"key": "Cache-Control",
-									"value": "public, max-age=60, s-maxage=60",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip",
-									"name": "Content-Encoding",
-									"description": "The type of encoding used on the data."
-								},
-								{
-									"key": "Content-Security-Policy",
-									"value": "default-src 'none'",
-									"name": "Content-Security-Policy",
-									"description": "Custom header"
+									"key": "Date",
+									"value": "Sat, 26 Jan 2019 06:58:16 GMT"
 								},
 								{
 									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 18 Dec 2017 14:57:23 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"4969f6a4b62918dafae715f1e9b4223c\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "Last-Modified",
-									"value": "Mon, 18 Dec 2017 05:25:18 GMT",
-									"name": "Last-Modified",
-									"description": "The last modified date for the requested object, in RFC 2822 format"
-								},
-								{
-									"key": "Server",
-									"value": "GitHub.com",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Status",
-									"value": "200 OK",
-									"name": "Status",
-									"description": "Custom header"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=31536000; includeSubdomains; preload",
-									"name": "Strict-Transport-Security",
-									"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"value": "chunked"
 								},
 								{
-									"key": "Vary",
-									"value": "Accept",
-									"name": "Vary",
-									"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+									"key": "Server",
+									"value": "GitHub.com"
 								},
 								{
-									"key": "Vary",
-									"value": "Accept-Encoding",
-									"name": "Vary",
-									"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff",
-									"name": "X-Content-Type-Options",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "deny",
-									"name": "X-Frame-Options",
-									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
-								},
-								{
-									"key": "X-GitHub-Media-Type",
-									"value": "github.v3; format=json",
-									"name": "X-GitHub-Media-Type",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-GitHub-Request-Id",
-									"value": "C11E:23FF:10343AB:14DD211:5A37D753",
-									"name": "X-GitHub-Request-Id",
-									"description": "Custom header"
+									"key": "Status",
+									"value": "200 OK"
 								},
 								{
 									"key": "X-RateLimit-Limit",
-									"value": "60",
-									"name": "X-RateLimit-Limit",
-									"description": "Custom header"
+									"value": "60"
 								},
 								{
 									"key": "X-RateLimit-Remaining",
-									"value": "58",
-									"name": "X-RateLimit-Remaining",
-									"description": "Custom header"
+									"value": "59"
 								},
 								{
 									"key": "X-RateLimit-Reset",
-									"value": "1513612605",
-									"name": "X-RateLimit-Reset",
-									"description": "Custom header"
+									"value": "1548489496"
 								},
 								{
-									"key": "X-Runtime-rack",
-									"value": "0.025357",
-									"name": "X-Runtime-rack",
-									"description": "Custom header"
+									"key": "Cache-Control",
+									"value": "public, max-age=60, s-maxage=60"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"687de6a641d08823ae08f4adeee22500\""
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Fri, 25 Jan 2019 16:17:23 GMT"
+								},
+								{
+									"key": "X-GitHub-Media-Type",
+									"value": "github.v3; format=json"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubdomains; preload"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "deny"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
 								},
 								{
 									"key": "X-XSS-Protection",
-									"value": "1; mode=block",
-									"name": "X-XSS-Protection",
-									"description": "Cross-site scripting (XSS) filter"
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "origin-when-cross-origin, strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'none'"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "X-GitHub-Request-Id",
+									"value": "C57B:71A1:1E394FA:2266C38:5C4C0507"
 								}
 							],
 							"cookie": [],
-							"body": "{\"login\":\"thedevsaddam\",\"id\":9676798,\"avatar_url\":\"https://avatars0.githubusercontent.com/u/9676798?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/thedevsaddam\",\"html_url\":\"https://github.com/thedevsaddam\",\"followers_url\":\"https://api.github.com/users/thedevsaddam/followers\",\"following_url\":\"https://api.github.com/users/thedevsaddam/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/thedevsaddam/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/thedevsaddam/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/thedevsaddam/subscriptions\",\"organizations_url\":\"https://api.github.com/users/thedevsaddam/orgs\",\"repos_url\":\"https://api.github.com/users/thedevsaddam/repos\",\"events_url\":\"https://api.github.com/users/thedevsaddam/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/thedevsaddam/received_events\",\"type\":\"User\",\"site_admin\":false,\"name\":\"Saddam H\",\"company\":\"Pathao Inc.\",\"blog\":\"https://thedevsaddam.github.io/\",\"location\":\"Dhaka, Bangladesh\",\"email\":null,\"hireable\":true,\"bio\":\"Software Engineer, Pathao Inc | Open Source Enthusiast | Love to write elegant code | Gopher, thirsty for exploring new tech tools.\",\"public_repos\":45,\"public_gists\":29,\"followers\":68,\"following\":62,\"created_at\":\"2014-11-11T14:07:13Z\",\"updated_at\":\"2017-12-18T05:25:18Z\"}"
+							"body": "{\n    \"login\": \"thedevsaddam\",\n    \"id\": 9676798,\n    \"node_id\": \"MDQ6VXNlcjk2NzY3OTg=\",\n    \"avatar_url\": \"https://avatars0.githubusercontent.com/u/9676798?v=4\",\n    \"gravatar_id\": \"\",\n    \"url\": \"https://api.github.com/users/thedevsaddam\",\n    \"html_url\": \"https://github.com/thedevsaddam\",\n    \"followers_url\": \"https://api.github.com/users/thedevsaddam/followers\",\n    \"following_url\": \"https://api.github.com/users/thedevsaddam/following{/other_user}\",\n    \"gists_url\": \"https://api.github.com/users/thedevsaddam/gists{/gist_id}\",\n    \"starred_url\": \"https://api.github.com/users/thedevsaddam/starred{/owner}{/repo}\",\n    \"subscriptions_url\": \"https://api.github.com/users/thedevsaddam/subscriptions\",\n    \"organizations_url\": \"https://api.github.com/users/thedevsaddam/orgs\",\n    \"repos_url\": \"https://api.github.com/users/thedevsaddam/repos\",\n    \"events_url\": \"https://api.github.com/users/thedevsaddam/events{/privacy}\",\n    \"received_events_url\": \"https://api.github.com/users/thedevsaddam/received_events\",\n    \"type\": \"User\",\n    \"site_admin\": false,\n    \"name\": \"Saddam H\",\n    \"company\": \"Pathao Inc.\",\n    \"blog\": \"https://thedevsaddam.github.io/\",\n    \"location\": \"Dhaka, Bangladesh\",\n    \"email\": null,\n    \"hireable\": true,\n    \"bio\": \"Software Engineer | Open Source Enthusiast | Love to write elegant code | Golang | Postgres | MongoDB | Elasticsearch / sleepy head, silent guy ;)\",\n    \"public_repos\": 78,\n    \"public_gists\": 38,\n    \"followers\": 197,\n    \"following\": 184,\n    \"created_at\": \"2014-11-11T14:07:13Z\",\n    \"updated_at\": \"2019-01-25T16:17:23Z\"\n}"
 						}
 					]
 				},
@@ -739,11 +558,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"description": "`content-type` must be `application/json` or `application/text`"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
+								"value": "Bearer {{access_token}}",
+								"description": "Provide `access_token`"
 							}
 						],
 						"body": {
@@ -769,11 +590,20 @@
 						{
 							"name": "succes",
 							"originalRequest": {
-								"method": "GET",
-								"header": [],
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "{\n\t\"name\": \"John Doe\",\n\t\"age\": 30,\n\t\"is_bangladeshi\": true\n}"
 								},
 								"url": {
 									"raw": "https://api.github.com/users/thedevsaddam",
@@ -944,7 +774,7 @@
 					]
 				}
 			],
-			"description": "My github api collection",
+			"description": "Contains github ***API*** collection",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -969,7 +799,7 @@
 			]
 		},
 		{
-			"name": "login",
+			"name": "Login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -985,7 +815,7 @@
 						{
 							"key": "password",
 							"value": "pass",
-							"description": "pass must be gt 5",
+							"description": "pass must be greater than `5` chars",
 							"type": "text"
 						}
 					]
@@ -999,7 +829,7 @@
 						"login"
 					]
 				},
-				"description": "login api"
+				"description": "Inorder to access the private ***API*** you must get an access token by providing `username/password`"
 			},
 			"response": []
 		}
