@@ -7,63 +7,63 @@ Full `Rest API` collection and documentation of *School management system*
 <!--- Request items indices -->
 
 ## Indices
-##### [Github API](GithubAPI)
-    
-* [Fetch profile](GithubAPI-Fetchprofile)
+* [Github API](#github-api)
 
-    
-* [create profile](GithubAPI-createprofile)
+    * [Fetch profile](#1-fetch-profile)
 
-    
 
-##### [Student](Student)
-    
-* [Fetch students](Student-Fetchstudents)
+    * [create profile](#2-create-profile)
 
-    
 
-##### [Teacher](Teacher)
-    
-* [Fetch teachers](Teacher-Fetchteachers)
 
-    
-* [Create teacher](Teacher-Createteacher)
+* [Student](#student)
 
-    
-* [Update teacher](Teacher-Updateteacher)
+    * [Fetch students](#1-fetch-students)
 
-    
-* [Update teacher partially](Teacher-Updateteacherpartially)
 
-    
-* [Remove teacher](Teacher-Removeteacher)
 
-    
+* [Teacher](#teacher)
 
-##### [Teacher/v2](Teacher_2Fv2)
-    
-* [Fetch teachers](Teacher_2Fv2-Fetchteachers)
+    * [Fetch teachers](#1-fetch-teachers)
 
-    
 
-##### [Default](Default)
-    
-* [Login](Default-Login)
+    * [Create teacher](#2-create-teacher)
 
-    
+
+    * [Update teacher](#3-update-teacher)
+
+
+    * [Update teacher partially](#4-update-teacher-partially)
+
+
+    * [Remove teacher](#5-remove-teacher)
+
+
+
+* [Teacher/v2](#teacherv2)
+
+    * [Fetch teachers](#1-fetch-teachers)
+
+
+
+* [Default](#default)
+
+    * [Login](#1-login)
+
+
 
 
 --------
 <!--- Iterate main collection -->
 
 
-### [Github API](GithubAPI)
+### Github API
 Contains github ***API*** collection
 
 <!--- Iterate collection items -->
 
 
-###### 1. [ Fetch profile ](GithubAPI-Fetchprofile)
+###### 1. Fetch profile
 
 
 Get ***github*** profile information
@@ -165,7 +165,7 @@ Status: Success Response | Code: 200
 
 <!--- End Iterate collection items -->
 
-###### 2. [ create profile ](GithubAPI-createprofile)
+###### 2. create profile
 
 
 To create a new profile for user you must provide `Authorization` header with *valid* `access_token`.
@@ -258,13 +258,13 @@ Status: succes | Code: 200
 
 <!--- End Iterate main collection -->
 
-### [Student](Student)
+### Student
 Contains Students `API` collection
 
 <!--- Iterate collection items -->
 
 
-###### 1. [ Fetch students ](Student-Fetchstudents)
+###### 1. Fetch students
 
 
 Fetch list of all students
@@ -331,13 +331,13 @@ URL: {{base_url}}/students
 
 <!--- End Iterate main collection -->
 
-### [Teacher](Teacher)
+### Teacher
 Teacher contains teacher's api collection
 
 <!--- Iterate collection items -->
 
 
-###### 1. [ Fetch teachers ](Teacher-Fetchteachers)
+###### 1. Fetch teachers
 
 
 Get list of teachers
@@ -390,7 +390,7 @@ URL: {{base_url}}/teachers
 
 <!--- End Iterate collection items -->
 
-###### 2. [ Create teacher ](Teacher-Createteacher)
+###### 2. Create teacher
 
 
 
@@ -486,7 +486,7 @@ Status: Success | Code: 200
 
 <!--- End Iterate collection items -->
 
-###### 3. [ Update teacher ](Teacher-Updateteacher)
+###### 3. Update teacher
 
 
 update a teacher using api
@@ -549,7 +549,7 @@ URL: {{base_url}}/teachers
 
 <!--- End Iterate collection items -->
 
-###### 4. [ Update teacher partially ](Teacher-Updateteacherpartially)
+###### 4. Update teacher partially
 
 
 This api need header for update teacher
@@ -613,7 +613,7 @@ URL: {{base_url}}/teachers
 
 <!--- End Iterate collection items -->
 
-###### 5. [ Remove teacher ](Teacher-Removeteacher)
+###### 5. Remove teacher
 
 
 update a teacher using api
@@ -643,13 +643,13 @@ URL: {{base_url}}/teachers/{{id}}
 
 <!--- End Iterate main collection -->
 
-### [Teacher/v2](Teacher_2Fv2)
+### Teacher/v2
 
 
 <!--- Iterate collection items -->
 
 
-###### 1. [ Fetch teachers ](Teacher_2Fv2-Fetchteachers)
+###### 1. Fetch teachers
 
 
 Get list of teachers
@@ -705,13 +705,13 @@ URL: {{base_url}}/v2/teachers
 
 <!--- End Iterate main collection -->
 
-### [Default](Default)
+### Default
 
 
 <!--- Iterate collection items -->
 
 
-###### 1. [ Login ](Default-Login)
+###### 1. Login
 
 
 Inorder to access the private ***API*** you must get an access token by providing `username/password`
@@ -769,4 +769,5 @@ URL: {{base_url}}/login
 
 
 ---
+[Back to top](#SMS)
 > ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___

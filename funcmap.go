@@ -55,6 +55,31 @@ func addOne(v int) string {
 	return strconv.Itoa(v + 1)
 }
 
+func trim(v string) string {
+	return strings.TrimSpace(v)
+}
+
+func lower(v string) string {
+	return strings.ToLower(v)
+}
+
+func upper(v string) string {
+	return strings.ToUpper(v)
+}
+
+func githubLink(v string) string {
+	v = strings.ToLower(v)
+
+	v = strings.Replace(v, " ", "-", -1)
+	v = strings.Replace(v, ".", "", -1)
+	v = strings.Replace(v, "/", "", -1)
+	return v
+}
+
+func merge(v1 int, v2 string) string {
+	return strconv.Itoa(v1+1) + ". " + v2
+}
+
 func markdown(v string) string {
 	return string(blackfriday.Run([]byte(v)))
 }

@@ -97,6 +97,11 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 	tm.Funcs(template.FuncMap{
 		"snake":           snake,
 		"addOne":          addOne,
+		"trim":            trim,
+		"lower":           lower,
+		"upper":           upper,
+		"glink":           githubLink,
+		"merge":           merge,
 		"trimQueryParams": trimQueryParams,
 	})
 	t, err := tm.Parse(assets.IndexMarkdown)

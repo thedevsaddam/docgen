@@ -1,7 +1,7 @@
 <!--- Collection name and description -->
 
 @{{if .Data.Info.Name -}}@
-# @{{ .Data.Info.Name }}@
+# @{{ .Data.Info.Name | trim }}@
 @{{ end }}@
 @{{ if .Data.Info.Description }}@
 @{{- .Data.Info.Description -}}@
@@ -10,25 +10,26 @@
 <!--- Request items indices -->
 
 ## Indices
-@{{- range $index, $c := .Data.Collections }}@
-##### [@{{ $c.Name }}@](@{{ $c.Name | snake }}@)
-    @{{ range $i, $item := $c.Items }}@
-* [@{{ $item.Name }}@](@{{ $c.Name | snake }}@-@{{ $item.Name | snake }}@)
 
-    @{{ end }}@
+@{{- range $index, $c := .Data.Collections }}@
+* [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
+@{{ range $i, $item := $c.Items }}@
+    * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink }}@)
+
+@{{ end }}@
 @{{ end }}@
 
 --------
 <!--- Iterate main collection -->
 
 @{{ range $di, $d := .Data.Collections }}@
-### [@{{ $d.Name }}@](@{{ $d.Name | snake }}@)
+### @{{ $d.Name | trim  }}@
 @{{ $d.Description }}@
 
 <!--- Iterate collection items -->
 
 @{{ range $ii, $item := $d.Items }}@
-###### @{{ $ii | addOne }}@. [@{{ if $item.Name }}@ @{{ $item.Name }}@ @{{ end }}@](@{{ $d.Name | snake }}@-@{{ $item.Name | snake }}@)
+###### @{{ $ii | addOne }}@. @{{ if $item.Name }}@@{{ $item.Name | trim }}@@{{ end }}@
 
 @{{ if $item.Request.Description }}@
 @{{ $item.Request.Description }}@
@@ -140,4 +141,5 @@ Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 @{{ end }}@
 
 ---
+[Back to top](#@{{ .Data.Info.Name | trim }}@)
 > ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___
