@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/url"
 	"regexp"
+	"strconv"
 	"strings"
 
 	blackfriday "gopkg.in/russross/blackfriday.v2"
@@ -48,6 +49,10 @@ func trimQueryParams(v string) string {
 		return strings.Split(v, "?")[0]
 	}
 	return v
+}
+
+func addOne(v int) string {
+	return strconv.Itoa(v + 1)
 }
 
 func markdown(v string) string {
