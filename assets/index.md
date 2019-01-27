@@ -10,13 +10,11 @@
 <!--- Request items indices -->
 
 ## Indices
-
-@{{- range $index, $c := .Data.Collections }}@
+@{{ range $index, $c := .Data.Collections }}@
 * [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
 @{{ range $i, $item := $c.Items }}@
-    * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
-
-@{{ end }}@
+  * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
+@{{- end }}@
 @{{ end }}@
 
 --------

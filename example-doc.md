@@ -7,50 +7,31 @@ Full `Rest API` collection and documentation of *School management system*
 <!--- Request items indices -->
 
 ## Indices
+
 * [Github API](#github-api)
 
-    * [Fetch profile](#1-fetch-profile)
-
-
-    * [create profile](#2-create-profile)
-
-
+  * [Fetch profile](#1-fetch-profile)
+  * [create profile](#2-create-profile)
 
 * [Student](#student)
 
-    * [Fetch students](#1-fetch-students)
-
-
+  * [Fetch students](#1-fetch-students)
 
 * [Teacher](#teacher)
 
-    * [Fetch teachers](#1-fetch-teachers)
-
-
-    * [Create teacher](#2-create-teacher)
-
-
-    * [Update teacher](#3-update-teacher)
-
-
-    * [Update teacher partially](#4-update-teacher-partially)
-
-
-    * [Remove teacher](#5-remove-teacher)
-
-
+  * [Fetch teachers](#1-fetch-teachers)
+  * [Create teacher](#2-create-teacher)
+  * [Update teacher](#3-update-teacher)
+  * [Update teacher partially](#4-update-teacher-partially)
+  * [Remove teacher](#5-remove-teacher)
 
 * [Teacher/v2](#teacherv2)
 
-    * [Fetch teachers](#1-fetch-teachers-1)
-
-
+  * [Fetch teachers](#1-fetch-teachers-1)
 
 * [Default](#default)
 
-    * [Login](#1-login)
-
-
+  * [Login](#1-login)
 
 
 --------
@@ -117,7 +98,7 @@ URL: https://api.github.com/users/thedevsaddam
 
 ***Response***
 
-        
+
 Status: Success Response | Code: 200
 
 
@@ -230,7 +211,7 @@ URL: https://api.github.com/users/thedevsaddam
 
 ***Response***
 
-        
+
 Status: succes | Code: 200
 
 
@@ -451,7 +432,7 @@ URL: {{base_url}}/teachers
 
 ***Response***
 
-        
+
 Status: Validation Error | Code: 422
 
 
@@ -467,7 +448,7 @@ Status: Validation Error | Code: 422
 ```
 
 
-        
+
 Status: Success | Code: 200
 
 
@@ -621,7 +602,7 @@ update a teacher using api
 
 ```bash
 Method: DELETE
-Type: 
+Type:
 URL: {{base_url}}/teachers/{{id}}
 ```
 
