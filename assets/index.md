@@ -139,5 +139,5 @@ Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 @{{ end }}@
 
 ---
-[Back to top](#@{{ .Data.Info.Name | trim }}@)
+[Back to top](#@{{ .Data.Info.Name | trim | glink }}@)
 > ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___
