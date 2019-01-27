@@ -254,7 +254,6 @@ Status: Validation Error | Code: 422
 ```
 
 
-
 Status: Success | Code: 200
 
 
@@ -333,7 +332,7 @@ update a teacher using api
 
 ```bash
 Method: DELETE
-Type:
+Type: 
 URL: {{base_url}}/teachers/{{id}}
 ```
 
@@ -387,5 +386,5 @@ URL: {{base_url}}/login
 
 
 ---
-[Back to top](#SMS)
+[Back to top](#sms)
 > ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___

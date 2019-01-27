@@ -34,7 +34,7 @@
 @{{ end }}@
 
 ```bash
-Method: @{{ $item.Request.Method }| upper }@
+Method: @{{ $item.Request.Method | upper }}@
 Type: @{{ $item.Request.Body.Mode | upper }}@
 URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 ```
