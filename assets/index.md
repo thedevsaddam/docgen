@@ -21,21 +21,21 @@
 <!--- Iterate main collection -->
 
 @{{ range $di, $d := .Data.Collections }}@
-### @{{ $d.Name | trim  }}@
+## @{{ $d.Name | trim  }}@
 @{{ $d.Description }}@
 
 <!--- Iterate collection items -->
 
 @{{ range $ii, $item := $d.Items }}@
-###### @{{ $ii | addOne }}@. @{{ if $item.Name }}@@{{ $item.Name | trim }}@@{{ end }}@
+### @{{ $ii | addOne }}@. @{{ if $item.Name }}@@{{ $item.Name | trim }}@@{{ end }}@
 
 @{{ if $item.Request.Description }}@
 @{{ $item.Request.Description }}@
 @{{ end }}@
 
 ```bash
-Method: @{{ $item.Request.Method }}@
-Type: @{{ $item.Request.Body.Mode }}@
+Method: @{{ $item.Request.Method }| upper }@
+Type: @{{ $item.Request.Body.Mode | upper }}@
 URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 ```
 
@@ -118,7 +118,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 @{{ if $item.Responses }}@
 ***Response***
 @{{ range $ir, $resp := $item.Responses }}@
-        @{{ if $resp.Name }}@
+@{{ if $resp.Name }}@
 Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 
 @{{ end }}@
