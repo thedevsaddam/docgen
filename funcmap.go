@@ -3,8 +3,9 @@ package main
 import (
 	"html/template"
 	"log"
-	"regexp"
 	"net/url"
+	"regexp"
+	"strconv"
 	"strings"
 
 	blackfriday "gopkg.in/russross/blackfriday.v2"
@@ -32,16 +33,15 @@ func js(v string) template.JS {
 
 func snake(v string) string {
 
+	reg, err := regexp.Compile("[^a-zA-Z0-9%]+")
+	resURI := url.QueryEscape(v)
+	if err != nil {
 
-		reg, err := regexp.Compile("[^a-zA-Z0-9%]+")
-		resUri := url.QueryEscape(v)
-		if err != nil {
-			
-			log.Fatal(err)
-		}
-		result := reg.ReplaceAllString(resUri, "")
-		result = strings.Replace(result,"%","_",-1)
-		return result
+		log.Fatal(err)
+	}
+	result := reg.ReplaceAllString(resURI, "")
+	result = strings.Replace(result, "%", "_", -1)
+	return result
 }
 
 func trimQueryParams(v string) string {
@@ -49,6 +49,45 @@ func trimQueryParams(v string) string {
 		return strings.Split(v, "?")[0]
 	}
 	return v
+}
+
+func addOne(v int) string {
+	return strconv.Itoa(v + 1)
+}
+
+func trim(v string) string {
+	return strings.TrimSpace(v)
+}
+
+func lower(v string) string {
+	return strings.ToLower(v)
+}
+
+func upper(v string) string {
+	return strings.ToUpper(v)
+}
+
+func githubLink(v string) string {
+	v = strings.ToLower(v)
+
+	v = strings.Replace(v, " ", "-", -1)
+	v = strings.Replace(v, ".", "", -1)
+	v = strings.Replace(v, "/", "", -1)
+	return v
+}
+
+func githubLinkIncrementer(v string) string {
+	k, ok := githubLinkInc[v]
+	if ok {
+		githubLinkInc[v]++
+		return v + "-" + strconv.Itoa((k + 1))
+	}
+	githubLinkInc[v] = 0
+	return v
+}
+
+func merge(v1 int, v2 string) string {
+	return strconv.Itoa(v1+1) + ". " + v2
 }
 
 func markdown(v string) string {

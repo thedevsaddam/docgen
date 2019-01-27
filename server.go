@@ -41,6 +41,6 @@ func server(cmd *cobra.Command, args []string) {
 
 func templateFunc(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/html")
-	buf := readJSON(file)
+	buf := readJSONtoHTML(file)
 	w.Write(buf.Bytes())
 }
