@@ -98,6 +98,8 @@ type (
 		JqueryJS     string
 		ScriptsJS    string
 		StylesCSS    string
+
+		IndexMarkdown string
 	}
 )
 
@@ -148,13 +150,13 @@ func (r *Root) buildSubChildItems(itm Item, c *Collection, pn string) bool {
 		}
 		r.Collections = append(r.Collections, clctn)
 		return true
-	} else {
-		c.Items = append(c.Items, Item{
-			Name:      itm.Name,
-			Request:   itm.Request,
-			Responses: itm.Responses,
-		})
 	}
+	c.Items = append(c.Items, Item{
+		Name:      itm.Name,
+		Request:   itm.Request,
+		Responses: itm.Responses,
+	})
+
 	return false
 }
 

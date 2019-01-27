@@ -2,15 +2,17 @@ package main
 
 import (
 	"bytes"
-	"html/template"
 	"log"
 	"os"
+	"text/template"
 
 	"github.com/spf13/cobra"
 )
 
 var (
 	assets Assets
+
+	githubLinkInc = make(map[string]int)
 
 	cmd = &cobra.Command{
 		Use:   "docgen",
@@ -34,6 +36,8 @@ func init() {
 		JqueryJS:  getData("assets/jquery.min.js"),
 		ScriptsJS: getData("assets/scripts.js"),
 		StylesCSS: getData("assets/styles.css"),
+
+		IndexMarkdown: getData("assets/index.md"),
 	}
 	// register commands
 	cmd.AddCommand(versionCmd)
@@ -41,7 +45,7 @@ func init() {
 	cmd.AddCommand(buildOutput)
 }
 
-func readJSON(str string) *bytes.Buffer {
+func readJSONtoHTML(str string) *bytes.Buffer {
 	var rt Root
 	f, err := os.Open(str)
 	if err != nil {
@@ -72,6 +76,45 @@ func readJSON(str string) *bytes.Buffer {
 	}{
 		Assets: assets,
 		Data:   rt,
+	}
+	buf := new(bytes.Buffer)
+	// defer buf.Reset()
+	if err := t.Execute(buf, data); err != nil {
+		log.Fatal(err)
+	}
+	return buf
+}
+func readJSONtoMarkdown(str string) *bytes.Buffer {
+	var rt Root
+	f, err := os.Open(str)
+	if err != nil {
+		log.Fatal("opening file", err.Error())
+	}
+	if err = rt.Open(f); err != nil {
+		log.Fatal("parsing json file", err.Error())
+	}
+
+	tm := template.New("main")
+	tm.Delims("@{{", "}}@")
+	tm.Funcs(template.FuncMap{
+		"snake":           snake,
+		"addOne":          addOne,
+		"trim":            trim,
+		"lower":           lower,
+		"upper":           upper,
+		"glink":           githubLink,
+		"glinkInc":        githubLinkIncrementer,
+		"merge":           merge,
+		"trimQueryParams": trimQueryParams,
+	})
+	t, err := tm.Parse(assets.IndexMarkdown)
+	if err != nil {
+		log.Fatal(err)
+	}
+	data := struct {
+		Data Root
+	}{
+		Data: rt,
 	}
 	buf := new(bytes.Buffer)
 	// defer buf.Reset()
