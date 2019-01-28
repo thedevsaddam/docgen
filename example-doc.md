@@ -1,9 +1,7 @@
 
-
 # SMS
 
 Full `Rest API` collection and documentation of *School management system*
-
 
 ## Indices
 
@@ -46,6 +44,7 @@ Contains github ***API*** collection
 Get ***github*** profile information
 
 
+***Endpoint:***
 ```bash
 Method: GET
 Type: RAW
@@ -60,7 +59,7 @@ URL: https://api.github.com/users/thedevsaddam
 | Authorization | {{access_token}} | Valid `access_token` |
 
 
-***Response***
+***Responses:***
 
 
 Status: Success Response | Code: 200
@@ -109,6 +108,7 @@ Status: Success Response | Code: 200
 To create a new profile for user you must provide `Authorization` header with *valid* `access_token`.
 
 
+***Endpoint:***
 ```bash
 Method: POST
 Type: RAW
@@ -135,7 +135,7 @@ URL: https://api.github.com/users/thedevsaddam
 ```
 
 
-***Response***
+***Responses:***
 
 
 Status: succes | Code: 200
@@ -165,6 +165,7 @@ Contains Students `API` collection
 Fetch list of all students
 
 
+***Endpoint:***
 ```bash
 Method: GET
 Type: RAW
@@ -197,6 +198,7 @@ Teacher contains teacher's api collection
 Get list of teachers
 
 
+***Endpoint:***
 ```bash
 Method: GET
 Type: RAW
@@ -209,12 +211,13 @@ URL: {{base_url}}/teachers
 | Key | Value | Description |
 | --- | ------|-------------|
 | q | john | q can be name, email, phone etc |
-| page | 1 | page as interger number |
+| page | 1 | page as integer number |
 
 
 ### 2. Create teacher
 
 
+***Endpoint:***
 ```bash
 Method: POST
 Type: FORMDATA
@@ -237,7 +240,7 @@ URL: {{base_url}}/teachers
 | age | 33 | `age` field must be a valid numeric value |
 
 
-***Response***
+***Responses:***
 
 
 Status: Validation Error | Code: 422
@@ -247,7 +250,7 @@ Status: Validation Error | Code: 422
 {
     "errors": [
         "Name field is required",
-        "age field is required"
+        "Age field is required"
     ],
     "code": 42201
 }
@@ -271,6 +274,7 @@ Status: Success | Code: 200
 update a teacher using api
 
 
+***Endpoint:***
 ```bash
 Method: PUT
 Type: URLENCODED
@@ -300,6 +304,7 @@ URL: {{base_url}}/teachers
 This api need header for update teacher
 
 
+***Endpoint:***
 ```bash
 Method: PATCH
 Type: URLENCODED
@@ -330,6 +335,7 @@ URL: {{base_url}}/teachers
 update a teacher using api
 
 
+***Endpoint:***
 ```bash
 Method: DELETE
 Type: 
@@ -346,6 +352,7 @@ URL: {{base_url}}/teachers/{{id}}
 Get list of teachers
 
 
+***Endpoint:***
 ```bash
 Method: GET
 Type: RAW
@@ -358,7 +365,7 @@ URL: {{base_url}}/v2/teachers
 | Key | Value | Description |
 | --- | ------|-------------|
 | q | john | q can be name, email, phone etc |
-| page | 1 | page as interger number |
+| page | 1 | page as integer number |
 
 
 ## Default
@@ -370,6 +377,7 @@ URL: {{base_url}}/v2/teachers
 Inorder to access the private ***API*** you must get an access token by providing `username/password`
 
 
+***Endpoint:***
 ```bash
 Method: POST
 Type: FORMDATA

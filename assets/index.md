@@ -1,5 +1,4 @@
 <!--- Collection name and description -->
-
 @{{if .Data.Info.Name -}}@
 # @{{ .Data.Info.Name | trim }}@
 @{{ end }}@
@@ -8,7 +7,6 @@
 @{{ end }}@
 
 <!--- Request items indices -->
-
 ## Indices
 @{{ range $index, $c := .Data.Collections }}@
 * [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
@@ -33,6 +31,7 @@
 @{{ $item.Request.Description }}@
 @{{ end }}@
 
+***Endpoint:***
 ```bash
 Method: @{{ $item.Request.Method | upper }}@
 Type: @{{ $item.Request.Body.Mode | upper }}@
@@ -116,7 +115,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 
 <!--- Items response -->
 @{{ if $item.Responses }}@
-***Response***
+***Responses:***
 @{{ range $ir, $resp := $item.Responses }}@
 @{{ if $resp.Name }}@
 Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
@@ -140,4 +139,4 @@ Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 
 ---
 [Back to top](#@{{ .Data.Info.Name | trim | glink }}@)
-> ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)
