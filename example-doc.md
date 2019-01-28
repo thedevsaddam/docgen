@@ -387,4 +387,4 @@ URL: {{base_url}}/login
 
 ---
 [Back to top](#sms)
-> ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)
