@@ -45,6 +45,7 @@ Get ***github*** profile information
 
 
 ***Endpoint:***
+
 ```bash
 Method: GET
 Type: RAW
@@ -109,6 +110,7 @@ To create a new profile for user you must provide `Authorization` header with *v
 
 
 ***Endpoint:***
+
 ```bash
 Method: POST
 Type: RAW
@@ -166,6 +168,7 @@ Fetch list of all students
 
 
 ***Endpoint:***
+
 ```bash
 Method: GET
 Type: RAW
@@ -199,6 +202,7 @@ Get list of teachers
 
 
 ***Endpoint:***
+
 ```bash
 Method: GET
 Type: RAW
@@ -218,6 +222,7 @@ URL: {{base_url}}/teachers
 
 
 ***Endpoint:***
+
 ```bash
 Method: POST
 Type: FORMDATA
@@ -275,6 +280,7 @@ update a teacher using api
 
 
 ***Endpoint:***
+
 ```bash
 Method: PUT
 Type: URLENCODED
@@ -305,6 +311,7 @@ This api need header for update teacher
 
 
 ***Endpoint:***
+
 ```bash
 Method: PATCH
 Type: URLENCODED
@@ -336,6 +343,7 @@ update a teacher using api
 
 
 ***Endpoint:***
+
 ```bash
 Method: DELETE
 Type: 
@@ -353,6 +361,7 @@ Get list of teachers
 
 
 ***Endpoint:***
+
 ```bash
 Method: GET
 Type: RAW
@@ -378,6 +387,7 @@ Inorder to access the private ***API*** you must get an access token by providin
 
 
 ***Endpoint:***
+
 ```bash
 Method: POST
 Type: FORMDATA
@@ -395,4 +405,4 @@ URL: {{base_url}}/login
 
 ---
 [Back to top](#sms)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2019-02-03 17:19:11
