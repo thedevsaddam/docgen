@@ -32,6 +32,7 @@
 @{{ end }}@
 
 ***Endpoint:***
+
 ```bash
 Method: @{{ $item.Request.Method | upper }}@
 Type: @{{ $item.Request.Body.Mode | upper }}@
