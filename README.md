@@ -14,7 +14,7 @@ go get -u github.com/thedevsaddam/docgen
 
 ### Available features
 * Live postman collection to documentation
-* Build postman collection to html documentation
+* Build postman collection to html/markdown documentation
 * Supports multi-level collection build
 
 ### Usage
