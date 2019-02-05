@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
@@ -92,6 +93,10 @@ func merge(v1 int, v2 string) string {
 
 func markdown(v string) string {
 	return string(blackfriday.Run([]byte(v)))
+}
+
+func dateTime() string {
+	return time.Now().Format("2006-01-02 15:04:05")
 }
 
 func color(v string) string {

@@ -39,7 +39,7 @@
 										{
 											"key": "page",
 											"value": "1",
-											"description": "page as interger number"
+											"description": "page as integer number"
 										}
 									]
 								},
@@ -77,7 +77,7 @@
 								{
 									"key": "page",
 									"value": "1",
-									"description": "page as interger number"
+									"description": "page as integer number"
 								}
 							]
 						},
@@ -167,7 +167,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"errors\": [\n        \"Name field is required\",\n        \"age field is required\"\n    ],\n    \"code\": 42201\n}"
+							"body": "{\n    \"errors\": [\n        \"Name field is required\",\n        \"Age field is required\"\n    ],\n    \"code\": 42201\n}"
 						},
 						{
 							"name": "Success",
