@@ -10,11 +10,18 @@ Transform your postman collection to html documentation
 go get -u github.com/thedevsaddam/docgen
 ```
 
+#### Mac
+```bash
+brew tap thedevsaddam/cli https://github.com/thedevsaddam/homebrew-cli.git
+brew install docgen
+```
+
+#### Linux/Windows
 [Download binary](https://github.com/thedevsaddam/docgen-bin)
 
 ### Available features
 * Live postman collection to documentation
-* Build postman collection to html documentation
+* Build postman collection to html/markdown documentation
 * Supports multi-level collection build
 
 ### Usage
@@ -22,7 +29,7 @@ go get -u github.com/thedevsaddam/docgen
 * To build a HTML documentation use `docgen build -i input-postman-collection.josn -o ~/Downloads/index.html`
 * To build a Markdown documentation use `docgen build -i input-postman-collection.josn -o ~/Downloads/index.md -m`
 
-***[See example markdown](example-doc.md)***
+***See [example API markdown documentation](example-doc.md)***
 
 ### Author
 1. [Sajib Sikder](https://github.com/mhshajib)

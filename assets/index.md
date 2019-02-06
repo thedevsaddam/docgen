@@ -1,5 +1,4 @@
 <!--- Collection name and description -->
-
 @{{if .Data.Info.Name -}}@
 # @{{ .Data.Info.Name | trim }}@
 @{{ end }}@
@@ -8,36 +7,35 @@
 @{{ end }}@
 
 <!--- Request items indices -->
-
 ## Indices
-
-@{{- range $index, $c := .Data.Collections }}@
+@{{ range $index, $c := .Data.Collections }}@
 * [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
 @{{ range $i, $item := $c.Items }}@
-    * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
-
-@{{ end }}@
+  * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
+@{{- end }}@
 @{{ end }}@
 
 --------
 <!--- Iterate main collection -->
 
 @{{ range $di, $d := .Data.Collections }}@
-### @{{ $d.Name | trim  }}@
+## @{{ $d.Name | trim  }}@
 @{{ $d.Description }}@
 
 <!--- Iterate collection items -->
 
 @{{ range $ii, $item := $d.Items }}@
-###### @{{ $ii | addOne }}@. @{{ if $item.Name }}@@{{ $item.Name | trim }}@@{{ end }}@
+### @{{ $ii | addOne }}@. @{{ if $item.Name }}@@{{ $item.Name | trim }}@@{{ end }}@
 
 @{{ if $item.Request.Description }}@
 @{{ $item.Request.Description }}@
 @{{ end }}@
 
+***Endpoint:***
+
 ```bash
-Method: @{{ $item.Request.Method }}@
-Type: @{{ $item.Request.Body.Mode }}@
+Method: @{{ $item.Request.Method | upper }}@
+Type: @{{ $item.Request.Body.Mode | upper }}@
 URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 ```
 
@@ -118,9 +116,9 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 
 <!--- Items response -->
 @{{ if $item.Responses }}@
-***Response***
+***Responses:***
 @{{ range $ir, $resp := $item.Responses }}@
-        @{{ if $resp.Name }}@
+@{{ if $resp.Name }}@
 Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 
 @{{ end }}@
@@ -141,5 +139,5 @@ Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 @{{ end }}@
 
 ---
-[Back to top](#@{{ .Data.Info.Name | trim }}@)
-> ___Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam)___
+[Back to top](#@{{ .Data.Info.Name | trim | glink }}@)
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: @{{date_time}}@

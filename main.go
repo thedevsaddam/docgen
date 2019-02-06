@@ -64,6 +64,7 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		"snake":           snake,
 		"color":           color,
 		"trimQueryParams": trimQueryParams,
+		"date_time":       dateTime,
 		"markdown":        markdown,
 	})
 	t, err := tm.Parse(assets.IndexHTML)
@@ -105,6 +106,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		"glink":           githubLink,
 		"glinkInc":        githubLinkIncrementer,
 		"merge":           merge,
+		"date_time":       dateTime,
 		"trimQueryParams": trimQueryParams,
 	})
 	t, err := tm.Parse(assets.IndexMarkdown)
