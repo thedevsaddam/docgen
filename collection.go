@@ -112,6 +112,8 @@ func (r *Root) Open(rdr io.Reader) error {
 	r.build()
 	r.sortCollections()
 
+	r.removeEmptyCollections()
+
 	return nil
 }
 
@@ -121,6 +123,9 @@ func (r *Root) build() {
 	c.Name = defaultCollection
 	for i := len(r.Collections) - 1; i >= 0; i-- {
 		if len(r.Collections[i].Items) <= 0 {
+			if r.Collections[i].Request.Method == "" { //a collection with no sub-items and request method is empty
+				continue
+			}
 			c.Items = append(c.Items, Item{
 				Name:      r.Collections[i].Name,
 				Request:   r.Collections[i].Request,
@@ -132,7 +137,7 @@ func (r *Root) build() {
 			for j := len(r.Collections[i].Items) - 1; j >= 0; j-- {
 				built := r.buildSubChildItems(r.Collections[i].Items[j], &clctn, r.Collections[i].Name)
 				if built {
-					r.Collections[i].Items = r.Collections[i].Items[1:] //removing the sub folder from the parent to make it a collection itself
+					r.Collections[i].Items = append(r.Collections[i].Items[:j], r.Collections[i].Items[j+1:]...) //removing the sub folder from the parent to make it a collection itself
 				}
 			}
 		}
@@ -168,4 +173,16 @@ func (r *Root) sortCollections() {
 		}
 		return r.Collections[i].Name < r.Collections[j].Name
 	})
+}
+
+//removeEmptyCollections removes any empty collection
+func (r *Root) removeEmptyCollections() {
+	for i, rc := range r.Collections {
+		if len(rc.Items) == 0 {
+			r.Collections = append(r.Collections[:i], r.Collections[i+1:]...) //popping the certain empty collection
+			r.removeEmptyCollections()                                        //recurssion followed by break to ensure proper indexing after a pop
+			break
+		}
+	}
+	return
 }
