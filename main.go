@@ -9,6 +9,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const logo = `
+_____                _____
+|  __ \              / ____|
+| |  | | ___   ___  | |  __  ___ _ __
+| |  | |/ _ \ / __| | | |_ |/ _ \ '_ \
+| |__| | (_) | (__  | |__| |  __/ | | |
+|_____/ \___/ \___|  \_____|\___|_| |_|
+
+Generate API documentation from Postman JSON collection
+For more info visit: https://github.com/thedevsaddam/docgen
+`
+
 var (
 	assets Assets
 
@@ -17,7 +29,7 @@ var (
 	cmd = &cobra.Command{
 		Use:   "docgen",
 		Short: "Generate documentation from Postman JSON collection",
-		Long:  `Generate documentation from Postman JSON collection`,
+		Long:  logo,
 	}
 )
 

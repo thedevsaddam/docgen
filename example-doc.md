@@ -405,4 +405,4 @@ URL: {{base_url}}/login
 
 ---
 [Back to top](#sms)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2019-02-03 17:19:11
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2019-02-12 19:45:27 by [docgen](https://github.com/thedevsaddam/docgen)

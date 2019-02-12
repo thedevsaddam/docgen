@@ -14,8 +14,8 @@ var (
 	port      int
 	serveLive = &cobra.Command{
 		Use:   "server",
-		Short: "Serve live from postman collection",
-		Long:  `Serve live from postman collection`,
+		Short: "Serve live html from postman collection",
+		Long:  `Serve live html from postman collection`,
 		Run:   server,
 	}
 )
