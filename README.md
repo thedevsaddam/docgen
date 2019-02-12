@@ -14,6 +14,9 @@ go get -u github.com/thedevsaddam/docgen
 ```bash
 brew tap thedevsaddam/cli https://github.com/thedevsaddam/homebrew-cli.git
 brew install docgen
+
+# update
+brew upgrade docgen
 ```
 
 #### Linux/Windows
