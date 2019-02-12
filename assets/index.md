@@ -140,4 +140,4 @@ Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 
 ---
 [Back to top](#@{{ .Data.Info.Name | trim | glink }}@)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: @{{date_time}}@
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: @{{date_time}}@ by [docgen](https://github.com/thedevsaddam/docgen)
