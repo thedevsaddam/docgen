@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,6 +24,7 @@ var (
 func init() {
 	serveLive.PersistentFlags().IntVarP(&port, "port", "p", 9000, "port number to listen")
 	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection file relative path")
+	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "this flag will command to show markdown")
 }
 
 func server(cmd *cobra.Command, args []string) {
@@ -41,6 +43,12 @@ func server(cmd *cobra.Command, args []string) {
 
 func templateFunc(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/html")
-	buf := readJSONtoHTML(file)
+	var buf *bytes.Buffer
+	if !isMarkdown {
+		buf = readJSONtoHTML(file)
+		w.Write(buf.Bytes())
+		return
+	}
+	buf = readJSONtoMarkdownHTML(file)
 	w.Write(buf.Bytes())
 }

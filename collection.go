@@ -99,7 +99,9 @@ type (
 		ScriptsJS    string
 		StylesCSS    string
 
-		IndexMarkdown string
+		IndexMarkdown        string
+		MarkdownHTML         string
+		GithubMarkdownMinCSS string
 	}
 )
 
