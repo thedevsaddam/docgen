@@ -24,7 +24,7 @@ var (
 func init() {
 	serveLive.PersistentFlags().IntVarP(&port, "port", "p", 9000, "port number to listen")
 	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection file relative path")
-	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "this flag will command to show markdown")
+	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "display markdown format in preview")
 }
 
 func server(cmd *cobra.Command, args []string) {
