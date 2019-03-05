@@ -211,7 +211,7 @@ func assetsMarkdownHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/markdown.html", size: 1523, mode: os.FileMode(420), modTime: time.Unix(1550126061, 0)}
+	info := bindataFileInfo{name: "assets/markdown.html", size: 1523, mode: os.FileMode(420), modTime: time.Unix(1550132118, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

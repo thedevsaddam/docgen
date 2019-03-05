@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -23,7 +24,7 @@ var (
 
 func init() {
 	serveLive.PersistentFlags().IntVarP(&port, "port", "p", 9000, "port number to listen")
-	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection file relative path")
+	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection file's relative path")
 	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "display markdown format in preview")
 }
 
@@ -38,6 +39,7 @@ func server(cmd *cobra.Command, args []string) {
 	}
 	http.HandleFunc("/", templateFunc)
 	log.Println("Listening on port: ", port)
+	log.Printf("Web Server is available at http://localhost:%s/\n", strconv.Itoa(port))
 	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 }
 
