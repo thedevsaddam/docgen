@@ -19,7 +19,10 @@ brew install docgen
 brew upgrade docgen
 ```
 
-#### Linux/Windows
+#### Windows
+**For windows download the binary and set environment variable so that you can access the binary from terminal**
+
+#### Binary link
 [Download binary](https://github.com/thedevsaddam/docgen-bin)
 
 ### Available features
@@ -28,9 +31,10 @@ brew upgrade docgen
 * Supports multi-level collection build
 
 ### Usage
-* To see live documentation from postman collection use `docgen server -f input-postman-collection.json -p 8000` This will open the html version of postman collection to the defined port
-* To build a HTML documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.html`
-* To build a Markdown documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.md -m`
+* To view live HTML documentation from postman collection use `docgen server -f input-postman-collection.json -p 8000` This will open the html version of postman collection to the defined port
+* To view live Markown documentation from postman collection use `docgen server -f input-postman-collection.json -p 8000 -m` This will open the markdown version of postman collection to the defined port
+* To make HTML documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.html`
+* To make Markdown documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.md -m`
 
 ***See [example API markdown documentation](example-doc.md)***
 
