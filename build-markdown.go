@@ -44,7 +44,7 @@ func buildAndGenerateMarkdownFile(cmd *cobra.Command, args []string) {
 		} else {
 			ws = 0
 		}
-		if ws <= 2 {
+		if ws <= 3 {
 			contents += "\n" + l
 		}
 	}
