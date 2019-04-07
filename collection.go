@@ -12,6 +12,7 @@ type (
 	Root struct {
 		Info        Info         `json:"info"`
 		Collections []Collection `json:"item"`
+		Variables   []Field      `json:"variable"`
 	}
 
 	// Info describes the postman info section

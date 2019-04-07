@@ -138,6 +138,21 @@ Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 <!--- End Iterate main collection -->
 @{{ end }}@
 
+<!--- Variables --->
+@{{ if .Data.Variables }}@
+***Available Variables:***
+
+<!--- Iterate variables -->
+| Key | Value | Type |
+| --- | ------|-------------|
+@{{ range $ih, $v := .Data.Variables -}}@
+| @{{ $v.Key }}@ | @{{ $v.Value }}@ | @{{ $v.Type }}@ |
+@{{ end }}@
+<!--- End Iterate headers items -->
+
+<!--- End  headers items -->
+@{{ end }}@
+
 ---
 [Back to top](#@{{ .Data.Info.Name | trim | glink }}@)
 > Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: @{{date_time}}@ by [docgen](https://github.com/thedevsaddam/docgen)
