@@ -1,0 +1,1420 @@
+{
+	"info": {
+		"_postman_id": "4090a478-7b0c-4413-8493-776fff19330f",
+		"name": "Notifications",
+		"description": "Notifications service persist notifications dispatched by administrator (basically from an admin dashboard) or other services. Notification cab be created and assigned to a list of receivers using single http call. When notifications are pulled then they are marked as seen. If need to send notification to large number of receivers (more than 2000) then use `Create notification` and `Assign notification` endpoints separately.\n\n#### [Postman Collection](https://www.getpostman.com/collections/e450889f13caa0fd53b3)\n\n#### Authorization\nThis app uses ```basic_auth``` as authorization\n\n#### Things to know\n**country**: this field supports two values for now: ```bangladesh``` & ```nepal```\n\n\n**title/body**: this two fields are valid json objects taking three keys for now: ``en`` for english ``bn`` for bangla & ``np`` for nepal.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "V2",
+			"item": [
+				{
+					"name": "List Notifications",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v2/notifications/list/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"notifications",
+								"list",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Fetch all the notifications of a particular user. "
+					},
+					"response": [
+						{
+							"name": "Error for invalid `user_id`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v2/notifications/list/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"notifications",
+										"list",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:12:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"user_id\": [\n            \"Must provide valid user_id\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v2/notifications/list/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"notifications",
+										"list",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:12:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "439"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": [\n        {\n            \"id\": 9,\n            \"title\": {\n                \"bn\": \"ডিসকাউন্ট অফার\",\n                \"en\": \"Discount Offer!\",\n                \"np\": \"छुट प्रस्ताव!\"\n            },\n            \"body\": {\n                \"bn\": \"আগামী 5 রাউন্ডে 50% ছাড়!\",\n                \"en\": \"50% Discount on next 5 rides!!!\",\n                \"np\": \"अर्को 5 सवारीमा 50% छूट! !!!\"\n            },\n            \"payload\": {},\n            \"notification_type\": \"warning\",\n            \"created_at\": \"2019-04-01 11:09:00\",\n            \"seen\": 0,\n            \"notification_id\": 14\n        }\n    ]\n}"
+						},
+						{
+							"name": "Empty notifications",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v2/notifications/list/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"notifications",
+										"list",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:12:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "List Unseen Notifications",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v2/notifications/unseen/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"notifications",
+								"unseen",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Fetch all the unseen notifications of a user "
+					},
+					"response": [
+						{
+							"name": "Empty notifications",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v2/notifications/unseen/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"notifications",
+										"unseen",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:13:56 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": []\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v2/notifications/unseen/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"notifications",
+										"unseen",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:18:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "439"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": [\n        {\n            \"id\": 9,\n            \"title\": {\n                \"bn\": \"ডিসকাউন্ট অফার\",\n                \"en\": \"Discount Offer!\",\n                \"np\": \"छुट प्रस्ताव!\"\n            },\n            \"body\": {\n                \"bn\": \"আগামী 5 রাউন্ডে 50% ছাড়!\",\n                \"en\": \"50% Discount on next 5 rides!!!\",\n                \"np\": \"अर्को 5 सवारीमा 50% छूट! !!!\"\n            },\n            \"payload\": {},\n            \"notification_type\": \"warning\",\n            \"created_at\": \"2019-04-01 11:09:00\",\n            \"seen\": 0,\n            \"notification_id\": 15\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Version:2 of notifications includes two endpoints `List Notifications` & `List Unseen Notifications` which supports multi-language support for `title` & `body`.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "90282531-8b75-42d9-b2c9-073726b100e5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "615e9b47-ab6e-4fb9-adcb-9bc58601f666",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "V1",
+			"item": [
+				{
+					"name": "Create & Assign Notification",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": {\n        \"en\": \"Discount Offer!\",\n        \"bn\": \"ডিসকাউন্ট অফার\",\n        \"np\": \"छुट प्रस्ताव!\"\n    },\n    \"body\": {\n        \"en\": \"50% Discount on next 5 rides!!!\",\n        \"bn\": \"আগামী 5 রাউন্ডে 50% ছাড়!\",\n        \"np\": \"अर्को 5 सवारीमा 50% छूट! !!!\"\n    },\n    \"payload\": {},\n    \"notification_type\": \"warning\",\n    \"receiver_ids\": [\n        \"1103\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/notifications/assign",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								"assign"
+							]
+						},
+						"description": "`Create` a notification  & `Assign` that notification to the receivers.\n**Note**: Apart from all the fields provided in the body there are two other fields: `expire_at` & `country`. The `expire_at` field is optional but if provided, the `country` field must be provided & the `expire_at` field must be of a future date given the format `\"2006-01-02 12:04PM\"`.The current possbile values for ```country``` field are `bangladesh/nepal`. The ```payload``` field is optional and _must provide_ valid json object. The `notification_type` field value can be `success/alert/danger/notice/warning/reward/bonus`"
+					},
+					"response": [
+						{
+							"name": "Validation error for expire without country",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": {\n        \"en\": \"Discount Offer!\",\n        \"bn\": \"ডিসকাউন্ট অফার\",\n        \"np\": \"छुट प्रस्ताव!\"\n    },\n    \"body\": {\n        \"en\": \"50% Discount on next 5 rides!!!\",\n        \"bn\": \"আগামী 5 রাউন্ডে 50% ছাড়!\",\n        \"np\": \"अर्को 5 सवारीमा 50% छूट! !!!\"\n    },\n    \"payload\": {},\n    \"notification_type\": \"warning\",\n    \"expire_at\": \"2006-01-02 15:04PM\",\n    \"receiver_ids\": [\n        \"33\",\n        \"45\"\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/assign",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"assign"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 10:49:39 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"country\": [\n            \"Must provide country name, expire field provided\"\n        ],\n        \"expire_at\": [\n            \"The expire_at field must be a value from future date. Provided the given format 2006-01-02 15:04PM\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Validation error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/assign",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"assign"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 10:46:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "182"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"body\": [\n            \"The body field is invalid\"\n        ],\n        \"receiver_ids\": [\n            \"The receiver_ids must be between length 1-2000\"\n        ],\n        \"title\": [\n            \"The title field is invalid\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"title\":{\n      \"en\":\"Discount Offer!\",\n      \"bn\":\"ডিসকাউন্ট অফার\",\n      \"np\":\"छुट प्रस्ताव!\"\n   },\n   \"body\":{\n      \"en\":\"50% Discount on next 5 rides!!!\",\n      \"bn\":\"আগামী 5 রাউন্ডে 50% ছাড়!\",\n      \"np\":\"अर्को 5 सवारीमा 50% छूट! !!!\"\n   },\n   \"payload\": {},\n   \"status\":\"active\",\n   \"notification_type\":\"test\",\n   \"receiver_ids\":[\n      \"33\",\n      \"45\"\n   ],\n   \"inapp_meta\": {\n   \t\"image_url\": \"www.imageurl.com\",\n   \t\"action_url\": \"www.actionurl.com\",\n   \t\"show_inapp\": true\n   }\n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/notifications/assign",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"notifications",
+										"assign"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 09:20:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Notification create & assign request queued successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Notification",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\":{\n      \"en\":\"Welcome to Pathao\",\n      \"bn\":\"পাঠাও তে স্বাগতম\",\n      \"np\":\"Pathao मा स्वागत छ\"\n   },\n   \"body\":{\n      \"en\":\"Welcome to the awesome world of pathao\",\n      \"bn\":\"পাঠাও এর সুন্দর বিশ্বে স্বাগতম\",\n      \"np\":\"पन्तौको सुन्दर संसारमा स्वागत छ\"\n   },\n   \"payload\" : {\n   \t\"inapp_meta\":{\n   \t\t\"action_url\":\"http://theactionurl.com\",\n   \t\t\"show_inapp\": true,\n   \t\t\"image_url\": \"http://imageurl.com\"\n   \t}\n   },\n   \"notification_type\":\"warning\",\n   \"expire_at\": \"2019-04-08 12:04PM\",\n   \"country\": \"bangladesh\"\n}\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/notifications/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								""
+							]
+						},
+						"description": "Create a notification. \n**Note**: Apart from all the fields provided in the body there are two other fields: `expire_at` & `country`. The `expire_at` field is optional but if provided, the `country` field must be provided & the `expire_at` field must be of a future date given the format `\"2006-01-02 12:04PM\"`.The current possbile values for ```country``` field are `bangladesh/nepal`. There is an optional field ```paload```. The ```payload``` field is optional and _must provide_ valid json object. The `notification_type` field value can be `success/alert/danger/notice/warning/reward/bonus`"
+					},
+					"response": [
+						{
+							"name": "Validation Error for invalid expire date time",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"title\":{\n      \"en\":\"Welcome to Pathao\",\n      \"bn\":\"পাঠাও তে স্বাগতম\",\n      \"np\":\"Pathao मा स्वागत छ\"\n   },\n   \"body\":{\n      \"en\":\"Welcome to the awesome world of pathao\",\n      \"bn\":\"পাঠাও এর সুন্দর বিশ্বে স্বাগতম\",\n      \"np\":\"पन्तौको सुन्दर संसारमा स्वागत छ\"\n   },\n   \"notification_type\":\"warning\",\n   \"expire_at\": \"2006-01-02 15:04PM\"\n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 10:51:45 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"country\": [\n            \"Must provide country name, expire field provided\"\n        ],\n        \"expire_at\": [\n            \"The expire_at field must be a value from future date. Provided the given format 2006-01-02 15:04PM\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Validation error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 10:50:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "116"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"body\": [\n            \"The body field is invalid\"\n        ],\n        \"title\": [\n            \"The title field is invalid\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Create Notification Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\" : {\n\t\t\"en\" : \"Welcome to Pathao\",\n\t\t\"bn\" : \"পাঠাও তে স্বাগতম\",\n\t\t\"np\" : \"Pathao मा स्वागत छ\"\n\t},\n    \"body\" : {\n    \t\"en\" : \"Welcome to the awesome world of pathao\",\n    \t\"bn\" : \"পাঠাও এর সুন্দর বিশ্বে স্বাগতম\",\n    \t\"np\" : \"पन्तौको सुन्दर संसारमा स्वागत छ\"\n    \t\n    },\n\t\"payload\" : \"payload\",\n    \"status\" : \"active\",\n\t\"user_type\" : \"driver\",\n\t\"notification_type\" : \"test\",\n\t\"ride_type\" : 1,\n\t\"city_id\" : 1\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/notifications/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"notifications",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Feb 2019 04:54:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"message\": \"Notification Created successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Assign Notification",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"notification_id\":5,\n   \"receiver_ids\":[\n      \"1130\", \"23\", \"90\"\n   ]\n}\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/notifications/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								""
+							]
+						},
+						"description": "Assign a notification to the receivers"
+					},
+					"response": [
+						{
+							"name": "Assign Notification Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"notification_id\" : 4,\n\t\"receiver_ids\" : [1,5,8,100]\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/notifications/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"notifications",
+										""
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Feb 2019 05:01:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Assigned notifications successfully placed in queue.\"\n}"
+						},
+						{
+							"name": "Assign Notification Error Response For Invalid Values",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/notifications/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"notifications",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Feb 2019 06:51:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notification_id\": [\n        \"Must provide valid notification id\"\n    ],\n    \"receiver_ids\": [\n        \"Receiver Id list cannot be empty\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Unseen Notifications",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/notifications/unseen/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								"unseen",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Fetch all the unseen notifications of a particular user"
+					},
+					"response": [
+						{
+							"name": "Empty notification unseen list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/unseen/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"unseen",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:21:01 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": []\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/unseen/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"unseen",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:10:03 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": [\n        {\n            \"id\": 9,\n            \"title\": \"Discount Offer!\",\n            \"body\": \"Discount Offer!\",\n            \"payload\": {},\n            \"notification_type\": \"warning\",\n            \"created_at\": \"2019-04-01 11:09:00\",\n            \"seen\": 0,\n            \"notification_id\": 14\n        }\n    ]\n}"
+						},
+						{
+							"name": "Error for invalid `user_id`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/unseen/users/wer",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"unseen",
+										"users",
+										"wer"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:10:35 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"user_id\": [\n            \"Must provide valid user_id\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Count Unseen Notifications",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/notifications/unseen_count/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								"unseen_count",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "A count of all the unseen  notifications of a particular user."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/unseen_count/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"unseen_count",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:17:10 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "19"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": 1\n}"
+						},
+						{
+							"name": "Error for invalid `user_id`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/unseen_count/users/{{user_id}}0w",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"unseen_count",
+										"users",
+										"{{user_id}}0w"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:17:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"user_id\": [\n            \"Must provide valid user_id\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Notifications",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pathao_password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pathao_username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/notifications/list/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								"list",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Fetch all the notifications assigned to the user"
+					},
+					"response": [
+						{
+							"name": "Error for invalid `user_id`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/list/users/{{user_id}}we",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"list",
+										"users",
+										"{{user_id}}we"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:11:41 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"user_id\": [\n            \"Must provide valid user_id\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Empty notifications",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/list/users/{{user_id}}0",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"list",
+										"users",
+										"{{user_id}}0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:14:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": []\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/notifications/list/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"notifications",
+										"list",
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Apr 2019 11:00:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"notifications\": [\n        {\n            \"id\": 8,\n            \"title\": \"Discount Offer!\",\n            \"body\": \"Discount Offer!\",\n            \"payload\": {},\n            \"notification_type\": \"warning\",\n            \"created_at\": \"2019-04-01 10:59:00\",\n            \"seen\": 2,\n            \"notification_id\": 12\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "The first version of the notifications service endpoints"
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "pass",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "username",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c4f7b02d-90de-464a-a99c-03b30aab3617",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ea40f626-830b-4ab2-a8db-8cbf77a16698",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f0df1f48-994c-4352-86a6-72335b7f9fe9",
+			"key": "base_url",
+			"value": "http://35.221.168.94:80",
+			"type": "string"
+		},
+		{
+			"id": "d22460d9-bff4-4f12-9be7-479d4f7e2be2",
+			"key": "local_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"id": "a68db31d-43ee-40d1-8974-fd64e2902b87",
+			"key": "user_id",
+			"value": "1103",
+			"type": "string"
+		}
+	]
+}
