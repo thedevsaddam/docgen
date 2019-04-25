@@ -25,13 +25,23 @@ $(document).ready(function(){
 		    if (html.charAt(0) == '"'){
 		    	html = html.substr(1);
 		    	html = html.slice(0, -1);
-		    }
-		    var obj = JSON.parse(html);
-			var formattedJson = JSON.stringify(obj, null, 4);
-		    ctx.html("<pre>"+ syntaxHighlight(formattedJson) + "</pre>");
+            }
+            if (IsJsonString(html)){
+                var obj = JSON.parse(html);
+                var formattedJson = JSON.stringify(obj, null, 4);
+                ctx.html("<pre>" + syntaxHighlight(formattedJson) + "</pre>");
+            }
 		});
  });
 
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 
 String.prototype.replaceAll = function (replaceThis, withThis) {
    var re = new RegExp(RegExp.quote(replaceThis),"g"); 
