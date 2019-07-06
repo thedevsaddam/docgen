@@ -53,3 +53,8 @@ Your suggestions will be more than appreciated.
 
 ### **License**
 The **docgen** is an open-source software licensed under the [MIT License](LICENSE.md).
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/thedevsaddam/docgen/badge.svg?style=beer-square)](https://beerpay.io/thedevsaddam/docgen)  [![Beerpay](https://beerpay.io/thedevsaddam/docgen/make-wish.svg?style=flat-square)](https://beerpay.io/thedevsaddam/docgen?focus=wish)
