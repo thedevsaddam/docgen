@@ -216,6 +216,25 @@
                                                         @{{ if $resp.Name }}@
                                                             <h6>@{{ $resp.Name }}@&nbsp;|&nbsp;Code: @{{ $resp.Code }}@</h6>
                                                         @{{ end }}@
+                                                        @{{ if $resp.Headers }}@
+                                                        <h5 class="label label-warning">Response Headers</h5>
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Key</th>
+                                                                <th>Value</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @{{ range $ih, $h := $resp.Headers }}@
+                                                            <tr>
+                                                                <td>@{{ $h.Key }}@</td>
+                                                                <td>@{{ $h.Value }}@</td>
+                                                            </tr>
+                                                            @{{ end }}@
+                                                            </tbody>
+                                                        </table>
+                                                        @{{ end }}@
                                                         @{{ if $resp.Body }}@
                                                             <span class="resp-prettyprint">
                                                             @{{ $resp.Body }}@

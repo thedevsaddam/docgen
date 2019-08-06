@@ -122,6 +122,22 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
 
 @{{ end }}@
+
+<!--- response headers items -->
+@{{ if $resp.Headers }}@
+***Response Headers:***
+
+<!--- Iterate response headers items -->
+| Key | Value |
+| --- | ------|
+@{{ range $ih, $h := $resp.Headers -}}@
+| @{{ $h.Key }}@ | @{{ $h.Value }}@ |
+@{{ end }}@
+<!--- End Iterate response headers items -->
+
+<!--- End response headers items -->
+@{{ end }}@
+
 @{{ if $resp.Body }}@
 ```js
 @{{ $resp.Body }}@
