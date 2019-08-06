@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/url"
 	"regexp"
@@ -13,7 +14,7 @@ import (
 )
 
 func getData(a string) string {
-	bs, err := Asset(a)
+	bs, err := ioutil.ReadFile(a)
 	if err != nil {
 		log.Fatal(err)
 	}
