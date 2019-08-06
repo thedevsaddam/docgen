@@ -10,11 +10,15 @@ import (
 	"strings"
 	"time"
 
-	blackfriday "gopkg.in/russross/blackfriday.v2"
+	"gopkg.in/russross/blackfriday.v2"
 )
 
 func getData(a string) string {
-	bs, err := ioutil.ReadFile(a)
+	fp, err := AssetFS.Open(a)
+	if err != nil {
+		log.Fatal(err)
+	}
+	bs, err := ioutil.ReadAll(fp)
 	if err != nil {
 		log.Fatal(err)
 	}
