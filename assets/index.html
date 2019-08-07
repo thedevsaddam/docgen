@@ -144,6 +144,27 @@
                                                     </tbody>
                                                 </table>
                                                 @{{ end }}@
+                                                @{{ if $item.Request.URL.Variables }}@
+                                                <h5 class="label label-info">URL Variables</h5>
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Value</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @{{ range $iq, $q := $item.Request.URL.Variables }}@
+                                                    <tr>
+                                                        <td>@{{ $q.Key }}@</td>
+                                                        <td>@{{ $q.Value }}@</td>
+                                                        <td>@{{ $q.Description | markdown | html }}@</td>
+                                                    </tr>
+                                                    @{{ end }}@
+                                                    </tbody>
+                                                </table>
+                                                @{{ end }}@
 
                                                 @{{ if $item.Request.Body.Mode}}@
                                                     @{{ if eq $item.Request.Body.Mode "raw"}}@

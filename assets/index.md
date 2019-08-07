@@ -67,6 +67,19 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 @{{ end }}@
 <!--- End query param items -->
 
+<!--- URL variables items -->
+@{{ if $item.Request.URL.Variables }}@
+***URL variables:***
+
+<!--- URL variables items -->
+| Key | Value | Description |
+| --- | ------|-------------|
+@{{ range $iq, $q := $item.Request.URL.Variables -}}@
+| @{{ $q.Key }}@ | @{{ $q.Value }}@ | @{{ $q.Description }}@ |
+@{{ end }}@
+@{{ end }}@
+<!--- End URL variables items -->
+
 <!--- Body mode -->
 @{{ if $item.Request.Body.Mode}}@
 <!--- Raw body data -->
