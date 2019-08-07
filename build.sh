@@ -1,5 +1,6 @@
 #!/bin/bash
 
+go generate
 #MAC OS
 export GOARCH="386"
 export GOOS="darwin"

@@ -1,3 +1,5 @@
+//go:generate go run generate-asset.go
+
 package main
 
 import (
@@ -40,18 +42,18 @@ const (
 func init() {
 	// init assets
 	assets = Assets{
-		IndexHTML: getData("assets/index.html"),
+		IndexHTML: getData("index.html"),
 
-		BootstrapJS:  getData("assets/bootstrap.min.js"),
-		BootstrapCSS: getData("assets/bootstrap.min.css"),
+		BootstrapJS:  getData("bootstrap.min.js"),
+		BootstrapCSS: getData("bootstrap.min.css"),
 
-		JqueryJS:  getData("assets/jquery.min.js"),
-		ScriptsJS: getData("assets/scripts.js"),
-		StylesCSS: getData("assets/styles.css"),
+		JqueryJS:  getData("jquery.min.js"),
+		ScriptsJS: getData("scripts.js"),
+		StylesCSS: getData("styles.css"),
 
-		IndexMarkdown:        getData("assets/index.md"),
-		MarkdownHTML:         getData("assets/markdown.html"),
-		GithubMarkdownMinCSS: getData("assets/github-markdown.min.css"),
+		IndexMarkdown:        getData("index.md"),
+		MarkdownHTML:         getData("markdown.html"),
+		GithubMarkdownMinCSS: getData("github-markdown.min.css"),
 	}
 	// register commands
 	cmd.AddCommand(versionCmd)
