@@ -26,6 +26,7 @@ func init() {
 	serveLive.PersistentFlags().IntVarP(&port, "port", "p", 9000, "port number to listen")
 	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection file's relative path")
 	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "display markdown format in preview")
+	serveLive.PersistentFlags().BoolVarP(&sortEnabled, "sort", "s", false, "sort the collection list")
 }
 
 func server(cmd *cobra.Command, args []string) {

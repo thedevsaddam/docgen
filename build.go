@@ -8,6 +8,7 @@ var (
 	in          string
 	out         string
 	isMarkdown  bool
+	sortEnabled bool
 	buildOutput = &cobra.Command{
 		Use:   "build",
 		Short: "Build html/markdown documentation from postman collection",
@@ -17,6 +18,7 @@ var (
 )
 
 func init() {
+	buildOutput.PersistentFlags().BoolVarP(&sortEnabled, "sort", "s", false, "sort the collection list")
 	buildOutput.PersistentFlags().StringVarP(&in, "in", "i", "", "postman collection file relative path")
 	buildOutput.PersistentFlags().StringVarP(&out, "out", "o", "", "output file relative path")
 	buildOutput.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "this flag will command to generate markdown")

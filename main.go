@@ -189,5 +189,8 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 	return buf
 }
 func main() {
-	cmd.Execute()
+	err := cmd.Execute()
+	if err != nil {
+		panic(err)
+	}
 }

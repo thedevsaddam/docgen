@@ -119,7 +119,9 @@ func (r *Root) Open(rdr io.Reader) error {
 		return err
 	}
 	r.build()
-	r.sortCollections()
+	if sortEnabled {
+		r.sortCollections()
+	}
 
 	r.removeEmptyCollections()
 
