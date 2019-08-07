@@ -15,14 +15,14 @@ $(document).ready(function(){
         $('.resp-prettyprint').each(function() {
         	var ctx = $(this);
         	var html =  ctx.html();
-		    ctx.html("")
+		    ctx.html("");
 		    
 		    html = html.replaceAll('\\n', '');
 		    html = html.replaceAll('\\t', '');
 		    html = html.replaceAll('\\', '');
 		    html = html.trim();
 
-		    if (html.charAt(0) == '"'){
+		    if (html.charAt(0) === '"'){
 		    	html = html.substr(1);
 		    	html = html.slice(0, -1);
             }
@@ -30,9 +30,23 @@ $(document).ready(function(){
                 var obj = JSON.parse(html);
                 var formattedJson = JSON.stringify(obj, null, 4);
                 ctx.html("<pre>" + syntaxHighlight(formattedJson) + "</pre>");
+            } else {
+                ctx.html("<pre>" + escapeHtml(html) + "</pre>");
             }
 		});
  });
+
+function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
 
 function IsJsonString(str) {
     try {
