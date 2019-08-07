@@ -7,7 +7,6 @@ import (
 )
 
 type (
-
 	// Root describes the full data read from file
 	Root struct {
 		Info        Info         `json:"info"`
@@ -40,11 +39,18 @@ type (
 
 	// URL describes URL of the request
 	URL struct {
-		Raw         string   `json:"raw"`
-		Host        []string `json:"host"`
-		Path        []string `json:"path"`
-		Description string   `json:"description"`
-		Query       []Field  `json:"query"`
+		Raw         string     `json:"raw"`
+		Host        []string   `json:"host"`
+		Path        []string   `json:"path"`
+		Description string     `json:"description"`
+		Query       []Field    `json:"query"`
+		Variables   []Variable `json:"variable"`
+	}
+
+	Variable struct {
+		Key         string `json:"key"`
+		Value       string `json:"value"`
+		Description string `json:"description"`
 	}
 
 	// Body describes a request body
