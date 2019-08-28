@@ -2,4 +2,3 @@
 *.pdf
 docgen
 vendor
-assetfs_vfsdata.go
