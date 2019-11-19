@@ -105,6 +105,7 @@ type (
 		JqueryJS     string
 		ScriptsJS    string
 		StylesCSS    string
+		ExtraCSS     string
 
 		IndexMarkdown        string
 		MarkdownHTML         string
