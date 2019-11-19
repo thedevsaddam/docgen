@@ -4,6 +4,7 @@ package main
 
 import (
 	"bytes"
+	"io/ioutil"
 	"log"
 	"os"
 	"text/template"
@@ -27,6 +28,8 @@ var (
 	assets Assets
 
 	githubLinkInc = make(map[string]int)
+
+	extraCSS = ""
 
 	cmd = &cobra.Command{
 		Use:   "docgen",
@@ -55,6 +58,10 @@ func init() {
 		MarkdownHTML:         getData("markdown.html"),
 		GithubMarkdownMinCSS: getData("github-markdown.min.css"),
 	}
+
+	//Add flags
+	cmd.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "Inject a css file")
+
 	// register commands
 	cmd.AddCommand(versionCmd)
 	cmd.AddCommand(serveLive)
@@ -87,6 +94,15 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	if extraCSS != "" {
+		ecFile, err := ioutil.ReadFile(extraCSS)
+		if err != nil {
+			log.Fatal("css file", err.Error())
+		}
+		assets.ExtraCSS = string(ecFile)
+	}
+
 	data := struct {
 		Assets Assets
 		Data   Root
@@ -172,6 +188,14 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 	var buf *bytes.Buffer
 	buf = readJSONtoMarkdown(file)
 	mdHTML := markdown(buf.String())
+
+	if extraCSS != "" {
+		ecFile, err := ioutil.ReadFile(extraCSS)
+		if err != nil {
+			log.Fatal("css file", err.Error())
+		}
+		assets.ExtraCSS = string(ecFile)
+	}
 
 	data := struct {
 		Assets       Assets
