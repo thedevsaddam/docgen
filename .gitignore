@@ -2,3 +2,4 @@
 *.pdf
 docgen
 vendor
+.idea

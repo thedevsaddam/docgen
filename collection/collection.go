@@ -1,4 +1,4 @@
-package main
+package collection
 
 import (
 	"encoding/json"
@@ -6,12 +6,17 @@ import (
 	"sort"
 )
 
+var (
+	defaultCollection = "Default"
+)
+
 type (
-	// Root describes the full data read from file
-	Root struct {
+	// Documentation describes the full API documentation
+	Documentation struct {
 		Info        Info         `json:"info"`
 		Collections []Collection `json:"item"`
 		Variables   []Field      `json:"variable"`
+		sortEnabled bool         `json:"-"`
 	}
 
 	// Info describes the postman info section
@@ -35,6 +40,7 @@ type (
 		Value       string `json:"value"`
 		Description string `json:"description"`
 		Type        string `json:"type"`
+		Disabled    bool   `json:"disabled"`
 	}
 
 	// URL describes URL of the request
@@ -72,21 +78,23 @@ type (
 
 	// Response describes a request resposne
 	Response struct {
-		ID      string   `json:"id"`
-		Name    string   `json:"name"`
-		Status  string   `json:"status"`
-		Code    int      `json:"code"`
-		Headers []Header `json:"header"`
-		Body    string   `json:"body"`
+		ID              string   `json:"id"`
+		Name            string   `json:"name"`
+		OriginalRequest Request  `json:"originalRequest"`
+		Status          string   `json:"status"`
+		Code            int      `json:"code"`
+		Headers         []Header `json:"header"`
+		Body            string   `json:"body"`
+		PreviewLanguage string   `json:"_postman_previewlanguage"`
 	}
 
 	// Item describes a request item
 	Item struct {
-		Name      string     `json:"name"`
-		Items     []Item     `json:"item"`
-		Request   Request    `json:"request"`
-		Responses []Response `json:"response"` // TODO: need to build response
-		Subfolder bool       `json:"_postman_isSubFolder"`
+		Name        string     `json:"name"`
+		Items       []Item     `json:"item"`
+		Request     Request    `json:"request"`
+		Responses   []Response `json:"response"`
+		IsSubFolder bool       `json:"_postman_isSubFolder"`
 	}
 
 	// Collection describes a request collection/item
@@ -96,31 +104,16 @@ type (
 		Items       []Item `json:"item"`
 		Item
 	}
-
-	// Assets represents template assets
-	Assets struct {
-		BootstrapJS  string
-		BootstrapCSS string
-		IndexHTML    string
-		JqueryJS     string
-		ScriptsJS    string
-		StylesCSS    string
-		ExtraCSS     string
-
-		IndexMarkdown        string
-		MarkdownHTML         string
-		GithubMarkdownMinCSS string
-	}
 )
 
 // Open open a new collection reader
-func (r *Root) Open(rdr io.Reader) error {
+func (r *Documentation) Open(rdr io.Reader) error {
 	dcr := json.NewDecoder(rdr)
 	if err := dcr.Decode(&r); err != nil {
 		return err
 	}
 	r.build()
-	if sortEnabled {
+	if r.sortEnabled {
 		r.sortCollections()
 	}
 
@@ -129,43 +122,49 @@ func (r *Root) Open(rdr io.Reader) error {
 	return nil
 }
 
+func (d *Documentation) WithSortEnabled() *Documentation {
+	d.sortEnabled = true
+	return d
+}
+
 // Build build UnCategorized collection
-func (r *Root) build() {
+func (d *Documentation) build() {
 	c := Collection{}
 	c.Name = defaultCollection
-	for i := len(r.Collections) - 1; i >= 0; i-- {
-		if len(r.Collections[i].Items) <= 0 {
-			if r.Collections[i].Request.Method == "" { //a collection with no sub-items and request method is empty
+	for i := len(d.Collections) - 1; i >= 0; i-- {
+		if len(d.Collections[i].Items) <= 0 {
+			if d.Collections[i].Request.Method == "" { //a collection with no sub-items and request method is empty
 				continue
 			}
 			c.Items = append(c.Items, Item{
-				Name:      r.Collections[i].Name,
-				Request:   r.Collections[i].Request,
-				Responses: r.Collections[i].Responses,
+				Name:      d.Collections[i].Name,
+				Request:   d.Collections[i].Request,
+				Responses: d.Collections[i].Responses,
 			})
-			r.Collections = append(r.Collections[:i], r.Collections[i+1:]...)
+			d.Collections = append(d.Collections[:i], d.Collections[i+1:]...)
 		} else {
-			clctn := Collection{}
-			for j := len(r.Collections[i].Items) - 1; j >= 0; j-- {
-				built := r.buildSubChildItems(r.Collections[i].Items[j], &clctn, r.Collections[i].Name)
+			collection := Collection{}
+			for j := len(d.Collections[i].Items) - 1; j >= 0; j-- {
+				built := d.buildSubChildItems(d.Collections[i].Items[j], &collection, d.Collections[i].Name)
 				if built {
-					r.Collections[i].Items = append(r.Collections[i].Items[:j], r.Collections[i].Items[j+1:]...) //removing the sub folder from the parent to make it a collection itself
+					d.Collections[i].Items = append(d.Collections[i].Items[:j], d.Collections[i].Items[j+1:]...) //removing the sub folder from the parent to make it a collection itself
 				}
 			}
 		}
 	}
-	r.Collections = append(r.Collections, c)
+	d.Collections = append(d.Collections, c)
 }
 
 // buildSubChildItems builds all the sub folder collections
-func (r *Root) buildSubChildItems(itm Item, c *Collection, pn string) bool {
-	if itm.Subfolder {
-		clctn := Collection{}
-		clctn.Name = pn + "/" + itm.Name
+func (d *Documentation) buildSubChildItems(itm Item, c *Collection, pn string) bool {
+	if itm.IsSubFolder {
+		collection := Collection{}
+		collection.Name = pn + "/" + itm.Name
+		collection.IsSubFolder = true
 		for _, i := range itm.Items {
-			r.buildSubChildItems(i, &clctn, clctn.Name)
+			d.buildSubChildItems(i, &collection, collection.Name)
 		}
-		r.Collections = append(r.Collections, clctn)
+		d.Collections = append(d.Collections, collection)
 		return true
 	}
 	c.Items = append(c.Items, Item{
@@ -178,21 +177,21 @@ func (r *Root) buildSubChildItems(itm Item, c *Collection, pn string) bool {
 }
 
 // sortCollections sorts the collections in the alphabetical order(except for the default)
-func (r *Root) sortCollections() {
-	sort.Slice(r.Collections, func(i int, j int) bool {
-		if r.Collections[i].Name == defaultCollection {
+func (d *Documentation) sortCollections() {
+	sort.Slice(d.Collections, func(i int, j int) bool {
+		if d.Collections[i].Name == defaultCollection {
 			return false
 		}
-		return r.Collections[i].Name < r.Collections[j].Name
+		return d.Collections[i].Name < d.Collections[j].Name
 	})
 }
 
 //removeEmptyCollections removes any empty collection
-func (r *Root) removeEmptyCollections() {
-	for i, rc := range r.Collections {
-		if len(rc.Items) == 0 {
-			r.Collections = append(r.Collections[:i], r.Collections[i+1:]...) //popping the certain empty collection
-			r.removeEmptyCollections()                                        //recurssion followed by break to ensure proper indexing after a pop
+func (d *Documentation) removeEmptyCollections() {
+	for i, c := range d.Collections {
+		if len(c.Items) == 0 {
+			d.Collections = append(d.Collections[:i], d.Collections[i+1:]...) //popping the certain empty collection
+			d.removeEmptyCollections()                                        //recursion followed by break to ensure proper indexing after a pop
 			break
 		}
 	}

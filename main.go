@@ -9,6 +9,8 @@ import (
 	"os"
 	"text/template"
 
+	"github.com/thedevsaddam/docgen/collection"
+
 	"github.com/spf13/cobra"
 )
 
@@ -42,6 +44,21 @@ const (
 	defaultCollection = "Default"
 )
 
+// Assets represents template assets
+type Assets struct {
+	BootstrapJS  string
+	BootstrapCSS string
+	IndexHTML    string
+	JqueryJS     string
+	ScriptsJS    string
+	StylesCSS    string
+	ExtraCSS     string
+
+	IndexMarkdown        string
+	MarkdownHTML         string
+	GithubMarkdownMinCSS string
+}
+
 func init() {
 	// init assets
 	assets = Assets{
@@ -69,7 +86,7 @@ func init() {
 }
 
 func readJSONtoHTML(str string) *bytes.Buffer {
-	var rt Root
+	var rt collection.Documentation
 	f, err := os.Open(str)
 	if err != nil {
 		log.Fatal("opening file", err.Error())
@@ -105,7 +122,7 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 
 	data := struct {
 		Assets Assets
-		Data   Root
+		Data   collection.Documentation
 	}{
 		Assets: assets,
 		Data:   rt,
@@ -118,7 +135,7 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 	return buf
 }
 func readJSONtoMarkdown(str string) *bytes.Buffer {
-	var rt Root
+	var rt collection.Documentation
 	f, err := os.Open(str)
 	if err != nil {
 		log.Fatal("opening file", err.Error())
@@ -146,7 +163,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		log.Fatal(err)
 	}
 	data := struct {
-		Data Root
+		Data collection.Documentation
 	}{
 		Data: rt,
 	}
