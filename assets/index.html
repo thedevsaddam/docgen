@@ -234,39 +234,161 @@
                                                 @{{ end }}@
 
                                                 @{{ if $item.Responses }}@
-                                                    <h5 class="label label-success">Response</h5>
-                                                    <div class="clearfix"></div>
+                                                    <select class="resp-selector">
+                                                        <option value="">Select Example Request/Response</option>
+                                                        @{{ range $ir, $resp := $item.Responses }}@
+                                                            <option value="req_res_@{{ $d.Name | snake }}@_@{{ $item.Name | snake }}@_@{{ $ir }}@_@{{ $resp.Name | snake }}@">@{{ $resp.Name }}@</option>
+                                                        @{{ end }}@
+                                                    </select>
+                                                    <br>
+                                                <!-- Iterate responses -->
                                                     @{{ range $ir, $resp := $item.Responses }}@
-                                                        @{{ if $resp.Name }}@
-                                                            <h6>@{{ $resp.Name }}@&nbsp;|&nbsp;Code: @{{ $resp.Code }}@</h6>
-                                                        @{{ end }}@
-                                                        @{{ if $resp.Headers }}@
-                                                        <h5 class="label label-warning">Response Headers</h5>
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>Key</th>
-                                                                <th>Value</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            @{{ range $ih, $h := $resp.Headers }}@
-                                                            <tr>
-                                                                <td>@{{ $h.Key }}@</td>
-                                                                <td>@{{ $h.Value }}@</td>
-                                                            </tr>
+                                                        <section id="req_res_@{{ $d.Name | snake }}@_@{{ $item.Name | snake }}@_@{{ $ir }}@_@{{ $resp.Name | snake }}@" style="display: none">
+
+                                                            @{{ if $resp.Name }}@
+                                                                <h4>Example Request</h4>
+                                                                <h5>URL: @{{ $resp.OriginalRequest.URL.Raw }}@</h5>
+
+                                                                @{{ if $resp.OriginalRequest.Headers }}@
+                                                                <h5 class="label label-warning">Headers</h5>
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Key</th>
+                                                                        <th>Value</th>
+                                                                        <th>Description</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @{{ range $ih, $h := $resp.OriginalRequest.Headers }}@
+                                                                    <tr>
+                                                                        <td>@{{ $h.Key }}@</td>
+                                                                        <td>@{{ $h.Value }}@</td>
+                                                                        <td>@{{ $h.Description | markdown | html }}@</td>
+                                                                    </tr>
+                                                                    @{{ end }}@
+                                                                    </tbody>
+                                                                </table>
+                                                                @{{ end }}@
+
+                                                                @{{ if $resp.OriginalRequest.URL.Query }}@
+                                                                <h5 class="label label-info">Query</h5>
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Key</th>
+                                                                        <th>Value</th>
+                                                                        <th>Description</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @{{ range $ih, $h := $resp.OriginalRequest.URL.Query }}@
+                                                                    <tr>
+                                                                        <td>@{{ $h.Key }}@</td>
+                                                                        <td>@{{ $h.Value }}@</td>
+                                                                        <td>@{{ $h.Description | markdown | html }}@</td>
+                                                                    </tr>
+                                                                    @{{ end }}@
+                                                                    </tbody>
+                                                                </table>
+                                                                @{{ end }}@
+
+                                                                @{{ if $resp.OriginalRequest.URL.Variables }}@
+                                                                <h5 class="label label-info">URL Variables</h5>
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Key</th>
+                                                                        <th>Value</th>
+                                                                        <th>Description</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @{{ range $iq, $q := $resp.OriginalRequest.URL.Variables }}@
+                                                                    <tr>
+                                                                        <td>@{{ $q.Key }}@</td>
+                                                                        <td>@{{ $q.Value }}@</td>
+                                                                        <td>@{{ $q.Description | markdown | html }}@</td>
+                                                                    </tr>
+                                                                    @{{ end }}@
+                                                                    </tbody>
+                                                                </table>
+                                                                @{{ end }}@
+
+                                                                @{{ if $resp.OriginalRequest.Body.Mode}}@
+                                                                    @{{ if eq $resp.OriginalRequest.Body.Mode "raw" }}@
+                                                                    <h5 class="label label-primary">Body</h5>
+                                                                    @{{ if ne $resp.OriginalRequest.Body.Raw ""}}@
+                                                                        <span class="resp-prettyprint">
+                                                                            @{{ $resp.OriginalRequest.Body.Raw }}@
+                                                                        </span>
+                                                                        <div class="clearfix"></div>
+                                                                        @{{ end }}@
+                                                                    @{{ end }}@
+
+                                                                    @{{ if eq $resp.OriginalRequest.Body.Mode "formdata" }}@
+                                                                    <h5 class="label label-primary">Body</h5>
+                                                                    <table class="table table-hover">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>Key</th>
+                                                                            <th>Value</th>
+                                                                            <th>Description</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        @{{ range $iu, $u := $resp.OriginalRequest.Body.FormData }}@
+                                                                        <tr>
+                                                                            <td>@{{ $u.Key }}@</td>
+                                                                            <td>@{{ $u.Value }}@</td>
+                                                                            <td>@{{ $u.Description | markdown | html }}@</td>
+                                                                        </tr>
+                                                                        @{{ end }}@
+                                                                        </tbody>
+                                                                    </table>
+                                                                    @{{ end }}@
+
+                                                                    @{{ if eq $resp.OriginalRequest.Body.Mode "urlencoded" }}@
+                                                                    <h5 class="label label-primary">Body</h5>
+                                                                    <table class="table table-hover">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>Key</th>
+                                                                            <th>Value</th>
+                                                                            <th>Description</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        @{{ range $iu, $u := $resp.OriginalRequest.Body.URLEncoded }}@
+                                                                        <tr>
+                                                                            <td>@{{ $u.Key }}@</td>
+                                                                            <td>@{{ $u.Value }}@</td>
+                                                                            <td>@{{ $u.Description | markdown | html }}@</td>
+                                                                        </tr>
+                                                                        @{{ end }}@
+                                                                        </tbody>
+                                                                    </table>
+                                                                    @{{ end }}@
+
+                                                                @{{ end }}@
                                                             @{{ end }}@
-                                                            </tbody>
-                                                        </table>
-                                                        @{{ end }}@
-                                                        @{{ if $resp.Body }}@
+
+                                                            <h4>Example Response</h4>
+                                                            @{{ if $resp.Body }}@
+                                                            <h5 class="label label-success">Body</h5>
                                                             <span class="resp-prettyprint">
-                                                            @{{ $resp.Body }}@
+                                                                @{{ $resp.Body }}@
                                                             </span>
                                                             <div class="clearfix"></div>
+                                                            <h5 class="label label-info">Code:</h5> <strong>@{{ $resp.Code }}@</strong>
                                                             @{{ end }}@
-                                                        @{{ end }}@
+
+                                                        </section>
+
                                                     @{{ end }}@
+                                            <!-- Iterate responses End -->
+
+                                            @{{ end }}@
                                             </div>
                                         </div>
                                     </div>
@@ -327,7 +449,7 @@
     <footer class="navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
           <div class="span12 text-center">
-            <span>Made with <em class="love-color">&#9829;</em> by <a href="https://github.com/thedevsaddam" target="_blank" class="text-muted">thedevsaddam</a> | Generated at: @{{date_time}}@ by <a href="https://github.com/thedevsaddam/docgen" target="_blank" class="text-muted">docgen</a></span>
+            <span data-toggle="tooltip" title="If the application help you, please feel free to give a star to the project in github. Your star inspire me to work more on open-source projects like this!">Made with <em class="love-color">&#9829;</em> by <a href="https://github.com/thedevsaddam" target="_blank" class="text-muted">thedevsaddam</a> | Generated at: @{{date_time}}@ by <a href="https://github.com/thedevsaddam/docgen" target="_blank" class="text-muted">docgen</a></span>
           </div>
         </div>
     </footer>

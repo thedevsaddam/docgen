@@ -34,7 +34,17 @@ $(document).ready(function(){
                 ctx.html("<pre>" + escapeHtml(html) + "</pre>");
             }
 		});
- });
+
+        $(".resp-selector").change(function () {
+            $(this).find("option").map(function(){
+                $("#"+this.value).hide()
+            });
+            var $option = $(this).find('option:selected');
+            $("#"+$option.val()).show()
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+});
 
 function escapeHtml(text) {
     var map = {

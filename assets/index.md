@@ -129,33 +129,119 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 
 <!--- Items response -->
 @{{ if $item.Responses }}@
-***Responses:***
+***More example Requests/Responses:***
 @{{ range $ir, $resp := $item.Responses }}@
 @{{ if $resp.Name }}@
-Status: @{{ $resp.Name }}@ | Code: @{{ $resp.Code }}@
+##### @{{ $ir | addOne | roman }}@. Example Request: @{{ $resp.Name }}@
 
+<!--- headers items -->
+@{{ if $resp.OriginalRequest.Headers }}@
+***Headers:***
+
+<!--- Iterate headers items -->
+| Key | Value | Description |
+| --- | ------|-------------|
+@{{ range $ih, $h := $resp.OriginalRequest.Headers -}}@
+| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
+@{{ end }}@
+<!--- End Iterate headers items -->
+
+<!--- End  headers items -->
 @{{ end }}@
 
-<!--- response headers items -->
-@{{ if $resp.Headers }}@
-***Response Headers:***
 
-<!--- Iterate response headers items -->
-| Key | Value |
-| --- | ------|
-@{{ range $ih, $h := $resp.Headers -}}@
-| @{{ $h.Key }}@ | @{{ $h.Value }}@ |
+<!--- query items -->
+@{{ if $resp.OriginalRequest.URL.Query }}@
+***Query:***
+
+<!--- Iterate query items -->
+| Key | Value | Description |
+| --- | ------|-------------|
+@{{ range $ih, $h := $resp.OriginalRequest.URL.Query -}}@
+| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
 @{{ end }}@
-<!--- End Iterate response headers items -->
+<!--- End Iterate query items -->
 
-<!--- End response headers items -->
+<!--- End  query items -->
+@{{ end }}@
+
+<!--- url variable items -->
+@{{ if $resp.OriginalRequest.URL.Variables }}@
+***Query:***
+
+<!--- Iterate url variable items -->
+| Key | Value | Description |
+| --- | ------|-------------|
+@{{ range $ih, $h := $resp.OriginalRequest.URL.Variables -}}@
+| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
+@{{ end }}@
+<!--- End Iterate url variable items -->
+
+<!--- End url variable items -->
+@{{ end }}@
+
+<!--- Body mode -->
+@{{ if $resp.OriginalRequest.Body.Mode }}@
+<!--- Raw body data -->
+@{{ if eq $resp.OriginalRequest.Body.Mode "raw"}}@
+@{{ if $resp.OriginalRequest.Body.Raw }}@
+***Body:***
+
+```js        
+@{{ $resp.OriginalRequest.Body.Raw }}@
+```
+@{{ end }}@
+@{{ end }}@
+<!---End Raw body data -->
+
+<!---FormData -->
+@{{ if eq $resp.OriginalRequest.Body.Mode "formdata"}}@
+<!--- Formdata items -->
+@{{ if $resp.OriginalRequest.Body.FormData }}@
+***Body:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+@{{ range $if, $f := $resp.OriginalRequest.Body.FormData -}}@
+| @{{ $f.Key }}@ | @{{ $f.Value }}@ | @{{ $f.Description }}@ |
+@{{ end }}@
+@{{ end }}@
+@{{ end }}@
+<!---End FormData -->
+
+
+<!---x-urlencoded data -->
+@{{ if eq $item.Request.Body.Mode "urlencoded"}}@
+***Body:***
+
+@{{ if $resp.OriginalRequest.Body.URLEncoded }}@
+| Key | Value | Description |
+| --- | ------|-------------|
+@{{ range $iu, $u := $resp.OriginalRequest.Body.URLEncoded -}}@
+| @{{ $u.Key }}@ | @{{ $u.Value }}@ | @{{ $u.Description }}@ |
+@{{ end }}@
+@{{ end }}@
+@{{ end }}@
+<!---End x-urlencoded data -->
+
+<!--- End Body mode -->
 @{{ end }}@
 
 @{{ if $resp.Body }}@
+##### @{{ $ir | addOne | roman }}@. Example Response: @{{ $resp.Name }}@
 ```js
 @{{ $resp.Body }}@
 ```
 @{{ end }}@
+
+***Status Code:*** @{{ $resp.Code }}@
+
+<br>
+
+<!--- Iterate Items response end -->
+@{{ end }}@
+
+<!--- if response exist response end -->
 @{{ end }}@
 
 <!--- End Items response -->

@@ -31,7 +31,11 @@ var (
 
 	githubLinkInc = make(map[string]int)
 
-	extraCSS = ""
+	extraCSS string
+
+	gitCommit = "unknown"
+	version   = "unknown"
+	buildDate = "unknown"
 
 	cmd = &cobra.Command{
 		Use:   "docgen",
@@ -91,6 +95,9 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 	if err != nil {
 		log.Fatal("opening file", err.Error())
 	}
+	if sortEnabled {
+		rt.WithSortEnabled()
+	}
 	if err = rt.Open(f); err != nil {
 		log.Fatal("parsing json file", err.Error())
 	}
@@ -102,6 +109,7 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		"css":             css,
 		"js":              js,
 		"snake":           snake,
+		"addOne":          addOne,
 		"color":           color,
 		"trimQueryParams": trimQueryParams,
 		"date_time":       dateTime,
@@ -140,6 +148,9 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 	if err != nil {
 		log.Fatal("opening file", err.Error())
 	}
+	if sortEnabled {
+		rt.WithSortEnabled()
+	}
 	if err = rt.Open(f); err != nil {
 		log.Fatal("parsing json file", err.Error())
 	}
@@ -155,6 +166,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		"glink":           githubLink,
 		"glinkInc":        githubLinkIncrementer,
 		"merge":           merge,
+		"roman":           roman,
 		"date_time":       dateTime,
 		"trimQueryParams": trimQueryParams,
 	})
@@ -177,7 +189,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 	// reset the link map
 	githubLinkInc = make(map[string]int)
-	var rt Root
+	var rt collection.Documentation
 	f, err := os.Open(str)
 	if err != nil {
 		log.Fatal("opening file", err.Error())
@@ -193,6 +205,7 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 		"css":             css,
 		"js":              js,
 		"snake":           snake,
+		"addOne":          addOne,
 		"color":           color,
 		"trimQueryParams": trimQueryParams,
 		"date_time":       dateTime,
@@ -216,7 +229,7 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 
 	data := struct {
 		Assets       Assets
-		Data         Root
+		Data         collection.Documentation
 		MarkdownHTML string
 	}{
 		Assets:       assets,

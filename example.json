@@ -1,173 +1,1592 @@
 {
 	"info": {
-		"_postman_id": "5dc9ecfe-c08a-06c3-26ff-11921363f0e7",
-		"name": "SMS",
-		"description": "Full `Rest API` collection and documentation of *School management system*",
+		"_postman_id": "504e7e19-d06d-4a12-809a-f744f0445fe6",
+		"name": "Blog",
+		"description": "This is a simple blogging service provide **REST API** for consumer to build their own blogging platform on demand.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Teacher",
+			"name": "Users",
 			"item": [
 				{
-					"name": "v2",
+					"name": "V2",
 					"item": [
 						{
-							"name": "Fetch teachers",
+							"name": "Create user",
 							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{base_url}}/v2/teachers?q=john&page=1",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v2",
-										"teachers"
-									],
-									"query": [
+								"auth": {
+									"type": "basic",
+									"basic": [
 										{
-											"key": "q",
-											"value": "john",
-											"description": "q can be name, email, phone etc"
+											"key": "password",
+											"value": "password",
+											"type": "string"
 										},
 										{
-											"key": "page",
-											"value": "1",
-											"description": "page as integer number"
+											"key": "username",
+											"value": "username",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"type": "any"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
 										}
 									]
 								},
-								"description": "Get list of teachers"
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Tom Hanks",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/v2/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v2",
+										"users"
+									]
+								},
+								"description": "Create user use `JSON` payload to create a user"
 							},
-							"response": []
-						}
-					],
-					"description": "***V2*** contains the version 2 API collections",
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Fetch teachers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/teachers?q=john&page=1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"teachers"
-							],
-							"query": [
+							"response": [
 								{
-									"key": "q",
-									"value": "john",
-									"description": "q can be name, email, phone etc"
+									"name": "Validation Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "bio",
+													"value": "",
+													"type": "text"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{blog-server}}/v2/users",
+											"host": [
+												"{{blog-server}}"
+											],
+											"path": [
+												"v2",
+												"users"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 10 May 2020 18:26:56 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "105"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errors\": {\n        \"bio\": [\n            \"Bio can not be empty\"\n        ],\n        \"name\": [\n            \"Name can not be empty\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
 								},
 								{
-									"key": "page",
-									"value": "1",
-									"description": "page as integer number"
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "Tom Hanks",
+													"type": "text"
+												},
+												{
+													"key": "bio",
+													"value": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.",
+													"type": "text"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{blog-server}}/v2/users",
+											"host": [
+												"{{blog-server}}"
+											],
+											"path": [
+												"v2",
+												"users"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 10 May 2020 18:27:21 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "311"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Tom Hanks\",\n        \"bio\": \"Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.\"\n    },\n    \"message\": \"User created successfully\"\n}"
+								},
+								{
+									"name": "Invalid username/password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{blog-server}}/users",
+											"host": [
+												"{{blog-server}}"
+											],
+											"path": [
+												"users"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 10 May 2020 17:46:00 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "34"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
 								}
 							]
 						},
-						"description": "Get list of teachers"
-					},
-					"response": []
+						{
+							"name": "Update user",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "password",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "username",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"type": "any"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Mr. Tom Hanks",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/v2/users/1",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v2",
+										"users",
+										"1"
+									]
+								},
+								"description": "Create user use `JSON` payload to create a user"
+							},
+							"response": [
+								{
+									"name": "Invalid username/password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{blog-server}}/users",
+											"host": [
+												"{{blog-server}}"
+											],
+											"path": [
+												"users"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 10 May 2020 17:46:00 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "34"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "Mr. Tom Hanks",
+													"type": "text"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{blog-server}}/v2/users/1",
+											"host": [
+												"{{blog-server}}"
+											],
+											"path": [
+												"v2",
+												"users",
+												"1"
+											]
+										}
+									},
+									"status": "Partial Content",
+									"code": 206,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 10 May 2020 18:45:04 GMT"
+										},
+										{
+											"key": "Content-Length",
+											"value": "320"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Mr. Tom Hanks\",\n        \"bio\": \"Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.\"\n    },\n    \"message\": \"User partial update successful\"\n}"
+								}
+							]
+						}
+					],
+					"description": "`V2` contains all the version *2.0* endpoints for users",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "Create teacher",
+					"name": "Create user",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"type": "any"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Captain Jack Sparrow\",\n\t\"bio\": \"Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{blog-server}}/v1/users",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						},
+						"description": "Create user use `JSON` payload to create a user"
+					},
+					"response": [
+						{
+							"name": "Invalid username/password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
+						},
+						{
+							"name": "Empty body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:49 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid request body\"\n}"
+						},
+						{
+							"name": "Validation error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"\",\n\t\"bio\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:52:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": {\n        \"bio\": [\n            \"Bio can not be empty\"\n        ],\n        \"name\": [\n            \"Name can not be empty\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Tom Hanks\",\n\t\"bio\": \"Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:53:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "311"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Tom Hanks\",\n        \"bio\": \"Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.\"\n    },\n    \"message\": \"User created successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Fetch user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"type": "any"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blog-server}}/v1/users/{{id}}",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"{{id}}"
+							]
+						},
+						"description": "Fetch a single user using `id`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:49:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "273"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Tom Hanks\",\n        \"bio\": \"Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.\"\n    }\n}"
+						},
+						{
+							"name": "Invalid user id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{invalid-id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{invalid-id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:49:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid user id\"\n}"
+						},
+						{
+							"name": "Invalid username/password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Fetch users",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"type": "any"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blog-server}}/v1/users?page=1&limit=20",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Fetch list of users using `pagination`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/v1/users?page=1&limit=20",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page numer is a `integer` which represents the page your are requesting"
+										},
+										{
+											"key": "limit",
+											"value": "20",
+											"description": "Limit it the maximum number of users listing in the result."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:51:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "542"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Tom Hanks\",\n            \"bio\": \"Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon.\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Captain Jack Sparrow\",\n            \"bio\": \"Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Invalid user id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{invalid-id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{invalid-id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:49:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid user id\"\n}"
+						},
+						{
+							"name": "Invalid username/password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"type": "any"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Captain Jack Sparrow\",\n\t\"bio\": \"Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{blog-server}}/v1/users/{{id}}",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"{{id}}"
+							]
+						},
+						"description": "Update user use `JSON` payload to create a user"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Captain Jack Sparrow\",\n\t\"bio\": \"Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:56:12 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "313"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Captain Jack Sparrow\",\n        \"bio\": \"Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp\"\n    },\n    \"message\": \"User updated successfully\"\n}"
+						},
+						{
+							"name": "Validation error",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"\",\n\t\"bio\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{id}}"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:55:56 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": {\n        \"bio\": [\n            \"Bio can not be empty\"\n        ],\n        \"name\": [\n            \"Name can not be empty\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Empty request body",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:55:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid request body\"\n}"
+						},
+						{
+							"name": "Invalid username/password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
+						},
+						{
+							"name": "Invalid user id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Captain Jack Sparrow\",\n\t\"bio\": \"Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{invalid-id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{invalid-id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:54:39 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid user id\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"type": "any"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{blog-server}}/v1/users/{{id}}",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a single user using `id`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:59:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User deleted successfully\"\n}"
+						},
+						{
+							"name": "Invalid user id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/v1/users/{{invalid-id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"{{invalid-id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:49:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid user id\"\n}"
+						},
+						{
+							"name": "Invalid username/password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
+						}
+					]
+				}
+			],
+			"description": "`Users` directory contains all the user related APIs. For authentication these apis requrie `BasicAuth`",
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "password",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "username",
+						"type": "string"
+					},
+					{
+						"key": "saveHelperData",
+						"type": "any"
+					},
+					{
+						"key": "showPassword",
+						"value": false,
+						"type": "boolean"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e06a7b80-9cdd-40da-bdda-9e4f23ad34f1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "31e3dfaa-4562-4bce-8f79-7f323d0ee7bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Create article",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"type": "any"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
+								"key": "ExampleHeader1",
+								"value": "ExampleHeader1Value",
+								"type": "text"
+							},
+							{
+								"key": "ExampleHeader2",
+								"value": "ExampleHeader2Value",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "name",
-									"value": "John Doe",
-									"description": "`name` field must be between *3 to 20* chars",
+									"key": "author_id",
+									"value": "1",
+									"description": "Accept `author_id` as the primary *id* of author",
 									"type": "text"
 								},
 								{
-									"key": "age",
-									"value": "33",
-									"description": "`age` field must be a valid numeric value",
+									"key": "title",
+									"value": "This is title one",
+									"description": "The `title` field must be between *1-255* chars",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "This is body one",
+									"description": "The `body` field must be between *1-2000* chars",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "{{base_url}}/teachers",
+							"raw": "{{blog-server}}/v1/articles",
 							"host": [
-								"{{base_url}}"
+								"{{blog-server}}"
 							],
 							"path": [
-								"teachers"
+								"v1",
+								"articles"
 							]
-						}
+						},
+						"description": "Create article endpoint is accept form-data to create an article with binary data like file"
 					},
 					"response": [
 						{
-							"name": "Validation Error",
+							"name": "Validation error",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
+										"key": "ExampleHeader1",
+										"value": "ExampleHeader1Value",
+										"type": "text"
+									},
+									{
+										"key": "ExampleHeader2",
+										"value": "ExampleHeader2Value",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "name",
-											"value": "John Doe",
-											"description": "`name` field must be between *3 to 20* chars",
+											"key": "author_id",
+											"value": "1",
+											"description": "Accept `author_id` as the primary *id* of author",
 											"type": "text"
 										},
 										{
-											"key": "age",
-											"value": "33",
-											"description": "`age` field must be a valid numeric value",
-											"type": "text"
+											"key": "title",
+											"value": "This is title one",
+											"description": "The `title` field must be between *1-255* chars",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "body",
+											"value": "This is body one",
+											"description": "The `body` field must be between *1-2000* chars",
+											"type": "text",
+											"disabled": true
 										}
-									]
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
-									"raw": "{{base_url}}/teachers",
+									"raw": "{{blog-server}}/v1/articles",
 									"host": [
-										"{{base_url}}"
+										"{{blog-server}}"
 									],
 									"path": [
-										"teachers"
+										"v1",
+										"articles"
 									]
 								}
 							},
-							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
 							"code": 422,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"errors\": [\n        \"Name field is required\",\n        \"Age field is required\"\n    ],\n    \"code\": 42201\n}"
+							"body": "{\n    \"errors\": {\n        \"title\": [\n            \"Title can not be empty\"\n        ],\n        \"body\": [\n            \"Body can not be empty\"\n        ]\n    },\n    \"message\": \"Validation error\"\n}"
+						},
+						{
+							"name": "Invalid username/password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blog-server}}/users",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 17:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized attempt\"\n}"
 						},
 						{
 							"name": "Success",
@@ -175,447 +1594,230 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"description": "`access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version"
+										"key": "ExampleHeader1",
+										"value": "ExampleHeader1Value",
+										"type": "text"
+									},
+									{
+										"key": "ExampleHeader2",
+										"value": "ExampleHeader2Value",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "name",
-											"value": "John Doe",
-											"description": "`name` field must be between *3 to 20* chars",
+											"key": "author_id",
+											"value": "1",
+											"description": "Accept `author_id` as the primary *id* of author",
 											"type": "text"
 										},
 										{
-											"key": "age",
-											"value": "33",
-											"description": "`age` field must be a valid numeric value",
+											"key": "title",
+											"value": "This is title one",
+											"description": "The `title` field must be between *1-255* chars",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "This is body one",
+											"description": "The `body` field must be between *1-2000* chars",
 											"type": "text"
 										}
-									]
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
-									"raw": "{{base_url}}/teachers",
+									"raw": "{{blog-server}}/v2/articles",
 									"host": [
-										"{{base_url}}"
+										"{{blog-server}}"
 									],
 									"path": [
-										"teachers"
+										"v2",
+										"articles"
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n\t\"message\": \"Teacher created successfully\",\n\t\"teacher_id\": 1002\n}"
-						}
-					]
-				},
-				{
-					"name": "Update teacher",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "name",
-									"value": "John Doe",
-									"type": "text"
-								},
-								{
-									"key": "age",
-									"value": "33",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{base_url}}/teachers",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"teachers"
-							]
-						},
-						"description": "update a teacher using api"
-					},
-					"response": []
-				},
-				{
-					"name": "Update teacher partially",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "name",
-									"value": "John Doe",
-									"type": "text"
-								},
-								{
-									"key": "age",
-									"value": "33",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{base_url}}/teachers",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"teachers"
-							]
-						},
-						"description": "This api need header for update teacher"
-					},
-					"response": []
-				},
-				{
-					"name": "Remove teacher",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{base_url}}/teachers/{{id}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"teachers",
-								"{{id}}"
-							]
-						},
-						"description": "update a teacher using api"
-					},
-					"response": []
-				}
-			],
-			"description": "Teacher contains teacher's api collection"
-		},
-		{
-			"name": "Student",
-			"item": [
-				{
-					"name": "Fetch students",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "Must provide valid `access_token`",
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/students?page=1&limit=20",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"students"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1",
-									"description": "page number must be number (`int`)"
-								},
-								{
-									"key": "limit",
-									"value": "20",
-									"description": "list limit must be a number (`int`)"
-								}
-							]
-						},
-						"description": "Fetch list of all students"
-					},
-					"response": []
-				}
-			],
-			"description": "Contains Students `API` collection",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "adde6005-f3a0-4111-99a0-16a76ce7ef0b",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "2f73446b-e6ab-47b0-a7d9-85578e63c4df",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
-			"name": "Github API",
-			"item": [
-				{
-					"name": "Fetch profile",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{access_token}}",
-								"description": "Valid `access_token`",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.github.com/users/thedevsaddam",
-							"protocol": "https",
-							"host": [
-								"api",
-								"github",
-								"com"
-							],
-							"path": [
-								"users",
-								"thedevsaddam"
-							]
-						},
-						"description": "Get ***github*** profile information"
-					},
-					"response": [
-						{
-							"name": "Success Response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://api.github.com/users/thedevsaddam",
-									"protocol": "https",
-									"host": [
-										"api",
-										"github",
-										"com"
-									],
-									"path": [
-										"users",
-										"thedevsaddam"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
+							"status": "Created",
+							"code": 201,
 							"_postman_previewlanguage": "json",
 							"header": [
-								{
-									"key": "Date",
-									"value": "Sat, 26 Jan 2019 06:58:16 GMT"
-								},
 								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
+									"key": "Date",
+									"value": "Sun, 10 May 2020 18:27:21 GMT"
 								},
 								{
-									"key": "Server",
-									"value": "GitHub.com"
-								},
-								{
-									"key": "Status",
-									"value": "200 OK"
-								},
-								{
-									"key": "X-RateLimit-Limit",
-									"value": "60"
-								},
-								{
-									"key": "X-RateLimit-Remaining",
-									"value": "59"
-								},
-								{
-									"key": "X-RateLimit-Reset",
-									"value": "1548489496"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "public, max-age=60, s-maxage=60"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"687de6a641d08823ae08f4adeee22500\""
-								},
-								{
-									"key": "Last-Modified",
-									"value": "Fri, 25 Jan 2019 16:17:23 GMT"
-								},
-								{
-									"key": "X-GitHub-Media-Type",
-									"value": "github.v3; format=json"
-								},
-								{
-									"key": "Access-Control-Expose-Headers",
-									"value": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=31536000; includeSubdomains; preload"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "deny"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block"
-								},
-								{
-									"key": "Referrer-Policy",
-									"value": "origin-when-cross-origin, strict-origin-when-cross-origin"
-								},
-								{
-									"key": "Content-Security-Policy",
-									"value": "default-src 'none'"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "X-GitHub-Request-Id",
-									"value": "C57B:71A1:1E394FA:2266C38:5C4C0507"
+									"key": "Content-Length",
+									"value": "311"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"login\": \"thedevsaddam\",\n    \"id\": 9676798,\n    \"node_id\": \"MDQ6VXNlcjk2NzY3OTg=\",\n    \"avatar_url\": \"https://avatars0.githubusercontent.com/u/9676798?v=4\",\n    \"gravatar_id\": \"\",\n    \"url\": \"https://api.github.com/users/thedevsaddam\",\n    \"html_url\": \"https://github.com/thedevsaddam\",\n    \"followers_url\": \"https://api.github.com/users/thedevsaddam/followers\",\n    \"following_url\": \"https://api.github.com/users/thedevsaddam/following{/other_user}\",\n    \"gists_url\": \"https://api.github.com/users/thedevsaddam/gists{/gist_id}\",\n    \"starred_url\": \"https://api.github.com/users/thedevsaddam/starred{/owner}{/repo}\",\n    \"subscriptions_url\": \"https://api.github.com/users/thedevsaddam/subscriptions\",\n    \"organizations_url\": \"https://api.github.com/users/thedevsaddam/orgs\",\n    \"repos_url\": \"https://api.github.com/users/thedevsaddam/repos\",\n    \"events_url\": \"https://api.github.com/users/thedevsaddam/events{/privacy}\",\n    \"received_events_url\": \"https://api.github.com/users/thedevsaddam/received_events\",\n    \"type\": \"User\",\n    \"site_admin\": false,\n    \"name\": \"Saddam H\",\n    \"company\": \"Pathao Inc.\",\n    \"blog\": \"https://thedevsaddam.github.io/\",\n    \"location\": \"Dhaka, Bangladesh\",\n    \"email\": null,\n    \"hireable\": true,\n    \"bio\": \"Software Engineer | Open Source Enthusiast | Love to write elegant code | Golang | Postgres | MongoDB | Elasticsearch / sleepy head, silent guy ;)\",\n    \"public_repos\": 78,\n    \"public_gists\": 38,\n    \"followers\": 197,\n    \"following\": 184,\n    \"created_at\": \"2014-11-11T14:07:13Z\",\n    \"updated_at\": \"2019-01-25T16:17:23Z\"\n}"
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"author_id\": 1,\n        \"title\": \"This is title one\",\n        \"body\": \"This is body one\"\n    },\n    \"message\": \"Article created successfully\"\n}"
 						}
 					]
 				},
 				{
-					"name": "create profile",
+					"name": "List articles",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": "`content-type` must be `application/json` or `application/text`"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"description": "Provide `access_token`"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"John Doe\",\n\t\"age\": 30,\n\t\"is_bangladeshi\": true\n}"
-						},
-						"url": {
-							"raw": "https://api.github.com/users/thedevsaddam",
-							"protocol": "https",
-							"host": [
-								"api",
-								"github",
-								"com"
-							],
-							"path": [
-								"users",
-								"thedevsaddam"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+									"type": "string"
+								}
 							]
 						},
-						"description": "To create a new profile for user you must provide `Authorization` header with *valid* `access_token`."
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Test",
+								"value": "dummy",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{blog-server}}/v1/articles?page={{id}}&limit={{limit}}",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								"v1",
+								"articles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{id}}",
+									"description": "Page is a `unsigned integer` which represents the page numer"
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}",
+									"description": "Limit represents maximum numer of results in the response"
+								},
+								{
+									"key": "user_id",
+									"value": "{{user_id}}",
+									"description": "Filter the articles using *author_id*",
+									"disabled": true
+								}
+							]
+						},
+						"description": "List articles endpoint provide article listing with *filtering*, *patination*"
 					},
 					"response": [
 						{
-							"name": "succes",
+							"name": "Invalid token",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [
 									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
 										"key": "Authorization",
-										"value": "Bearer {{access_token}}"
+										"value": "Bearer inalid_token",
+										"description": "Providing invalid token cause `401`",
+										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": \"John Doe\",\n\t\"age\": 30,\n\t\"is_bangladeshi\": true\n}"
-								},
 								"url": {
-									"raw": "https://api.github.com/users/thedevsaddam",
-									"protocol": "https",
+									"raw": "{{blog-server}}/v1/articles?page={{id}}&limit={{limit}}&user_id={{user_id}}",
 									"host": [
-										"api",
-										"github",
-										"com"
+										"{{blog-server}}"
 									],
 									"path": [
-										"users",
-										"thedevsaddam"
+										"v1",
+										"articles"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "{{id}}",
+											"description": "Page is a `unsigned integer` which represents the page numer"
+										},
+										{
+											"key": "limit",
+											"value": "{{limit}}",
+											"description": "Limit represents maximum numer of results in the response"
+										},
+										{
+											"key": "user_id",
+											"value": "{{user_id}}",
+											"description": "Filter the articles using *author_id*"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 May 2020 19:14:51 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized token\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_token}}",
+										"description": "Providing valid token won't cause *401*",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{blog-server}}/v1/articles?page={{id}}&limit={{limit}}&user_id={{user_id}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"articles"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "{{id}}",
+											"description": "Page is a `unsigned integer` which represents the page numer"
+										},
+										{
+											"key": "limit",
+											"value": "{{limit}}",
+											"description": "Limit represents maximum numer of results in the response"
+										},
+										{
+											"key": "user_id",
+											"value": "{{user_id}}",
+											"description": "Filter the articles using *author_id*"
+										}
 									]
 								}
 							},
@@ -624,162 +1826,88 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*",
-									"name": "Access-Control-Allow-Origin",
-									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
-								},
-								{
-									"key": "Access-Control-Expose-Headers",
-									"value": "ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
-									"name": "Access-Control-Expose-Headers",
-									"description": "Lets a server whitelist headers that browsers are allowed to access."
-								},
-								{
-									"key": "Cache-Control",
-									"value": "public, max-age=60, s-maxage=60",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip",
-									"name": "Content-Encoding",
-									"description": "The type of encoding used on the data."
-								},
-								{
-									"key": "Content-Security-Policy",
-									"value": "default-src 'none'",
-									"name": "Content-Security-Policy",
-									"description": "Custom header"
-								},
-								{
 									"key": "Content-Type",
-									"value": "application/json; charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
+									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 18 Dec 2017 14:57:23 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
+									"value": "Sun, 10 May 2020 19:15:50 GMT"
 								},
 								{
-									"key": "ETag",
-									"value": "W/\"4969f6a4b62918dafae715f1e9b4223c\"",
-									"name": "ETag",
-									"description": "An identifier for a specific version of a resource, often a message digest"
-								},
-								{
-									"key": "Last-Modified",
-									"value": "Mon, 18 Dec 2017 05:25:18 GMT",
-									"name": "Last-Modified",
-									"description": "The last modified date for the requested object, in RFC 2822 format"
-								},
-								{
-									"key": "Server",
-									"value": "GitHub.com",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "Status",
-									"value": "200 OK",
-									"name": "Status",
-									"description": "Custom header"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=31536000; includeSubdomains; preload",
-									"name": "Strict-Transport-Security",
-									"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"name": "Transfer-Encoding",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"key": "Vary",
-									"value": "Accept",
-									"name": "Vary",
-									"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding",
-									"name": "Vary",
-									"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff",
-									"name": "X-Content-Type-Options",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "deny",
-									"name": "X-Frame-Options",
-									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
-								},
-								{
-									"key": "X-GitHub-Media-Type",
-									"value": "github.v3; format=json",
-									"name": "X-GitHub-Media-Type",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-GitHub-Request-Id",
-									"value": "C11E:23FF:10343AB:14DD211:5A37D753",
-									"name": "X-GitHub-Request-Id",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-RateLimit-Limit",
-									"value": "60",
-									"name": "X-RateLimit-Limit",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-RateLimit-Remaining",
-									"value": "58",
-									"name": "X-RateLimit-Remaining",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-RateLimit-Reset",
-									"value": "1513612605",
-									"name": "X-RateLimit-Reset",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-Runtime-rack",
-									"value": "0.025357",
-									"name": "X-Runtime-rack",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block",
-									"name": "X-XSS-Protection",
-									"description": "Cross-site scripting (XSS) filter"
+									"key": "Content-Length",
+									"value": "226"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"login\": \"thedevsaddam\",\n    \"avatar_url\": \"https://avatars0.githubusercontent.com/u/9676798?v=4\",\n    \"url\": \"https://api.github.com/users/thedevsaddam\",\n    \"html_url\": \"https://github.com/thedevsaddam\",\n    \"followers_url\": \"https://api.github.com/users/thedevsaddam/followers\",\n    \"following_url\": \"https://api.github.com/users/thedevsaddam/following{/other_user}\",\n    \"created_at\": \"2014-11-11T14:07:13Z\",\n    \"updated_at\": \"2017-12-18T05:25:18Z\"\n}"
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 3,\n            \"user_id\": 10,\n            \"title\": \"Article 13\",\n            \"body\": \"This is article three\"\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 10,\n            \"title\": \"Article 2\",\n            \"body\": \"This is article two\"\n        },\n        {\n            \"id\": 1,\n            \"user_id\": 10,\n            \"title\": \"Article 1\",\n            \"body\": \"This is article one\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Without filtering",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_token}}",
+										"type": "text",
+										"description": "Providing valid token won't cause *401*"
+									}
+								],
+								"url": {
+									"raw": "{{blog-server}}/v1/articles?page={{id}}&limit={{limit}}",
+									"host": [
+										"{{blog-server}}"
+									],
+									"path": [
+										"v1",
+										"articles"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "{{id}}",
+											"description": "Page is a `unsigned integer` which represents the page numer"
+										},
+										{
+											"key": "limit",
+											"value": "{{limit}}",
+											"description": "Limit represents maximum numer of results in the response"
+										},
+										{
+											"key": "user_id",
+											"value": "{{user_id}}",
+											"description": "Filter the articles using *author_id*",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 3,\n            \"user_id\": 10,\n            \"title\": \"Article 13\",\n            \"body\": \"This is article three\"\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 10,\n            \"title\": \"Article 2\",\n            \"body\": \"This is article two\"\n        },\n        {\n            \"id\": 1,\n            \"user_id\": 10,\n            \"title\": \"Article 1\",\n            \"body\": \"This is article one\"\n        }\n    ]\n}"
 						}
 					]
 				}
 			],
-			"description": "Contains github ***API*** collection",
+			"description": "`Articles` directory contains all the article related APIs. Use `JWT` toekn for authentications for articles API.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						"type": "string"
+					}
+				]
+			},
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "90f126c6-e309-4e86-b216-5dd42ac3dd50",
+						"id": "368bf88a-3db6-41aa-85c9-5daecd705532",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -789,56 +1917,117 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3eb7048a-3ebd-4055-9e3a-7e2bafcb8423",
+						"id": "14adfa0c-c5ae-4931-b2a5-779b6eee4467",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Login",
+			"name": "Emtpy collection",
+			"item": [],
+			"description": "**Emtpy collection** should not be present in the documentation",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Health check",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "user",
-							"description": "username email/phone",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "pass",
-							"description": "pass must be greater than `5` chars",
-							"type": "text"
-						}
-					]
-				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{blog-server}}/",
 					"host": [
-						"{{base_url}}"
+						"{{blog-server}}"
 					],
 					"path": [
-						"login"
+						""
 					]
 				},
-				"description": "Inorder to access the private ***API*** you must get an access token by providing `username/password`"
+				"description": "System health check endpoint provide system health status for `probe`"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blog-server}}/",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 10 May 2020 19:02:53 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"system\": \"Failed\"\n}"
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blog-server}}/",
+							"host": [
+								"{{blog-server}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 10 May 2020 19:02:27 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "15"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"system\": \"OK\"\n}"
+				}
+			]
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "bbd0020c-2e8f-4cbf-9326-4142e145e34c",
+				"id": "e12c506e-2ca9-4139-9fbd-f07f3cec14af",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -848,12 +2037,13 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "4ef7d535-71e6-4278-acc6-82723a341daa",
+				"id": "0df9adc3-6805-4511-8099-961da3007165",
 				"type": "text/javascript",
 				"exec": [
 					""
 				]
 			}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

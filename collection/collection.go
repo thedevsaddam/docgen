@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	defaultCollection = "Default"
+	defaultCollection = "Ungrouped"
 )
 
 type (
@@ -26,15 +26,7 @@ type (
 		Schema      string `json:"schema"`
 	}
 
-	// Header describes header of  request
-	Header struct {
-		Key         string `json:"key"`
-		Value       string `json:"value"`
-		Name        string `json:"name"`
-		Description string `json:"description"`
-	}
-
-	// Field describes a field of request
+	// Field describes query, header, form-data and urlencoded field of request
 	Field struct {
 		Key         string `json:"key"`
 		Value       string `json:"value"`
@@ -45,18 +37,12 @@ type (
 
 	// URL describes URL of the request
 	URL struct {
-		Raw         string     `json:"raw"`
-		Host        []string   `json:"host"`
-		Path        []string   `json:"path"`
-		Description string     `json:"description"`
-		Query       []Field    `json:"query"`
-		Variables   []Variable `json:"variable"`
-	}
-
-	Variable struct {
-		Key         string `json:"key"`
-		Value       string `json:"value"`
-		Description string `json:"description"`
+		Raw         string   `json:"raw"`
+		Host        []string `json:"host"`
+		Path        []string `json:"path"`
+		Description string   `json:"description"`
+		Query       []Field  `json:"query"`
+		Variables   []Field  `json:"variable"`
 	}
 
 	// Body describes a request body
@@ -69,23 +55,23 @@ type (
 
 	// Request describes a request
 	Request struct {
-		Method      string   `json:"method"`
-		Headers     []Header `json:"header"`
-		Body        Body     `json:"body"`
-		URL         URL      `json:"url"`
-		Description string   `json:"description"`
+		Method      string  `json:"method"`
+		Headers     []Field `json:"header"`
+		Body        Body    `json:"body"`
+		URL         URL     `json:"url"`
+		Description string  `json:"description"`
 	}
 
 	// Response describes a request resposne
 	Response struct {
-		ID              string   `json:"id"`
-		Name            string   `json:"name"`
-		OriginalRequest Request  `json:"originalRequest"`
-		Status          string   `json:"status"`
-		Code            int      `json:"code"`
-		Headers         []Header `json:"header"`
-		Body            string   `json:"body"`
-		PreviewLanguage string   `json:"_postman_previewlanguage"`
+		ID              string  `json:"id"`
+		Name            string  `json:"name"`
+		OriginalRequest Request `json:"originalRequest"`
+		Status          string  `json:"status"`
+		Code            int     `json:"code"`
+		Headers         []Field `json:"header"`
+		Body            string  `json:"body"`
+		PreviewLanguage string  `json:"_postman_previewlanguage"`
 	}
 
 	// Item describes a request item
@@ -107,18 +93,21 @@ type (
 )
 
 // Open open a new collection reader
-func (r *Documentation) Open(rdr io.Reader) error {
+func (d *Documentation) Open(rdr io.Reader) error {
 	dcr := json.NewDecoder(rdr)
-	if err := dcr.Decode(&r); err != nil {
+	if err := dcr.Decode(&d); err != nil {
 		return err
 	}
-	r.build()
-	if r.sortEnabled {
-		r.sortCollections()
+	d.build()
+	if d.sortEnabled {
+		d.sortCollections()
 	}
 
-	r.removeEmptyCollections()
-
+	// remove empty collections
+	d.removeEmptyCollections()
+	// after building all the collections, remove disabled fields
+	d.removeItemRequestDisabledField()
+	d.removeItemResponseRequestDisabledField()
 	return nil
 }
 
@@ -184,15 +173,89 @@ func (d *Documentation) sortCollections() {
 		}
 		return d.Collections[i].Name < d.Collections[j].Name
 	})
+
+	for index, _ := range d.Collections {
+		sort.Slice(d.Collections[index].Items, func(i, j int) bool {
+			return d.Collections[index].Items[i].Name < d.Collections[index].Items[j].Name
+		})
+	}
 }
 
 //removeEmptyCollections removes any empty collection
 func (d *Documentation) removeEmptyCollections() {
-	for i, c := range d.Collections {
-		if len(c.Items) == 0 {
+	for i := 0; i < len(d.Collections); i++ {
+		if len(d.Collections[i].Items) == 0 {
 			d.Collections = append(d.Collections[:i], d.Collections[i+1:]...) //popping the certain empty collection
 			d.removeEmptyCollections()                                        //recursion followed by break to ensure proper indexing after a pop
 			break
+		}
+	}
+	return
+}
+
+//removeEmptyCollections removes disabled field from request
+func (d *Documentation) removeItemRequestDisabledField() {
+	for i, c := range d.Collections {
+		for j, _ := range c.Items {
+			// remove disabled headers
+			for k := len(d.Collections[i].Items[j].Request.Headers) - 1; k >= 0; k-- {
+				if d.Collections[i].Items[j].Request.Headers[k].Disabled {
+					d.Collections[i].Items[j].Request.Headers = append(d.Collections[i].Items[j].Request.Headers[:k], d.Collections[i].Items[j].Request.Headers[k+1:]...)
+				}
+			}
+			// remove disabled queries
+			for l := len(d.Collections[i].Items[j].Request.URL.Query) - 1; l >= 0; l-- {
+				if d.Collections[i].Items[j].Request.URL.Query[l].Disabled {
+					d.Collections[i].Items[j].Request.URL.Query = append(d.Collections[i].Items[j].Request.URL.Query[:l], d.Collections[i].Items[j].Request.URL.Query[l+1:]...)
+				}
+			}
+			// remove disabled form-data
+			for m := len(d.Collections[i].Items[j].Request.Body.FormData) - 1; m >= 0; m-- {
+				if d.Collections[i].Items[j].Request.Body.FormData[m].Disabled {
+					d.Collections[i].Items[j].Request.Body.FormData = append(d.Collections[i].Items[j].Request.Body.FormData[:m], d.Collections[i].Items[j].Request.Body.FormData[m+1:]...)
+				}
+			}
+			// remove disabled urlencoded
+			for n := len(d.Collections[i].Items[j].Request.Body.URLEncoded) - 1; n >= 0; n-- {
+				if d.Collections[i].Items[j].Request.Body.URLEncoded[n].Disabled {
+					d.Collections[i].Items[j].Request.Body.URLEncoded = append(d.Collections[i].Items[j].Request.Body.URLEncoded[:n], d.Collections[i].Items[j].Request.Body.URLEncoded[n+1:]...)
+				}
+			}
+		}
+	}
+	return
+}
+
+//removeItemResponseRequestDisabledField removes disabled field from response originalRequest
+func (d *Documentation) removeItemResponseRequestDisabledField() {
+	for i, c := range d.Collections {
+		for j, item := range c.Items {
+			for o, _ := range item.Responses {
+				// remove disabled headers
+				for k := len(d.Collections[i].Items[j].Responses[o].OriginalRequest.Headers) - 1; k >= 0; k-- {
+					if d.Collections[i].Items[j].Responses[o].OriginalRequest.Headers[k].Disabled {
+						d.Collections[i].Items[j].Responses[o].OriginalRequest.Headers = append(d.Collections[i].Items[j].Responses[o].OriginalRequest.Headers[:k], d.Collections[i].Items[j].Responses[o].OriginalRequest.Headers[k+1:]...)
+					}
+				}
+				// remove disabled queries
+				for l := len(d.Collections[i].Items[j].Responses[o].OriginalRequest.URL.Query) - 1; l >= 0; l-- {
+					if d.Collections[i].Items[j].Responses[o].OriginalRequest.URL.Query[l].Disabled {
+						d.Collections[i].Items[j].Responses[o].OriginalRequest.URL.Query = append(d.Collections[i].Items[j].Responses[o].OriginalRequest.URL.Query[:l], d.Collections[i].Items[j].Responses[o].OriginalRequest.URL.Query[l+1:]...)
+					}
+				}
+				// remove disabled form-data
+				for m := len(d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.FormData) - 1; m >= 0; m-- {
+					if d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.FormData[m].Disabled {
+						d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.FormData = append(d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.FormData[:m], d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.FormData[m+1:]...)
+					}
+				}
+				// remove disabled urlencoded
+				for n := len(d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.URLEncoded) - 1; n >= 0; n-- {
+					if d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.URLEncoded[n].Disabled {
+						d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.URLEncoded = append(d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.URLEncoded[:n], d.Collections[i].Items[j].Responses[o].OriginalRequest.Body.URLEncoded[n+1:]...)
+					}
+				}
+			}
 		}
 	}
 	return

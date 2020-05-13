@@ -12,7 +12,9 @@ var versionCmd = &cobra.Command{
 	Long:  `Provide version information`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(logo)
-		fmt.Println("Docgen version: v2.3")
+		fmt.Println("Version:", version)
+		fmt.Println("Git commit:", gitCommit)
+		fmt.Println("Build date:", buildDate)
 		fmt.Println("Support postman collection version > 2.1")
 	},
 }

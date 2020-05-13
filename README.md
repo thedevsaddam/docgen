@@ -1,22 +1,13 @@
 Docgen
 =====================
 
-Transform your postman collection to html documentation
+Transform your postman collection to HTML/Markdown documentation
 
 ![Task screenshot](screenshot.png)
 
-### Installation
-```go
-go get -u github.com/thedevsaddam/docgen
-```
-
-#### Mac
+#### Installation on Mac/Linux
 ```bash
-brew tap thedevsaddam/cli https://github.com/thedevsaddam/homebrew-cli.git
-brew install docgen
-
-# update
-brew upgrade docgen
+curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o install.sh && sudo chmod +x install.sh && sudo ./install.sh
 ```
 
 #### Windows
@@ -35,8 +26,9 @@ brew upgrade docgen
 * To view live Markown documentation from postman collection use `docgen server -f input-postman-collection.json -p 8000 -m` This will open the markdown version of postman collection to the defined port
 * To make HTML documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.html`
 * To make Markdown documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.md -m`
+* Use `-s` flag to sort API in lexical order
 
-***See [example API markdown documentation](example-doc.md)***
+***[Demo markdown API documentation](example-doc.md)***
 
 ### Author
 1. [Sajib Sikder](https://github.com/mhshajib)

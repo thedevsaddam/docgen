@@ -1,224 +1,45 @@
 
-# SMS
+# Blog
 
-Full `Rest API` collection and documentation of *School management system*
+This is a simple blogging service provide **REST API** for consumer to build their own blogging platform on demand.
 
 ## Indices
 
-* [Github API](#github-api)
+* [Articles](#articles)
 
-  * [Fetch profile](#1-fetch-profile)
-  * [create profile](#2-create-profile)
+  * [Create article](#1-create-article)
+  * [List articles](#2-list-articles)
 
-* [Student](#student)
+* [Users](#users)
 
-  * [Fetch students](#1-fetch-students)
+  * [Create user](#1-create-user)
+  * [Delete user](#2-delete-user)
+  * [Fetch user](#3-fetch-user)
+  * [Fetch users](#4-fetch-users)
+  * [Update user](#5-update-user)
 
-* [Teacher](#teacher)
+* [Users/V2](#usersv2)
 
-  * [Fetch teachers](#1-fetch-teachers)
-  * [Create teacher](#2-create-teacher)
-  * [Update teacher](#3-update-teacher)
-  * [Update teacher partially](#4-update-teacher-partially)
-  * [Remove teacher](#5-remove-teacher)
+  * [Create user](#1-create-user-1)
+  * [Update user](#2-update-user)
 
-* [Teacher/v2](#teacherv2)
+* [Ungrouped](#ungrouped)
 
-  * [Fetch teachers](#1-fetch-teachers-1)
-
-* [Default](#default)
-
-  * [Login](#1-login)
+  * [Health check](#1-health-check)
 
 
 --------
 
 
-## Github API
-Contains github ***API*** collection
+## Articles
+`Articles` directory contains all the article related APIs. Use `JWT` toekn for authentications for articles API.
 
 
-### 1. Fetch profile
 
+### 1. Create article
 
-Get ***github*** profile information
 
-
-***Endpoint:***
-
-```bash
-Method: GET
-Type: RAW
-URL: https://api.github.com/users/thedevsaddam
-```
-
-
-***Headers:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| Authorization | {{access_token}} | Valid `access_token` |
-
-
-***Responses:***
-
-
-Status: Success Response | Code: 200
-
-
-```js
-{
-    "login": "thedevsaddam",
-    "id": 9676798,
-    "node_id": "MDQ6VXNlcjk2NzY3OTg=",
-    "avatar_url": "https://avatars0.githubusercontent.com/u/9676798?v=4",
-    "gravatar_id": "",
-    "url": "https://api.github.com/users/thedevsaddam",
-    "html_url": "https://github.com/thedevsaddam",
-    "followers_url": "https://api.github.com/users/thedevsaddam/followers",
-    "following_url": "https://api.github.com/users/thedevsaddam/following{/other_user}",
-    "gists_url": "https://api.github.com/users/thedevsaddam/gists{/gist_id}",
-    "starred_url": "https://api.github.com/users/thedevsaddam/starred{/owner}{/repo}",
-    "subscriptions_url": "https://api.github.com/users/thedevsaddam/subscriptions",
-    "organizations_url": "https://api.github.com/users/thedevsaddam/orgs",
-    "repos_url": "https://api.github.com/users/thedevsaddam/repos",
-    "events_url": "https://api.github.com/users/thedevsaddam/events{/privacy}",
-    "received_events_url": "https://api.github.com/users/thedevsaddam/received_events",
-    "type": "User",
-    "site_admin": false,
-    "name": "Saddam H",
-    "company": "Pathao Inc.",
-    "blog": "https://thedevsaddam.github.io/",
-    "location": "Dhaka, Bangladesh",
-    "email": null,
-    "hireable": true,
-    "bio": "Software Engineer | Open Source Enthusiast | Love to write elegant code | Golang | Postgres | MongoDB | Elasticsearch / sleepy head, silent guy ;)",
-    "public_repos": 78,
-    "public_gists": 38,
-    "followers": 197,
-    "following": 184,
-    "created_at": "2014-11-11T14:07:13Z",
-    "updated_at": "2019-01-25T16:17:23Z"
-}
-```
-
-
-### 2. create profile
-
-
-To create a new profile for user you must provide `Authorization` header with *valid* `access_token`.
-
-
-***Endpoint:***
-
-```bash
-Method: POST
-Type: RAW
-URL: https://api.github.com/users/thedevsaddam
-```
-
-
-***Headers:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| Content-Type | application/json | `content-type` must be `application/json` or `application/text` |
-| Authorization | Bearer {{access_token}} | Provide `access_token` |
-
-
-***Body:***
-
-```js        
-{
-	"name": "John Doe",
-	"age": 30,
-	"is_bangladeshi": true
-}
-```
-
-
-***Responses:***
-
-
-Status: succes | Code: 200
-
-
-```js
-{
-    "login": "thedevsaddam",
-    "avatar_url": "https://avatars0.githubusercontent.com/u/9676798?v=4",
-    "url": "https://api.github.com/users/thedevsaddam",
-    "html_url": "https://github.com/thedevsaddam",
-    "followers_url": "https://api.github.com/users/thedevsaddam/followers",
-    "following_url": "https://api.github.com/users/thedevsaddam/following{/other_user}",
-    "created_at": "2014-11-11T14:07:13Z",
-    "updated_at": "2017-12-18T05:25:18Z"
-}
-```
-
-
-## Student
-Contains Students `API` collection
-
-
-### 1. Fetch students
-
-
-Fetch list of all students
-
-
-***Endpoint:***
-
-```bash
-Method: GET
-Type: RAW
-URL: {{base_url}}/students
-```
-
-
-***Headers:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| Authorization | Bearer {{access_token}} | Must provide valid `access_token` |
-
-
-***Query params:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| page | 1 | page number must be number (`int`) |
-| limit | 20 | list limit must be a number (`int`) |
-
-
-## Teacher
-Teacher contains teacher's api collection
-
-
-### 1. Fetch teachers
-
-
-Get list of teachers
-
-
-***Endpoint:***
-
-```bash
-Method: GET
-Type: RAW
-URL: {{base_url}}/teachers
-```
-
-
-***Query params:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| q | john | q can be name, email, phone etc |
-| page | 1 | page as integer number |
-
-
-### 2. Create teacher
+Create article endpoint is accept form-data to create an article with binary data like file
 
 
 ***Endpoint:***
@@ -226,7 +47,7 @@ URL: {{base_url}}/teachers
 ```bash
 Method: POST
 Type: FORMDATA
-URL: {{base_url}}/teachers
+URL: {{blog-server}}/v1/articles
 ```
 
 
@@ -234,112 +55,443 @@ URL: {{base_url}}/teachers
 
 | Key | Value | Description |
 | --- | ------|-------------|
-| Authorization | Bearer {{access_token}} | `access_token` must be a valid *oAuth2* access token. You can also use ~~custom token~~ but it will be removed from next version |
+| ExampleHeader1 | ExampleHeader1Value |  |
+| ExampleHeader2 | ExampleHeader2Value |  |
+
 
 
 ***Body:***
 
 | Key | Value | Description |
 | --- | ------|-------------|
-| name | John Doe | `name` field must be between *3 to 20* chars |
-| age | 33 | `age` field must be a valid numeric value |
+| author_id | 1 | Accept `author_id` as the primary *id* of author |
+| title | This is title one | The `title` field must be between *1-255* chars |
+| body | This is body one | The `body` field must be between *1-2000* chars |
 
 
-***Responses:***
+
+***More example Requests/Responses:***
 
 
-Status: Validation Error | Code: 422
+##### I. Example Request: Validation error
 
 
+***Headers:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| ExampleHeader1 | ExampleHeader1Value |  |
+| ExampleHeader2 | ExampleHeader2Value |  |
+| Content-Type | application/x-www-form-urlencoded |  |
+
+
+
+***Body:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| author_id | 1 | Accept `author_id` as the primary *id* of author |
+
+
+
+##### I. Example Response: Validation error
 ```js
 {
-    "errors": [
-        "Name field is required",
-        "Age field is required"
-    ],
-    "code": 42201
+    "errors": {
+        "title": [
+            "Title can not be empty"
+        ],
+        "body": [
+            "Body can not be empty"
+        ]
+    },
+    "message": "Validation error"
 }
 ```
 
 
-Status: Success | Code: 200
+***Status Code:*** 422
+
+<br>
 
 
+
+##### II. Example Request: Invalid username/password
+
+
+
+##### II. Example Response: Invalid username/password
 ```js
 {
-	"message": "Teacher created successfully",
-	"teacher_id": 1002
+    "message": "Unauthorized attempt"
 }
 ```
 
 
-### 3. Update teacher
+***Status Code:*** 401
+
+<br>
 
 
-update a teacher using api
+
+##### III. Example Request: Success
+
+
+***Headers:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| ExampleHeader1 | ExampleHeader1Value |  |
+| ExampleHeader2 | ExampleHeader2Value |  |
+
+
+
+***Body:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| author_id | 1 | Accept `author_id` as the primary *id* of author |
+| title | This is title one | The `title` field must be between *1-255* chars |
+| body | This is body one | The `body` field must be between *1-2000* chars |
+
+
+
+##### III. Example Response: Success
+```js
+{
+    "data": {
+        "id": 1,
+        "author_id": 1,
+        "title": "This is title one",
+        "body": "This is body one"
+    },
+    "message": "Article created successfully"
+}
+```
+
+
+***Status Code:*** 201
+
+<br>
+
+
+
+### 2. List articles
+
+
+List articles endpoint provide article listing with *filtering*, *patination*
 
 
 ***Endpoint:***
 
 ```bash
-Method: PUT
-Type: URLENCODED
-URL: {{base_url}}/teachers
+Method: GET
+Type: 
+URL: {{blog-server}}/v1/articles
 ```
+
+
+
+***Query params:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| page | {{id}} | Page is a `unsigned integer` which represents the page numer |
+| limit | {{limit}} | Limit represents maximum numer of results in the response |
+
+
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Invalid token
 
 
 ***Headers:***
 
 | Key | Value | Description |
 | --- | ------|-------------|
-| Content-Type | application/x-www-form-urlencoded |  |
+| Authorization | Bearer inalid_token | Providing invalid token cause `401` |
 
 
-***Body:***
 
+***Query:***
 
 | Key | Value | Description |
 | --- | ------|-------------|
-| name | John Doe |  |
-| age | 33 |  |
+| page | {{id}} | Page is a `unsigned integer` which represents the page numer |
+| limit | {{limit}} | Limit represents maximum numer of results in the response |
+| user_id | {{user_id}} | Filter the articles using *author_id* |
 
 
-### 4. Update teacher partially
+
+##### I. Example Response: Invalid token
+```js
+{
+    "message": "Unauthorized token"
+}
+```
 
 
-This api need header for update teacher
+***Status Code:*** 401
+
+<br>
+
+
+
+##### II. Example Request: Success
+
+
+***Headers:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| Authorization | Bearer {{jwt_token}} | Providing valid token won't cause *401* |
+
+
+
+***Query:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| page | {{id}} | Page is a `unsigned integer` which represents the page numer |
+| limit | {{limit}} | Limit represents maximum numer of results in the response |
+| user_id | {{user_id}} | Filter the articles using *author_id* |
+
+
+
+##### II. Example Response: Success
+```js
+{
+    "data": [
+        {
+            "id": 3,
+            "user_id": 10,
+            "title": "Article 13",
+            "body": "This is article three"
+        },
+        {
+            "id": 2,
+            "user_id": 10,
+            "title": "Article 2",
+            "body": "This is article two"
+        },
+        {
+            "id": 1,
+            "user_id": 10,
+            "title": "Article 1",
+            "body": "This is article one"
+        }
+    ]
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
+
+
+##### III. Example Request: Without filtering
+
+
+***Headers:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| Authorization | Bearer {{jwt_token}} | Providing valid token won't cause *401* |
+
+
+
+***Query:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| page | {{id}} | Page is a `unsigned integer` which represents the page numer |
+| limit | {{limit}} | Limit represents maximum numer of results in the response |
+
+
+
+##### III. Example Response: Without filtering
+```js
+{
+    "data": [
+        {
+            "id": 3,
+            "user_id": 10,
+            "title": "Article 13",
+            "body": "This is article three"
+        },
+        {
+            "id": 2,
+            "user_id": 10,
+            "title": "Article 2",
+            "body": "This is article two"
+        },
+        {
+            "id": 1,
+            "user_id": 10,
+            "title": "Article 1",
+            "body": "This is article one"
+        }
+    ]
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
+
+
+## Users
+`Users` directory contains all the user related APIs. For authentication these apis requrie `BasicAuth`
+
+
+
+### 1. Create user
+
+
+Create user use `JSON` payload to create a user
 
 
 ***Endpoint:***
 
 ```bash
-Method: PATCH
-Type: URLENCODED
-URL: {{base_url}}/teachers
+Method: POST
+Type: RAW
+URL: {{blog-server}}/v1/users
 ```
 
-
-***Headers:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| Content-Type | application/x-www-form-urlencoded |  |
-| Authorization | Bearer {{access_token}} |  |
 
 
 ***Body:***
 
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| name | John Doe |  |
-| age | 33 |  |
-
-
-### 5. Remove teacher
+```js        
+{
+	"name": "Captain Jack Sparrow",
+	"bio": "Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp"
+}
+```
 
 
-update a teacher using api
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Invalid username/password
+
+
+
+##### I. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+##### II. Example Request: Empty body
+
+
+
+##### II. Example Response: Empty body
+```js
+{
+    "message": "Invalid request body"
+}
+```
+
+
+***Status Code:*** 400
+
+<br>
+
+
+
+##### III. Example Request: Validation error
+
+
+
+***Body:***
+
+```js        
+{
+	"name": "",
+	"bio": ""
+}
+```
+
+
+
+##### III. Example Response: Validation error
+```js
+{
+    "errors": {
+        "bio": [
+            "Bio can not be empty"
+        ],
+        "name": [
+            "Name can not be empty"
+        ]
+    },
+    "message": "Validation error"
+}
+```
+
+
+***Status Code:*** 422
+
+<br>
+
+
+
+##### IV. Example Request: Success
+
+
+
+***Body:***
+
+```js        
+{
+	"name": "Tom Hanks",
+	"bio": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon."
+}
+```
+
+
+
+##### IV. Example Response: Success
+```js
+{
+    "data": {
+        "id": 1,
+        "name": "Tom Hanks",
+        "bio": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon."
+    },
+    "message": "User created successfully"
+}
+```
+
+
+***Status Code:*** 201
+
+<br>
+
+
+
+### 2. Delete user
+
+
+Delete a single user using `id`
 
 
 ***Endpoint:***
@@ -347,62 +499,670 @@ update a teacher using api
 ```bash
 Method: DELETE
 Type: 
-URL: {{base_url}}/teachers/{{id}}
+URL: {{blog-server}}/v1/users/{{id}}
 ```
 
 
-## Teacher/v2
+
+***More example Requests/Responses:***
 
 
-### 1. Fetch teachers
+##### I. Example Request: Success
 
 
-Get list of teachers
+
+##### I. Example Response: Success
+```js
+{
+    "message": "User deleted successfully"
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
+
+
+##### II. Example Request: Invalid user id
+
+
+
+##### II. Example Response: Invalid user id
+```js
+{
+    "message": "Invalid user id"
+}
+```
+
+
+***Status Code:*** 400
+
+<br>
+
+
+
+##### III. Example Request: Invalid username/password
+
+
+
+##### III. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+### 3. Fetch user
+
+
+Fetch a single user using `id`
 
 
 ***Endpoint:***
 
 ```bash
 Method: GET
-Type: RAW
-URL: {{base_url}}/v2/teachers
+Type: 
+URL: {{blog-server}}/v1/users/{{id}}
 ```
+
+
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Success
+
+
+
+##### I. Example Response: Success
+```js
+{
+    "data": {
+        "id": 1,
+        "name": "Tom Hanks",
+        "bio": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon."
+    }
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
+
+
+##### II. Example Request: Invalid user id
+
+
+
+##### II. Example Response: Invalid user id
+```js
+{
+    "message": "Invalid user id"
+}
+```
+
+
+***Status Code:*** 400
+
+<br>
+
+
+
+##### III. Example Request: Invalid username/password
+
+
+
+##### III. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+### 4. Fetch users
+
+
+Fetch list of users using `pagination`
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{blog-server}}/v1/users
+```
+
 
 
 ***Query params:***
 
 | Key | Value | Description |
 | --- | ------|-------------|
-| q | john | q can be name, email, phone etc |
-| page | 1 | page as integer number |
+| page | 1 |  |
+| limit | 20 |  |
 
 
-## Default
+
+***More example Requests/Responses:***
 
 
-### 1. Login
+##### I. Example Request: Success
 
 
-Inorder to access the private ***API*** you must get an access token by providing `username/password`
+
+***Query:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| page | 1 | Page numer is a `integer` which represents the page your are requesting |
+| limit | 20 | Limit it the maximum number of users listing in the result. |
+
+
+
+##### I. Example Response: Success
+```js
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Tom Hanks",
+            "bio": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon."
+        },
+        {
+            "id": 2,
+            "name": "Captain Jack Sparrow",
+            "bio": "Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp"
+        }
+    ]
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
+
+
+##### II. Example Request: Invalid user id
+
+
+
+##### II. Example Response: Invalid user id
+```js
+{
+    "message": "Invalid user id"
+}
+```
+
+
+***Status Code:*** 400
+
+<br>
+
+
+
+##### III. Example Request: Invalid username/password
+
+
+
+##### III. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+### 5. Update user
+
+
+Update user use `JSON` payload to create a user
+
+
+***Endpoint:***
+
+```bash
+Method: PUT
+Type: RAW
+URL: {{blog-server}}/v1/users/{{id}}
+```
+
+
+
+***Body:***
+
+```js        
+{
+	"name": "Captain Jack Sparrow",
+	"bio": "Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp"
+}
+```
+
+
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Success
+
+
+
+***Body:***
+
+```js        
+{
+	"name": "Captain Jack Sparrow",
+	"bio": "Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp"
+}
+```
+
+
+
+##### I. Example Response: Success
+```js
+{
+    "data": {
+        "id": 1,
+        "name": "Captain Jack Sparrow",
+        "bio": "Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp"
+    },
+    "message": "User updated successfully"
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
+
+
+##### II. Example Request: Validation error
+
+
+
+***Body:***
+
+```js        
+{
+	"name": "",
+	"bio": ""
+}
+```
+
+
+
+##### II. Example Response: Validation error
+```js
+{
+    "errors": {
+        "bio": [
+            "Bio can not be empty"
+        ],
+        "name": [
+            "Name can not be empty"
+        ]
+    },
+    "message": "Validation error"
+}
+```
+
+
+***Status Code:*** 422
+
+<br>
+
+
+
+##### III. Example Request: Empty request body
+
+
+
+##### III. Example Response: Empty request body
+```js
+{
+    "message": "Invalid request body"
+}
+```
+
+
+***Status Code:*** 400
+
+<br>
+
+
+
+##### IV. Example Request: Invalid username/password
+
+
+
+##### IV. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+##### V. Example Request: Invalid user id
+
+
+
+***Body:***
+
+```js        
+{
+	"name": "Captain Jack Sparrow",
+	"bio": "Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series. The character was created by screenwriters Ted Elliott and Terry Rossio and is portrayed by Johnny Depp"
+}
+```
+
+
+
+##### V. Example Response: Invalid user id
+```js
+{
+    "message": "Invalid user id"
+}
+```
+
+
+***Status Code:*** 400
+
+<br>
+
+
+
+## Users/V2
+
+
+
+### 1. Create user
+
+
+Create user use `JSON` payload to create a user
 
 
 ***Endpoint:***
 
 ```bash
 Method: POST
-Type: FORMDATA
-URL: {{base_url}}/login
+Type: URLENCODED
+URL: {{blog-server}}/v2/users
 ```
+
 
 
 ***Body:***
 
+
 | Key | Value | Description |
 | --- | ------|-------------|
-| username | user | username email/phone |
-| password | pass | pass must be greater than `5` chars |
+| name | Tom Hanks |  |
+| bio | Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon. |  |
+
+
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Validation Error
+
+
+
+***Body:***
+
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| name |  |  |
+| bio |  |  |
+
+
+
+##### I. Example Response: Validation Error
+```js
+{
+    "errors": {
+        "bio": [
+            "Bio can not be empty"
+        ],
+        "name": [
+            "Name can not be empty"
+        ]
+    },
+    "message": "Validation error"
+}
+```
+
+
+***Status Code:*** 422
+
+<br>
+
+
+
+##### II. Example Request: Success
+
+
+
+***Body:***
+
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| name | Tom Hanks |  |
+| bio | Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon. |  |
+
+
+
+##### II. Example Response: Success
+```js
+{
+    "data": {
+        "id": 1,
+        "name": "Tom Hanks",
+        "bio": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon."
+    },
+    "message": "User created successfully"
+}
+```
+
+
+***Status Code:*** 201
+
+<br>
+
+
+
+##### III. Example Request: Invalid username/password
+
+
+
+##### III. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+### 2. Update user
+
+
+Create user use `JSON` payload to create a user
+
+
+***Endpoint:***
+
+```bash
+Method: PATCH
+Type: URLENCODED
+URL: {{blog-server}}/v2/users/1
+```
+
+
+
+***Body:***
+
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| name | Mr. Tom Hanks |  |
+
+
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Invalid username/password
+
+
+
+##### I. Example Response: Invalid username/password
+```js
+{
+    "message": "Unauthorized attempt"
+}
+```
+
+
+***Status Code:*** 401
+
+<br>
+
+
+
+##### II. Example Request: Success
+
+
+
+***Body:***
+
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| name | Mr. Tom Hanks |  |
+
+
+
+##### II. Example Response: Success
+```js
+{
+    "data": {
+        "id": 1,
+        "name": "Mr. Tom Hanks",
+        "bio": "Thomas Jeffrey Hanks is an American actor and filmmaker. Known for both his comedic and dramatic roles, Hanks is one of the most popular and recognizable film stars worldwide, and is widely regarded as an American cultural icon."
+    },
+    "message": "User partial update successful"
+}
+```
+
+
+***Status Code:*** 206
+
+<br>
+
+
+
+## Ungrouped
+
+
+
+### 1. Health check
+
+
+System health check endpoint provide system health status for `probe`
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{blog-server}}/
+```
+
+
+
+***More example Requests/Responses:***
+
+
+##### I. Example Request: Error
+
+
+
+##### I. Example Response: Error
+```js
+{
+    "system": "Failed"
+}
+```
+
+
+***Status Code:*** 500
+
+<br>
+
+
+
+##### II. Example Request: Success
+
+
+
+##### II. Example Response: Success
+```js
+{
+    "system": "OK"
+}
+```
+
+
+***Status Code:*** 200
+
+<br>
+
 
 
 ---
-[Back to top](#sms)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2019-02-12 19:45:27 by [docgen](https://github.com/thedevsaddam/docgen)
+[Back to top](#blog)
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2020-05-14 14:48:48 by [docgen](https://github.com/thedevsaddam/docgen)
