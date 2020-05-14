@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"html/template"
@@ -10,11 +10,12 @@ import (
 	"strings"
 	"time"
 
+	"github.com/thedevsaddam/docgen/assets_bin"
 	"gopkg.in/russross/blackfriday.v2"
 )
 
 func getData(a string) string {
-	fp, err := AssetFS.Open(a)
+	fp, err := assets_bin.AssetFS.Open(a)
 	if err != nil {
 		log.Fatal(err)
 	}

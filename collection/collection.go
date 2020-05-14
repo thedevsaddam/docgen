@@ -16,7 +16,6 @@ type (
 		Info        Info         `json:"info"`
 		Collections []Collection `json:"item"`
 		Variables   []Field      `json:"variable"`
-		sortEnabled bool         `json:"-"`
 	}
 
 	// Info describes the postman info section
@@ -98,22 +97,20 @@ func (d *Documentation) Open(rdr io.Reader) error {
 	if err := dcr.Decode(&d); err != nil {
 		return err
 	}
+
+	// build the collections
 	d.build()
-	if d.sortEnabled {
-		d.sortCollections()
-	}
 
 	// remove empty collections
 	d.removeEmptyCollections()
 	// after building all the collections, remove disabled fields
 	d.removeItemRequestDisabledField()
 	d.removeItemResponseRequestDisabledField()
-	return nil
-}
 
-func (d *Documentation) WithSortEnabled() *Documentation {
-	d.sortEnabled = true
-	return d
+	// sort the collections in lexical order
+	d.sortCollections()
+
+	return nil
 }
 
 // Build build UnCategorized collection

@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"bytes"
@@ -26,7 +26,6 @@ func init() {
 	serveLive.PersistentFlags().IntVarP(&port, "port", "p", 9000, "port number to listen")
 	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection file's relative path")
 	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "display markdown format in preview")
-	serveLive.PersistentFlags().BoolVarP(&sortEnabled, "sort", "s", false, "sort the collection list")
 }
 
 func server(cmd *cobra.Command, args []string) {
@@ -41,7 +40,9 @@ func server(cmd *cobra.Command, args []string) {
 	http.HandleFunc("/", templateFunc)
 	log.Println("Listening on port: ", port)
 	log.Printf("Web Server is available at http://localhost:%s/\n", strconv.Itoa(port))
-	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil); err != nil {
+		handleErr("Failed to open server", err)
+	}
 }
 
 func templateFunc(w http.ResponseWriter, r *http.Request) {
@@ -49,9 +50,11 @@ func templateFunc(w http.ResponseWriter, r *http.Request) {
 	var buf *bytes.Buffer
 	if !isMarkdown {
 		buf = readJSONtoHTML(file)
-		w.Write(buf.Bytes())
+		_, err := w.Write(buf.Bytes())
+		handleErr("Failed to write html in writer", err)
 		return
 	}
 	buf = readJSONtoMarkdownHTML(file)
-	w.Write(buf.Bytes())
+	_, err := w.Write(buf.Bytes())
+	handleErr("Failed to write html in writer", err)
 }

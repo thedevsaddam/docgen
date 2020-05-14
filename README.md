@@ -26,9 +26,8 @@ curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o inst
 * To view live Markown documentation from postman collection use `docgen server -f input-postman-collection.json -p 8000 -m` This will open the markdown version of postman collection to the defined port
 * To make HTML documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.html`
 * To make Markdown documentation use `docgen build -i input-postman-collection.json -o ~/Downloads/index.md -m`
-* Use `-s` flag to sort API in lexical order
 
-***[Demo markdown API documentation](example-doc.md)***
+***[Demo markdown API documentation](_examples/example-doc.md)***
 
 ### Author
 1. [Sajib Sikder](https://github.com/mhshajib)
