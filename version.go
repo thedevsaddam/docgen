@@ -15,6 +15,6 @@ var versionCmd = &cobra.Command{
 		fmt.Println("Version:", version)
 		fmt.Println("Git commit:", gitCommit)
 		fmt.Println("Build date:", buildDate)
-		fmt.Println("Support postman collection version > 2.1")
+		fmt.Println("Support postman collection version >= 2.1")
 	},
 }
