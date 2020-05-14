@@ -14,7 +14,7 @@ curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o inst
 **For windows download the binary and set environment variable so that you can access the binary from terminal**
 
 #### Binary link
-[Download binary](https://github.com/thedevsaddam/docgen-bin)
+[Download binary](https://github.com/thedevsaddam/docgen-bin/tree/master/latest)
 
 ### Available features
 * Live postman collection to documentation
