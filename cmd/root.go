@@ -30,9 +30,9 @@ var (
 
 	extraCSS string
 
-	gitCommit = "unknown"
-	version   = "unknown"
-	buildDate = "unknown"
+	GitCommit = "unknown"
+	Version   = "unknown"
+	BuildDate = "unknown"
 
 	cmd = &cobra.Command{
 		Use:   "docgen",
