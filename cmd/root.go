@@ -82,7 +82,7 @@ func init() {
 	cmd.AddCommand(buildOutput)
 }
 
-// execute the root command
+// Execute the root command
 func Execute() error {
 	return cmd.Execute()
 }
