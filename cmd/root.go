@@ -173,6 +173,25 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		log.Fatal("parsing json file", err.Error())
 	}
 
+	// populate envCollection with collection variables
+	if len(rt.Variables) > 0 {
+		envCollection.SetCollectionVariables(rt.Variables)
+	}
+
+	// override collection variable by env variables
+	if env != "" {
+		if _, err := os.Stat(env); os.IsNotExist(err) {
+			handleErr("Invalid environment file path", err)
+		}
+		f, err := os.Open(env)
+		if err != nil {
+			handleErr("Unable to open file", err)
+		}
+		if err := envCollection.Open(f); err != nil {
+			handleErr("Unable to parse environment file", err)
+		}
+	}
+
 	tm := template.New("main")
 	tm.Delims("@{{", "}}@")
 	tm.Funcs(template.FuncMap{
@@ -187,6 +206,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		"roman":           roman,
 		"date_time":       dateTime,
 		"trimQueryParams": trimQueryParams,
+		"e":               e,
 	})
 	t, err := tm.Parse(assets.IndexMarkdown)
 	if err != nil {
@@ -216,6 +236,25 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 		log.Fatal("parsing json file", err.Error())
 	}
 
+	// populate envCollection with collection variables
+	if len(rt.Variables) > 0 {
+		envCollection.SetCollectionVariables(rt.Variables)
+	}
+
+	// override collection variable by env variables
+	if env != "" {
+		if _, err := os.Stat(env); os.IsNotExist(err) {
+			handleErr("Invalid environment file path", err)
+		}
+		f, err := os.Open(env)
+		if err != nil {
+			handleErr("Unable to open file", err)
+		}
+		if err := envCollection.Open(f); err != nil {
+			handleErr("Unable to parse environment file", err)
+		}
+	}
+
 	tm := template.New("main")
 	tm.Delims("@{{", "}}@")
 	tm.Funcs(template.FuncMap{
@@ -228,6 +267,7 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 		"trimQueryParams": trimQueryParams,
 		"date_time":       dateTime,
 		"markdown":        markdown,
+		"e":               e,
 	})
 
 	t, err := tm.Parse(assets.MarkdownHTML)
