@@ -107,7 +107,7 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		envCollection.SetCollectionVariables(rt.Variables)
 	}
 
-	// override collection variable by env variables
+	// override collection variables by env variables
 	if env != "" {
 		if _, err := os.Stat(env); os.IsNotExist(err) {
 			handleErr("Invalid environment file path", err)
@@ -178,7 +178,7 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 		envCollection.SetCollectionVariables(rt.Variables)
 	}
 
-	// override collection variable by env variables
+	// override collection variables by env variables
 	if env != "" {
 		if _, err := os.Stat(env); os.IsNotExist(err) {
 			handleErr("Invalid environment file path", err)
@@ -241,7 +241,7 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 		envCollection.SetCollectionVariables(rt.Variables)
 	}
 
-	// override collection variable by env variables
+	// override collection variables by env variables
 	if env != "" {
 		if _, err := os.Stat(env); os.IsNotExist(err) {
 			handleErr("Invalid environment file path", err)
