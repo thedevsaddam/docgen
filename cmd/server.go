@@ -26,7 +26,7 @@ func init() {
 	serveLive.PersistentFlags().IntVarP(&port, "port", "p", 9000, "port number to listen")
 	serveLive.PersistentFlags().StringVarP(&file, "file", "f", "", "postman collection path")
 	serveLive.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "display markdown format in preview")
-	serveLive.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "Inject a css file")
+	serveLive.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "inject a css file")
 	serveLive.PersistentFlags().StringVarP(&env, "env", "e", "", "postman environment variable file path")
 }
 

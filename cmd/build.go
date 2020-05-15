@@ -25,7 +25,7 @@ func init() {
 	buildOutput.PersistentFlags().StringVarP(&in, "in", "i", "", "postman collection path")
 	buildOutput.PersistentFlags().StringVarP(&out, "out", "o", "", "output file path")
 	buildOutput.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "this flag will command to generate markdown")
-	buildOutput.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "Inject a css file")
+	buildOutput.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "inject a css file")
 	buildOutput.PersistentFlags().StringVarP(&env, "env", "e", "", "postman environment variable file path")
 }
 
