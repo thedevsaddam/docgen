@@ -7,7 +7,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>
             @{{ if .Data.Info.Name }}@
-                @{{ .Data.Info.Name }}@
+                @{{ .Data.Info.Name | e }}@
             @{{ end }}@
             @{{ if .Data.Info.Description }}@
                 &nbsp;|&nbsp;
@@ -36,7 +36,7 @@
             <div class="col-md-12 collection-intro">
                 <h3>@{{ .Data.Info.Name }}@</h3>
                 <p>
-                    @{{ .Data.Info.Description | markdown | html }}@
+                    @{{ .Data.Info.Description | markdown | e | html }}@
                 </p>
             </div>
             <!-- end introduction -->
@@ -70,7 +70,7 @@
                         </div>
                         <div class="panel-body">
                             <p>
-                                @{{ $d.Description | markdown | html }}@
+                                @{{ $d.Description | markdown | e | html }}@
                             </p>
                             <div class="request-item">
                                 <div class="panel-group" id="accordion-@{{ $d.Name | snake }}@">
@@ -91,7 +91,7 @@
                                                     @{{ $item.Request.Method }}@
                                                     </strong>
                                                     &nbsp;
-                                                    @{{ $item.Request.URL.Raw | trimQueryParams}}@
+                                                    @{{ $item.Request.URL.Raw | trimQueryParams | e }}@
                                                 </h4>
                                             </a>
                                         </div>
@@ -101,7 +101,7 @@
                                                 <h5 class="label label-default">Description</h5>
                                                 <br>
                                                 <small>
-                                                    @{{ $item.Request.Description | markdown | html }}@
+                                                    @{{ $item.Request.Description | markdown | e | html }}@
                                                 </small>
                                                 <br><br>
                                                 @{{ end }}@
@@ -118,9 +118,9 @@
                                                     <tbody>
                                                         @{{ range $ih, $h := $item.Request.Headers }}@
                                                             <tr>
-                                                                <td>@{{ $h.Key }}@</td>
-                                                                <td>@{{ $h.Value }}@</td>
-                                                                <td>@{{ $h.Description | markdown | html }}@</td>
+                                                                <td>@{{ $h.Key | e }}@</td>
+                                                                <td>@{{ $h.Value |e }}@</td>
+                                                                <td>@{{ $h.Description | markdown | e | html }}@</td>
                                                             </tr>
                                                         @{{ end }}@
                                                     </tbody>
@@ -139,9 +139,9 @@
                                                     <tbody>
                                                         @{{ range $iq, $q := $item.Request.URL.Query }}@
                                                             <tr>
-                                                                <td>@{{ $q.Key }}@</td>
-                                                                <td>@{{ $q.Value }}@</td>
-                                                                <td>@{{ $q.Description | markdown | html }}@</td>
+                                                                <td>@{{ $q.Key | e }}@</td>
+                                                                <td>@{{ $q.Value | e }}@</td>
+                                                                <td>@{{ $q.Description | markdown | e | html }}@</td>
                                                             </tr>
                                                         @{{ end }}@
                                                     </tbody>
@@ -160,9 +160,9 @@
                                                     <tbody>
                                                     @{{ range $iq, $q := $item.Request.URL.Variables }}@
                                                     <tr>
-                                                        <td>@{{ $q.Key }}@</td>
-                                                        <td>@{{ $q.Value }}@</td>
-                                                        <td>@{{ $q.Description | markdown | html }}@</td>
+                                                        <td>@{{ $q.Key | e }}@</td>
+                                                        <td>@{{ $q.Value | e }}@</td>
+                                                        <td>@{{ $q.Description | markdown | e | html }}@</td>
                                                     </tr>
                                                     @{{ end }}@
                                                     </tbody>
@@ -196,9 +196,9 @@
                                                             <tbody>
                                                                 @{{ range $if, $f := $item.Request.Body.FormData }}@
                                                                 <tr>
-                                                                    <td>@{{ $f.Key }}@</td>
-                                                                    <td>@{{ $f.Value }}@</td>
-                                                                    <td>@{{ $f.Description | markdown | html }}@</td>
+                                                                    <td>@{{ $f.Key | e }}@</td>
+                                                                    <td>@{{ $f.Value | e }}@</td>
+                                                                    <td>@{{ $f.Description | markdown | e | html }}@</td>
                                                                 </tr>
                                                                 @{{ end }}@
                                                             </tbody>
@@ -222,9 +222,9 @@
                                                             <tbody>
                                                                 @{{ range $iu, $u := $item.Request.Body.URLEncoded }}@
                                                                     <tr>
-                                                                        <td>@{{ $u.Key }}@</td>
-                                                                        <td>@{{ $u.Value }}@</td>
-                                                                        <td>@{{ $u.Description | markdown | html }}@</td>
+                                                                        <td>@{{ $u.Key | e }}@</td>
+                                                                        <td>@{{ $u.Value | e }}@</td>
+                                                                        <td>@{{ $u.Description | markdown | e | html }}@</td>
                                                                     </tr>
                                                                 @{{ end }}@
                                                             </tbody>
@@ -247,7 +247,7 @@
 
                                                             @{{ if $resp.Name }}@
                                                                 <h4>Example Request</h4>
-                                                                <h5>URL: @{{ $resp.OriginalRequest.URL.Raw }}@</h5>
+                                                                <h5>URL: @{{ $resp.OriginalRequest.URL.Raw | e }}@</h5>
 
                                                                 @{{ if $resp.OriginalRequest.Headers }}@
                                                                 <h5 class="label label-warning">Headers</h5>
@@ -262,9 +262,9 @@
                                                                     <tbody>
                                                                     @{{ range $ih, $h := $resp.OriginalRequest.Headers }}@
                                                                     <tr>
-                                                                        <td>@{{ $h.Key }}@</td>
-                                                                        <td>@{{ $h.Value }}@</td>
-                                                                        <td>@{{ $h.Description | markdown | html }}@</td>
+                                                                        <td>@{{ $h.Key | e }}@</td>
+                                                                        <td>@{{ $h.Value | e }}@</td>
+                                                                        <td>@{{ $h.Description | markdown | e | html }}@</td>
                                                                     </tr>
                                                                     @{{ end }}@
                                                                     </tbody>
@@ -284,9 +284,9 @@
                                                                     <tbody>
                                                                     @{{ range $ih, $h := $resp.OriginalRequest.URL.Query }}@
                                                                     <tr>
-                                                                        <td>@{{ $h.Key }}@</td>
-                                                                        <td>@{{ $h.Value }}@</td>
-                                                                        <td>@{{ $h.Description | markdown | html }}@</td>
+                                                                        <td>@{{ $h.Key | e }}@</td>
+                                                                        <td>@{{ $h.Value | e }}@</td>
+                                                                        <td>@{{ $h.Description | markdown | e | html }}@</td>
                                                                     </tr>
                                                                     @{{ end }}@
                                                                     </tbody>
@@ -306,9 +306,9 @@
                                                                     <tbody>
                                                                     @{{ range $iq, $q := $resp.OriginalRequest.URL.Variables }}@
                                                                     <tr>
-                                                                        <td>@{{ $q.Key }}@</td>
-                                                                        <td>@{{ $q.Value }}@</td>
-                                                                        <td>@{{ $q.Description | markdown | html }}@</td>
+                                                                        <td>@{{ $q.Key | e }}@</td>
+                                                                        <td>@{{ $q.Value | e }}@</td>
+                                                                        <td>@{{ $q.Description | markdown | e | html }}@</td>
                                                                     </tr>
                                                                     @{{ end }}@
                                                                     </tbody>
@@ -339,9 +339,9 @@
                                                                         <tbody>
                                                                         @{{ range $iu, $u := $resp.OriginalRequest.Body.FormData }}@
                                                                         <tr>
-                                                                            <td>@{{ $u.Key }}@</td>
-                                                                            <td>@{{ $u.Value }}@</td>
-                                                                            <td>@{{ $u.Description | markdown | html }}@</td>
+                                                                            <td>@{{ $u.Key | e }}@</td>
+                                                                            <td>@{{ $u.Value | e }}@</td>
+                                                                            <td>@{{ $u.Description | markdown | e | html }}@</td>
                                                                         </tr>
                                                                         @{{ end }}@
                                                                         </tbody>
@@ -361,9 +361,9 @@
                                                                         <tbody>
                                                                         @{{ range $iu, $u := $resp.OriginalRequest.Body.URLEncoded }}@
                                                                         <tr>
-                                                                            <td>@{{ $u.Key }}@</td>
-                                                                            <td>@{{ $u.Value }}@</td>
-                                                                            <td>@{{ $u.Description | markdown | html }}@</td>
+                                                                            <td>@{{ $u.Key | e }}@</td>
+                                                                            <td>@{{ $u.Value | e }}@</td>
+                                                                            <td>@{{ $u.Description | markdown | e | html }}@</td>
                                                                         </tr>
                                                                         @{{ end }}@
                                                                         </tbody>

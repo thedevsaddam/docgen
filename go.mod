@@ -3,6 +3,7 @@ module github.com/thedevsaddam/docgen
 go 1.12
 
 require (
+	github.com/davecgh/go-spew v1.1.1
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/shurcooL/sanitized_anchor_name v0.0.0-20170918181015-86672fcb3f95 // indirect

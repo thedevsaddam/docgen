@@ -32,6 +32,7 @@ type (
 		Description string `json:"description"`
 		Type        string `json:"type"`
 		Disabled    bool   `json:"disabled"`
+		Enabled     bool   `json:"enabled"` // this field is used by env
 	}
 
 	// URL describes URL of the request

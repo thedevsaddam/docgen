@@ -73,9 +73,6 @@ func init() {
 		GithubMarkdownMinCSS: getData("github-markdown.min.css"),
 	}
 
-	//Add flags
-	cmd.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "Inject a css file")
-
 	// register commands
 	cmd.AddCommand(versionCmd)
 	cmd.AddCommand(serveLive)
@@ -100,6 +97,19 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		log.Fatal("opening file", err.Error())
 	}
 
+	if env != "" {
+		if _, err := os.Stat(env); os.IsNotExist(err) {
+			handleErr("Invalid environment file path", err)
+		}
+		f, err := os.Open(env)
+		if err != nil {
+			handleErr("Unable to open file", err)
+		}
+		if err := envCollection.Open(f); err != nil {
+			handleErr("Unable to parse environment file", err)
+		}
+	}
+
 	if err = rt.Open(f); err != nil {
 		log.Fatal("parsing json file", err.Error())
 	}
@@ -116,6 +126,7 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		"trimQueryParams": trimQueryParams,
 		"date_time":       dateTime,
 		"markdown":        markdown,
+		"e":               e,
 	})
 	t, err := tm.Parse(assets.IndexHTML)
 	if err != nil {
