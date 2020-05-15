@@ -12,7 +12,7 @@ var (
 	out           string
 	env           string
 	isMarkdown    bool
-	envCollection collection.Environment
+	envCollection = &collection.Environment{}
 	buildOutput   = &cobra.Command{
 		Use:   "build",
 		Short: "Build html/markdown documentation from postman collection",
@@ -26,6 +26,7 @@ func init() {
 	buildOutput.PersistentFlags().StringVarP(&out, "out", "o", "", "output file path")
 	buildOutput.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "this flag will command to generate markdown")
 	buildOutput.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "Inject a css file")
+	buildOutput.PersistentFlags().StringVarP(&env, "env", "e", "", "postman environment variable file path")
 }
 
 func buildAngGenerateFile(cmd *cobra.Command, args []string) {

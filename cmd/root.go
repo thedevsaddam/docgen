@@ -97,6 +97,17 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		log.Fatal("opening file", err.Error())
 	}
 
+	// open and build collection
+	if err = rt.Open(f); err != nil {
+		log.Fatal("parsing json file", err.Error())
+	}
+
+	// populate envCollection with collection variables
+	if len(rt.Variables) > 0 {
+		envCollection.SetCollectionVariables(rt.Variables)
+	}
+
+	// override collection variable by env variables
 	if env != "" {
 		if _, err := os.Stat(env); os.IsNotExist(err) {
 			handleErr("Invalid environment file path", err)
@@ -108,10 +119,6 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 		if err := envCollection.Open(f); err != nil {
 			handleErr("Unable to parse environment file", err)
 		}
-	}
-
-	if err = rt.Open(f); err != nil {
-		log.Fatal("parsing json file", err.Error())
 	}
 
 	tm := template.New("main")

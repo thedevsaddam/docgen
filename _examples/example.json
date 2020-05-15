@@ -278,7 +278,7 @@
 										"1"
 									]
 								},
-								"description": "Create user use `JSON` payload to create a user"
+								"description": "Use **urlencoded** data to update user partially"
 							},
 							"response": [
 								{
@@ -1691,7 +1691,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{blog-server}}/v1/articles?page={{id}}&limit={{limit}}",
+							"raw": "{{blog-server}}/v1/articles?page={{id}}&limit={{limit}}&user_id={{user_id}}",
 							"host": [
 								"{{blog-server}}"
 							],
@@ -1713,8 +1713,7 @@
 								{
 									"key": "user_id",
 									"value": "{{user_id}}",
-									"description": "Filter the articles using *author_id*",
-									"disabled": true
+									"description": "Filter the articles using *author_id*"
 								}
 							]
 						},
@@ -2043,6 +2042,34 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"id": "1a2400f7-15e9-4746-8916-a4c3b4664b18",
+			"key": "blog-server",
+			"value": "www.blog-api.com",
+			"type": "string"
+		},
+		{
+			"id": "17aea640-4cc0-4d41-9c5e-f2b5d4aba89b",
+			"key": "username",
+			"value": "user",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "96a49ccd-2a36-427b-861a-201f522f2535",
+			"key": "password",
+			"value": "pass",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "81bb711d-0ee5-4ee0-8ca0-e687c45fce2b",
+			"key": "limit",
+			"value": "20",
+			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}
