@@ -36,7 +36,7 @@
 ```bash
 Method: @{{ $item.Request.Method | upper }}@
 Type: @{{ $item.Request.Body.Mode | upper }}@
-URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
+URL: @{{ $item.Request.URL.Raw | trimQueryParams | e }}@
 ```
 
 <!--- headers items -->
@@ -47,7 +47,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $ih, $h := $item.Request.Headers -}}@
-| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
+| @{{ $h.Key | e }}@ | @{{ $h.Value | e }}@ | @{{ $h.Description | e }}@ |
 @{{ end }}@
 <!--- End Iterate headers items -->
 
@@ -62,7 +62,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $iq, $q := $item.Request.URL.Query -}}@
-| @{{ $q.Key }}@ | @{{ $q.Value }}@ | @{{ $q.Description }}@ |
+| @{{ $q.Key | e }}@ | @{{ $q.Value | e }}@ | @{{ $q.Description | e }}@ |
 @{{ end }}@
 @{{ end }}@
 <!--- End query param items -->
@@ -75,7 +75,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $iq, $q := $item.Request.URL.Variables -}}@
-| @{{ $q.Key }}@ | @{{ $q.Value }}@ | @{{ $q.Description }}@ |
+| @{{ $q.Key | e }}@ | @{{ $q.Value | e }}@ | @{{ $q.Description | e }}@ |
 @{{ end }}@
 @{{ end }}@
 <!--- End URL variables items -->
@@ -103,7 +103,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $if, $f := $item.Request.Body.FormData -}}@
-| @{{ $f.Key }}@ | @{{ $f.Value }}@ | @{{ $f.Description }}@ |
+| @{{ $f.Key | e }}@ | @{{ $f.Value | e }}@ | @{{ $f.Description | e }}@ |
 @{{ end }}@
 @{{ end }}@
 @{{ end }}@
@@ -118,7 +118,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $iu, $u := $item.Request.Body.URLEncoded -}}@
-| @{{ $u.Key }}@ | @{{ $u.Value }}@ | @{{ $u.Description }}@ |
+| @{{ $u.Key | e }}@ | @{{ $u.Value | e }}@ | @{{ $u.Description | e }}@ |
 @{{ end }}@
 @{{ end }}@
 @{{ end }}@
@@ -142,7 +142,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $ih, $h := $resp.OriginalRequest.Headers -}}@
-| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
+| @{{ $h.Key | e }}@ | @{{ $h.Value | e }}@ | @{{ $h.Description | e }}@ |
 @{{ end }}@
 <!--- End Iterate headers items -->
 
@@ -158,7 +158,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $ih, $h := $resp.OriginalRequest.URL.Query -}}@
-| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
+| @{{ $h.Key | e }}@ | @{{ $h.Value | e }}@ | @{{ $h.Description | e }}@ |
 @{{ end }}@
 <!--- End Iterate query items -->
 
@@ -173,7 +173,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $ih, $h := $resp.OriginalRequest.URL.Variables -}}@
-| @{{ $h.Key }}@ | @{{ $h.Value }}@ | @{{ $h.Description }}@ |
+| @{{ $h.Key | e }}@ | @{{ $h.Value | e }}@ | @{{ $h.Description | e }}@ |
 @{{ end }}@
 <!--- End Iterate url variable items -->
 
@@ -203,7 +203,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $if, $f := $resp.OriginalRequest.Body.FormData -}}@
-| @{{ $f.Key }}@ | @{{ $f.Value }}@ | @{{ $f.Description }}@ |
+| @{{ $f.Key | e }}@ | @{{ $f.Value | e }}@ | @{{ $f.Description | e }}@ |
 @{{ end }}@
 @{{ end }}@
 @{{ end }}@
@@ -218,7 +218,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams}}@
 | Key | Value | Description |
 | --- | ------|-------------|
 @{{ range $iu, $u := $resp.OriginalRequest.Body.URLEncoded -}}@
-| @{{ $u.Key }}@ | @{{ $u.Value }}@ | @{{ $u.Description }}@ |
+| @{{ $u.Key | e }}@ | @{{ $u.Value | e }}@ | @{{ $u.Description | e }}@ |
 @{{ end }}@
 @{{ end }}@
 @{{ end }}@

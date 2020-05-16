@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -153,4 +154,12 @@ func roman(num string) string {
 		}
 	}
 	return roman
+}
+
+// provide env values
+func e(key string) string {
+	for _, k := range envCollection.Values {
+		key = strings.ReplaceAll(key, fmt.Sprintf("{{%s}}", k.Key), k.Value)
+	}
+	return key
 }

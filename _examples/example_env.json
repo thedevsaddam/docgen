@@ -1,0 +1,29 @@
+{
+	"id": "4e932f2e-cc70-4aa3-9b84-60bc1f145ff5",
+	"name": "blog",
+	"values": [
+		{
+			"key": "blog-server",
+			"value": "www.localhost:9000",
+			"enabled": true
+		},
+		{
+			"key": "id",
+			"value": "1",
+			"enabled": true
+		},
+		{
+			"key": "limit",
+			"value": "20",
+			"enabled": true
+		},
+		{
+			"key": "user_id",
+			"value": "1",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-05-11T08:57:20.194Z",
+	"_postman_exported_using": "Postman/7.24.0"
+}
