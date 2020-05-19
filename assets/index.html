@@ -174,7 +174,7 @@
                                                         @{{ if $item.Request.Body.Raw }}@
                                                         <h5 class="label label-primary">Body</h5>
                                                         <span class="resp-prettyprint">
-                                                        @{{ $item.Request.Body.Raw }}@
+                                                        @{{ $item.Request.Body.Raw | eHTML }}@
                                                         </span>
                                                         <div class="clearfix"></div>
                                                         @{{ end }}@
@@ -320,7 +320,7 @@
                                                                     <h5 class="label label-primary">Body</h5>
                                                                     @{{ if ne $resp.OriginalRequest.Body.Raw ""}}@
                                                                         <span class="resp-prettyprint">
-                                                                            @{{ $resp.OriginalRequest.Body.Raw }}@
+                                                                            @{{ $resp.OriginalRequest.Body.Raw | eHTML }}@
                                                                         </span>
                                                                         <div class="clearfix"></div>
                                                                         @{{ end }}@
@@ -377,7 +377,7 @@
                                                             @{{ if $resp.Body }}@
                                                             <h5 class="label label-success">Body</h5>
                                                             <span class="resp-prettyprint">
-                                                                @{{ $resp.Body }}@
+                                                                @{{ $resp.Body | eHTML }}@
                                                             </span>
                                                             <div class="clearfix"></div>
                                                             <h5 class="label label-info">Code:</h5> <strong>@{{ $resp.Code }}@</strong>

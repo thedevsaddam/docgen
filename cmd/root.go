@@ -124,9 +124,10 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 	tm := template.New("main")
 	tm.Delims("@{{", "}}@")
 	tm.Funcs(template.FuncMap{
-		"html":            html,
-		"css":             css,
-		"js":              js,
+		"html":            htmlTemplate,
+		"css":             cssTemplate,
+		"js":              jsTemplate,
+		"eHTML":           eHTML,
 		"snake":           snake,
 		"addOne":          addOne,
 		"color":           color,
@@ -258,9 +259,10 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 	tm := template.New("main")
 	tm.Delims("@{{", "}}@")
 	tm.Funcs(template.FuncMap{
-		"html":            html,
-		"css":             css,
-		"js":              js,
+		"html":            htmlTemplate,
+		"css":             cssTemplate,
+		"js":              jsTemplate,
+		"eHTML":           eHTML,
 		"snake":           snake,
 		"addOne":          addOne,
 		"color":           color,

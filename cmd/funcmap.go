@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"html"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -27,15 +28,19 @@ func getData(a string) string {
 	return string(bs)
 }
 
-func html(v string) template.HTML {
+func eHTML(s string) string {
+	return html.EscapeString(s)
+}
+
+func htmlTemplate(v string) template.HTML {
 	return template.HTML(v)
 }
 
-func css(v string) template.CSS {
+func cssTemplate(v string) template.CSS {
 	return template.CSS(v)
 }
 
-func js(v string) template.JS {
+func jsTemplate(v string) template.JS {
 	return template.JS(v)
 }
 
