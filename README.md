@@ -11,7 +11,7 @@ curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o inst
 ```
 #### Uninstallation
 ```bash
-curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o uninstall.sh && sudo chmod +x uninstall.sh && sudo ./uninstall.sh
+curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/uninstall.sh -o uninstall.sh && sudo chmod +x uninstall.sh && sudo ./uninstall.sh
 ```
 
 #### Windows
