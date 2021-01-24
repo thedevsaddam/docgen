@@ -9,6 +9,10 @@ Transform your postman collection to HTML/Markdown documentation
 ```bash
 curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o install.sh && sudo chmod +x install.sh && sudo ./install.sh
 ```
+#### Uninstallation
+```bash
+curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o uninstall.sh && sudo chmod +x uninstall.sh && sudo ./uninstall.sh
+```
 
 #### Windows
 **For windows download the binary and set environment variable so that you can access the binary from terminal**

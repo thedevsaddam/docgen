@@ -3,3 +3,8 @@
 docgen
 vendor
 .idea
+linux_386
+linux_amd64
+mac_amd64
+windows_386.exe
+windows_amd64.exe
