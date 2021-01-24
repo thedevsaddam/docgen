@@ -10,7 +10,7 @@ exec_curl(){
 OS=`uname`
 ARCH=`uname -m`
 VERSION=$1
-URL=https://github.com/thedevsaddam/docgen-bin
+URL=https://github.com/thedevsaddam/docgen
 TARGET=/usr/local/bin/docgen
 MESSAGE_START="Installing docgen"
 MESSAGE_END="Installation complete"
