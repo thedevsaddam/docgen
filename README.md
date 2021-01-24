@@ -7,11 +7,16 @@ Transform your postman collection to HTML/Markdown documentation
 
 #### Installation on Mac/Linux
 ```bash
-curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o install.sh && sudo chmod +x install.sh && sudo ./install.sh
+curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o install.sh \
+&& sudo chmod +x install.sh \
+&& sudo ./install.sh
 ```
+
 #### Uninstallation
 ```bash
-curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/uninstall.sh -o uninstall.sh && sudo chmod +x uninstall.sh && sudo ./uninstall.sh
+curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/uninstall.sh -o uninstall.sh \
+&& sudo chmod +x uninstall.sh \
+&& sudo ./uninstall.sh
 ```
 
 #### Windows
@@ -48,8 +53,3 @@ Your suggestions will be more than appreciated.
 
 ### **License**
 The **docgen** is an open-source software licensed under the [MIT License](LICENSE.md).
-
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
-
-[![Beerpay](https://beerpay.io/thedevsaddam/docgen/badge.svg?style=beer-square)](https://beerpay.io/thedevsaddam/docgen)  [![Beerpay](https://beerpay.io/thedevsaddam/docgen/make-wish.svg?style=flat-square)](https://beerpay.io/thedevsaddam/docgen?focus=wish)
