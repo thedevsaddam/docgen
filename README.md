@@ -9,14 +9,16 @@ Transform your postman collection to HTML/Markdown documentation
 ```bash
 curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o install.sh \
 && sudo chmod +x install.sh \
-&& sudo ./install.sh
+&& sudo ./install.sh \
+&& rm install.sh
 ```
 
 #### Uninstallation
 ```bash
 curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/uninstall.sh -o uninstall.sh \
 && sudo chmod +x uninstall.sh \
-&& sudo ./uninstall.sh
+&& sudo ./uninstall.sh \
+&& rm uninstall.sh
 ```
 
 #### Windows
