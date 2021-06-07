@@ -108,8 +108,8 @@ func (d *Documentation) Open(rdr io.Reader) error {
 	d.removeItemRequestDisabledField()
 	d.removeItemResponseRequestDisabledField()
 
-	// sort the collections in lexical order
-	d.sortCollections()
+	// // sort the collections in lexical order
+	// d.sortCollections()
 
 	return nil
 }
