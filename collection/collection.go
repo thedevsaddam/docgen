@@ -144,7 +144,7 @@ func (d *Documentation) build() {
 
 // buildSubChildItems builds all the sub folder collections
 func (d *Documentation) buildSubChildItems(itm Item, c *Collection, pn string) bool {
-	if itm.IsSubFolder {
+	if len(itm.Items) > 0 {
 		collection := Collection{}
 		collection.Name = pn + "/" + itm.Name
 		collection.IsSubFolder = true
