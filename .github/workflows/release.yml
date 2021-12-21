@@ -1,0 +1,98 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.*"
+
+jobs:
+  build_release:
+    name: build_release
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout and setup
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: update Golang
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.17.2'
+      - name: build binary files
+        run: make binary
+      - name: list directory
+        run: ls -la && ls -la bin
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ github.ref }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: upload darwin_amd64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/darwin_amd64
+          asset_name: darwin_amd64
+          asset_content_type: application/octet-stream
+      - name: upload darwin_arm64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/darwin_arm64
+          asset_name: darwin_arm64
+          asset_content_type: application/octet-stream
+      - name: upload linux_amd64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/linux_amd64
+          asset_name: linux_amd64
+          asset_content_type: application/octet-stream
+      - name: upload linux_arm64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/linux_arm64
+          asset_name: linux_arm64
+          asset_content_type: application/octet-stream
+      - name: upload linux_386 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/linux_386
+          asset_name: linux_386
+          asset_content_type: application/octet-stream
+      - name: upload windows_386 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/windows_386.exe
+          asset_name: windows_386.exe
+          asset_content_type: application/octet-stream
+      - name: upload windows_amd64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/windows_amd64.exe
+          asset_name: windows_amd64.exe
+          asset_content_type: application/octet-stream

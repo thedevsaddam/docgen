@@ -21,24 +21,42 @@ if [ "$VERSION" == "" ]; then
 fi
 
 if [ "$OS" == "Darwin" ]; then
-    exec_curl $URL/releases/download/$VERSION/mac_amd64 $TARGET
+  if [ "$ARCH" == "x86_64" ]; then
+    exec_curl $URL/releases/download/$VERSION/darwin_amd64 $TARGET
     echo "$MESSAGE_START"
     chmod +x $TARGET
     echo "$MESSAGE_END"
-    docgen
+    dl
+  fi
+  
+  if [ "$ARCH" == "arm64" ] || [ "$ARCH" == "aarch64" ]; then
+    exec_curl $URL/releases/download/$VERSION/darwin_arm64 $TARGET
+    echo "$MESSAGE_START"
+    chmod +x $TARGET
+    echo "$MESSAGE_END"
+    dl
+  fi
+
 elif [ "$OS" == "Linux" ]; then
   if [ "$ARCH" == "x86_64" ]; then
     exec_curl $URL/releases/download/$VERSION/linux_amd64 $TARGET
     echo "$MESSAGE_START"
     chmod +x $TARGET
     echo "$MESSAGE_END"
-    docgen
+    dl
+  fi
+
+  if [ "$ARCH" == "arm64" ] || [ "$ARCH" == "aarch64" ]; then
+    exec_curl $URL/releases/download/$VERSION/linux_arm64 $TARGET
+    echo "$MESSAGE_START"
+    chmod +x $TARGET
+    echo "$MESSAGE_END"
+    dl
   fi
 
   if [ "$ARCH" == "i368" ]; then
     exec_curl $URL/releases/download/$VERSION/linux_386 $TARGET
     chmod +x $TARGET
-    docgen
+    dl
   fi
 fi
-

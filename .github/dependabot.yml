@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    target-branch: "v3"
+    # Labels on pull requests for version updates only
+    labels:
+      - "go mod dependencies"
