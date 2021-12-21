@@ -26,7 +26,7 @@ if [ "$OS" == "Darwin" ]; then
     echo "$MESSAGE_START"
     chmod +x $TARGET
     echo "$MESSAGE_END"
-    dl
+    docgen
   fi
   
   if [ "$ARCH" == "arm64" ] || [ "$ARCH" == "aarch64" ]; then
@@ -34,7 +34,7 @@ if [ "$OS" == "Darwin" ]; then
     echo "$MESSAGE_START"
     chmod +x $TARGET
     echo "$MESSAGE_END"
-    dl
+    docgen
   fi
 
 elif [ "$OS" == "Linux" ]; then
@@ -43,7 +43,7 @@ elif [ "$OS" == "Linux" ]; then
     echo "$MESSAGE_START"
     chmod +x $TARGET
     echo "$MESSAGE_END"
-    dl
+    docgen
   fi
 
   if [ "$ARCH" == "arm64" ] || [ "$ARCH" == "aarch64" ]; then
@@ -51,12 +51,12 @@ elif [ "$OS" == "Linux" ]; then
     echo "$MESSAGE_START"
     chmod +x $TARGET
     echo "$MESSAGE_END"
-    dl
+    docgen
   fi
 
   if [ "$ARCH" == "i368" ]; then
     exec_curl $URL/releases/download/$VERSION/linux_386 $TARGET
     chmod +x $TARGET
-    dl
+    docgen
   fi
 fi
