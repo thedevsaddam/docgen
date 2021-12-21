@@ -84,8 +84,8 @@ func githubLink(v string) string {
 	v = strings.ToLower(v)
 
 	v = strings.Replace(v, " ", "-", -1)
-	v = strings.Replace(v, ".", "", -1)
-	v = strings.Replace(v, "/", "", -1)
+	nonWordChars := regexp.MustCompile(`[^-\w\d]`)
+	v = nonWordChars.ReplaceAllString(v, "")
 	return v
 }
 
