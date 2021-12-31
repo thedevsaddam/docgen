@@ -6,20 +6,51 @@
 @{{- .Data.Info.Description -}}@
 @{{ end }}@
 
-<!--- Request items indices -->
-## Indices
-@{{ range $index, $c := .Data.Collections }}@
-* [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
-@{{ range $i, $item := $c.Items }}@
-  * [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
+<!--- Table of contents -->
+@{{- $numCollections := len .Data.Collections}}@
+<!--- If we have only one grouop/collection, then no need for the "ungrouped" heading -->
+@{{- if eq $numCollections 1 }}@ 
+@{{- range $index, $c := .Data.Collections -}}@
+@{{- range $i, $item := $c.Items }}@
+1. [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
+@{{- range $ri, $response := $item.Responses }}@
+@{{- $riRoman := ($ri | addOne | roman) }}@
+   1. [@{{ $response.Name | trim }}@](#@{{ (print $riRoman ". Example Request: " $response.Name) | trim | glink | glinkInc }}@)
+@{{- /* End iterate responses for the request */}}@
 @{{- end }}@
-@{{ end }}@
+@{{- /* End iterate requests in the collection */}}@
+@{{- end }}@
+@{{- /* End iterate collections */}}@
+@{{- end }}@
+@{{- /* End if we have more than one collection */}}@
+@{{- end }}@
+
+<!--- If we have more than one group/collection, then display each group name heading -->
+@{{- if gt $numCollections 1 }}@ 
+@{{- range $index, $c := .Data.Collections }}@
+* [@{{ $c.Name | trim }}@](#@{{ $c.Name | trim | glink }}@)
+@{{- range $i, $item := $c.Items }}@
+    1. [@{{ $item.Name | trim }}@](#@{{ merge $i $item.Name | trim | glink | glinkInc }}@)
+@{{- range $ri, $response := $item.Responses }}@
+@{{- $riRoman := ($ri | addOne | roman) }}@
+        * [@{{ $response.Name | trim }}@](#@{{ (print $riRoman ". Example Request: " $response.Name) | trim | glink | glinkInc }}@)
+@{{- /* End iterate responses for the request */}}@
+@{{- end }}@
+@{{- /* End iterate requests in the collection */}}@
+@{{- end }}@
+@{{- /* End iterate collections */}}@
+@{{- end }}@
+@{{- /* End if we have more than one collection */}}@
+@{{- end }}@
 
 --------
 <!--- Iterate main collection -->
 
 @{{ range $di, $d := .Data.Collections }}@
+<!--- Only show the collection name if there is more than the "ungrouped" collection -->
+@{{ if gt $numCollections 1 }}@
 ## @{{ $d.Name | trim  }}@
+@{{ end }}@
 @{{ $d.Description }}@
 
 <!--- Iterate collection items -->
