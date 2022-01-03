@@ -5,7 +5,7 @@ Transform your postman collection to HTML/Markdown documentation
 
 ![Task screenshot](screenshot.png)
 
-#### Installation on Mac/Linux
+#### Installation/Update on Mac/Linux
 ```bash
 curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/install.sh -o install.sh \
 && sudo chmod +x install.sh \
