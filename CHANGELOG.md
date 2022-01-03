@@ -1,1 +1,1 @@
-* Fix links to markdown anchors; Resolve issue #62
+* Modify markdown template to add request example links. See #65
