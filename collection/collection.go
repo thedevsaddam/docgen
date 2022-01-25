@@ -109,7 +109,7 @@ func (d *Documentation) Open(rdr io.Reader) error {
 	d.removeItemResponseRequestDisabledField()
 
 	// sort the collections in lexical order
-	d.sortCollections()
+	// d.sortCollections()
 
 	return nil
 }
@@ -163,8 +163,8 @@ func (d *Documentation) buildSubChildItems(itm Item, c *Collection, pn string) b
 	return false
 }
 
-// sortCollections sorts the collections in the alphabetical order(except for the default)
-func (d *Documentation) sortCollections() {
+// SortCollections sorts the collections in the alphabetical order(except for the default)
+func (d *Documentation) SortCollections() {
 	sort.Slice(d.Collections, func(i int, j int) bool {
 		if d.Collections[i].Name == defaultCollection {
 			return false
@@ -172,7 +172,7 @@ func (d *Documentation) sortCollections() {
 		return d.Collections[i].Name < d.Collections[j].Name
 	})
 
-	for index, _ := range d.Collections {
+	for index := range d.Collections {
 		sort.Slice(d.Collections[index].Items, func(i, j int) bool {
 			return d.Collections[index].Items[i].Name < d.Collections[index].Items[j].Name
 		})

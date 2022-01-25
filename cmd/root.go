@@ -103,8 +103,12 @@ func readJSONtoHTML(str string) *bytes.Buffer {
 	}
 
 	// populate envCollection with collection variables
-	if len(rt.Variables) > 0 {
+	if len(rt.Variables) > 0 && includeVariable {
 		envCollection.SetCollectionVariables(rt.Variables)
+	}
+
+	if sorted {
+		rt.SortCollections()
 	}
 
 	// override collection variables by env variables
@@ -175,8 +179,12 @@ func readJSONtoMarkdown(str string) *bytes.Buffer {
 	}
 
 	// populate envCollection with collection variables
-	if len(rt.Variables) > 0 {
+	if len(rt.Variables) > 0 && includeVariable {
 		envCollection.SetCollectionVariables(rt.Variables)
+	}
+
+	if sorted {
+		rt.SortCollections()
 	}
 
 	// override collection variables by env variables
@@ -238,8 +246,12 @@ func readJSONtoMarkdownHTML(str string) *bytes.Buffer {
 	}
 
 	// populate envCollection with collection variables
-	if len(rt.Variables) > 0 {
+	if len(rt.Variables) > 0 && includeVariable {
 		envCollection.SetCollectionVariables(rt.Variables)
+	}
+
+	if sorted {
+		rt.SortCollections()
 	}
 
 	// override collection variables by env variables

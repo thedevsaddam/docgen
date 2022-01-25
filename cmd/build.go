@@ -8,12 +8,14 @@ import (
 )
 
 var (
-	in            string
-	out           string
-	env           string
-	isMarkdown    bool
-	envCollection = &collection.Environment{}
-	buildOutput   = &cobra.Command{
+	in              string
+	out             string
+	env             string
+	isMarkdown      bool
+	includeVariable bool
+	sorted          bool
+	envCollection   = &collection.Environment{}
+	buildOutput     = &cobra.Command{
 		Use:   "build",
 		Short: "Build html/markdown documentation from postman collection",
 		Long:  `Build html/markdown documentation from postman collection`,
@@ -25,6 +27,8 @@ func init() {
 	buildOutput.PersistentFlags().StringVarP(&in, "in", "i", "", "postman collection path")
 	buildOutput.PersistentFlags().StringVarP(&out, "out", "o", "", "output file path")
 	buildOutput.PersistentFlags().BoolVarP(&isMarkdown, "md", "m", false, "this flag will command to generate markdown")
+	buildOutput.PersistentFlags().BoolVarP(&includeVariable, "var", "v", false, "this flag will include variables in template")
+	buildOutput.PersistentFlags().BoolVarP(&sorted, "sort", "s", false, "this flag will sort the collection in ascending order")
 	buildOutput.PersistentFlags().StringVarP(&extraCSS, "css", "c", "", "inject a css file")
 	buildOutput.PersistentFlags().StringVarP(&env, "env", "e", "", "postman environment variable file path")
 }
