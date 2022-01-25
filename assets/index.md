@@ -8,7 +8,7 @@
 
 <!--- Table of contents -->
 @{{- $numCollections := len .Data.Collections}}@
-<!--- If we have only one grouop/collection, then no need for the "ungrouped" heading -->
+<!--- If we have only one group/collection, then no need for the "ungrouped" heading -->
 @{{- if eq $numCollections 1 }}@ 
 @{{- range $index, $c := .Data.Collections -}}@
 @{{- range $i, $item := $c.Items }}@
@@ -181,7 +181,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams | e }}@
 ***More example Requests/Responses:***
 @{{ range $ir, $resp := $item.Responses }}@
 @{{ if $resp.Name }}@
-##### @{{ $ir | addOne | roman }}@. Example Request: @{{ $resp.Name }}@
+#### @{{ $ir | addOne | roman }}@. Example Request: @{{ $resp.Name }}@
 
 <!--- headers items -->
 @{{ if $resp.OriginalRequest.Headers }}@
@@ -230,7 +230,7 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams | e }}@
 @{{ end }}@
 
 <!--- Body mode -->
-@{{ if $resp.OriginalRequest.Body.Mode }}@
+@{{ if ne $resp.OriginalRequest.Body.Mode "" }}@
 <!--- Raw body data -->
 @{{ if eq $resp.OriginalRequest.Body.Mode "raw"}}@
 @{{ if $resp.OriginalRequest.Body.Raw }}@
@@ -273,11 +273,13 @@ URL: @{{ $item.Request.URL.Raw | trimQueryParams | e }}@
 @{{ end }}@
 <!---End x-urlencoded data -->
 
+@{{ else }}@
+***Body: None***
 <!--- End Body mode -->
 @{{ end }}@
 
 @{{ if $resp.Body }}@
-##### @{{ $ir | addOne | roman }}@. Example Response: @{{ $resp.Name }}@
+#### @{{ $ir | addOne | roman }}@. Example Response: @{{ $resp.Name }}@
 ```js
 @{{ $resp.Body }}@
 ```
