@@ -40,10 +40,6 @@ curl https://raw.githubusercontent.com/thedevsaddam/docgen/v3/uninstall.sh -o un
 
 ***[Demo markdown API documentation](_examples/example-doc.md)***
 
-### Author
-1. [Sajib Sikder](https://github.com/mhshajib)
-1. [Saddam H](https://github.com/thedevsaddam)
-
 ### Contributor
 1. [Anondo](https://github.com/Anondo)
 
